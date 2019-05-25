@@ -8,7 +8,7 @@ RxOn is an online pharmacy platform that provides basic services of a brick and 
 
 Anyone who has a prescription from a health provider. The patient user can register an account and then can upload/enter their prescription to request it to be filled. The patient must upload photo their prescription and fill in the form.
 
-The patient can then choose whether they want to pick-up their prescription from the nearest partner pharmacy or ask it to be delivered. The platform updates the status of the prescription. 
+The patient can then choose whether they want to pick-up their prescription from the nearest partner pharmacy or have it delivered. The platform updates the status of the prescription. 
 
 There are six basic statuses:
 1. Pending 2. Ready for pick up 3. Shipped 4. Canceled 5. Out of stock 6. Complete
