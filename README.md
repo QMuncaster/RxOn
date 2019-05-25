@@ -1,10 +1,10 @@
-## RxOn
+﻿# RxOn
 
-# Project Description
+### Project Description
 
-RxOn is an online pharmacy platform that provides basic services of a brick and mortar pharmacy services online. There are two user types: 1-Patient  2-Pharmacist. The basic data it stores are prescriptions and their statuses for each patient. Patients can add prescriptions, and pharmacists can approve and fill prescriptions. Additional functionality can include payment integration, live-chat with pharmacists, and image-recognizing for prescription uploads.
+RxOn is an online pharmacy platform that provides basic services of a brick and mortar pharmacy. There are two user types: 1-Patient  2-Pharmacist. The basic data it stores are prescriptions and their statuses for each patient. Patients can add prescriptions, and pharmacists can approve and fill prescriptions. Additional functionality can include payment integration, live-chat with pharmacists, and image recognition for prescription uploads.
 
-# Details: a patient user 
+### Details: a Patient User 
 
 Anyone who has a prescription from a health provider. The patient user can register an account and then can upload/enter their prescription to request it to be filled. The patient must upload photo their prescription and fill in the form.
 
@@ -15,12 +15,12 @@ There are six basic statuses:
 
 The platform keeps all the patient medication history that they uploaded to the platform. 
 
-# Details: a pharmacist user
+### Details: a Pharmacist User
 
 A pharmacist will be able to view all prescriptions, current statuses of each prescription, and associated patient user. 
 The pharmacist can also update the status of the prescription according to action taken. So for example if a pending prescription is filled and the patient chose the “pick up option” then the pharmacist will update the status of the prescription to be ready to pick up.
 
-# Minimal Requirements
+### Minimal Requirements
 * Patient and pharmacist/admin login
     * Select button to indicate whether user is a patient or pharmacist
 * Patient home page
@@ -41,7 +41,7 @@ The pharmacist can also update the status of the prescription according to actio
     * Contact information and other verification info
     * Pharmacy name, address, phone number
 
-# Standard Requirements
+### Standard Requirements
 * More sophisticated prescription adding (e.g. adding image, verification)
 * Patient account page: show more details, restrict access and editing based on user type
   * e.g. prescription history
@@ -50,7 +50,7 @@ The pharmacist can also update the status of the prescription according to actio
 * Pharmacist can add price of medication that will appear on patient’s page next to their prescription ready for pick up
 * Allow creation of pharmacist account through some verification
 
-# Stretch Requirements
+### Stretch Requirements
 * Adding support for login with Google/Fb/ account
 * Chat box where patient user is able to chat with pharmacist
 * Database of prescriptions so that patient can easily input the medication data
@@ -60,5 +60,13 @@ The pharmacist can also update the status of the prescription according to actio
 * User usage analytics
 * Deployment of the application
 
-# Minimal Requirement Breakdown
+### Minimal Requirement Breakdown
 (see sub-bullet points of each minimal requirement above)
+
+### Prototypes
+#### Pharmacist home screen
+![Image of pharmacist home screen](images/pharmacist_home.jpg?raw=true "Pharmacist Home")
+#### Patient home screen
+![Image of patient home screen](images/patient_home.jpg?raw=true "Patient Home")
+#### Login screen and patient profile screen
+![Image of login and profile](images/login_and_profile.jpg?raw=true "Login and Profile")
