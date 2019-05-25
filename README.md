@@ -56,7 +56,7 @@ The pharmacist can also update the status of the prescription according to actio
 * Database of prescriptions so that patient can easily input the medication data
 * Payment integration with Stripe
 * Image recognition where platform fills in the prescription form 
-* *note: legally the patient must upload their actual prescription but we also need the patient to fill in the prescription form)-Google Vision API.
+* *note: legally the patient must upload their actual prescription but we also need the patient to fill in the prescription form)-Google Vision API.*
 * User usage analytics
 * Deployment of the application
 
