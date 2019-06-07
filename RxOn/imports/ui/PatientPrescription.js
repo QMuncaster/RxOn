@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Prescriptions } from '../api/prescriptions.js';
+import "./styling/PatientPrescription"
 
 // Patient prescription component - represents a single row in prescription table
 export default class PatientPrescription extends Component {
@@ -10,12 +11,12 @@ export default class PatientPrescription extends Component {
 
   render() {
     return (
-      <tr>
-        <td className="name">{this.props.prescription.name}</td>
-        <td className="strength">{this.props.prescription.strength}</td>
-        <td className="dose">{this.props.prescription.dose}</td>
-        <td className="date">{this.props.prescription.date.toLocaleDateString("en-US")}</td>
-        <td className="status">{this.props.prescription.status}</td>
+     <tr className="tr">
+        <td className="th">{this.props.prescription.name}</td>
+        <td className="th">{this.props.prescription.strength}</td>
+        <td className="th">{this.props.prescription.dose}</td>
+        <td className="th">{this.props.prescription.date.toLocaleDateString("en-US")}</td>
+        <td className="th">{this.props.prescription.status}</td>
         <td className="delete">
           {/* TODO: add functionality so canceling can only be done for pending prescriptions */}
           <button className="delete" onClick={this.cancelPrescription.bind(this)}>
@@ -23,6 +24,7 @@ export default class PatientPrescription extends Component {
           </button>
         </td>
       </tr>
+     
     );
   }
 }

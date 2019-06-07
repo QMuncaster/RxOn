@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Prescriptions } from '../api/prescriptions.js';
 import PatientPrescription from './PatientPrescription.js';
+import "./styling/PatientPage.css"
+import "./styling/PatientPrescription.css"
 
 // Patient Page component - represents the patient page???
 // Not sure how to structure this, just wanted to separate this from the App component...
@@ -68,8 +70,8 @@ class PatientPage extends Component {
               <input type="text" ref="dose" placeholder="Enter dose" />
               <br></br>
 
-              <button type="submit">Submit</button>
-              <button onClick={this.closeAddBox.bind(this)}>Cancel</button>
+              <button className="button" type="submit">Submit</button>
+              <button className="button" onClick={this.closeAddBox.bind(this)}>Cancel</button>
             </form>
 
           </div>
@@ -87,15 +89,14 @@ class PatientPage extends Component {
 
   render() {
     return (
+      <div>
       <div className="container">
         {/* // header could be its own component, with added navbar */}
         <header>      
           <h1>Patient Portal</h1>
         </header>
 
-        <button className="openAddPrescriptionBox" onClick={this.openAddPrescriptionBox.bind(this)}>
-          Add Prescription
-        </button>
+        
 
         {/* // addPrescriptionBox should be its own component
         // but then we would need redux to share state (on whether the popup is open or closed)
@@ -103,22 +104,28 @@ class PatientPage extends Component {
         // TODO: make own component, use redux to track whether its open or not*/}
         {this.renderAddPrescriptionBox()}
 
-        <table>
-          <thead>
+        <table className="table">
+          <thead className="th">
             <tr>
-              <th>Prescription</th>
-              <th>Strength</th>
-              <th>Dose</th>
-              <th>Request Date</th>
-              <th>Status</th>
+              <th className="th">Prescription</th>
+              <th className="th">Strength</th>
+              <th className="th">Dose</th>
+              <th className="th">Request Date</th>
+              <th className="th">Status</th>
             </tr>
           </thead>
           <tbody>
             {this.renderPrescriptions()}
           </tbody>
         </table>
-
       </div>
+      <div className="button-container">
+      <button className="button2" onClick={this.openAddPrescriptionBox.bind(this)}>
+        Add Prescription
+      </button>
+      </div>
+      </div>
+     
     );
   }
 }
