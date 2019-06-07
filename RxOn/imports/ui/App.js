@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import LoginPage from './LoginPage.js';
-
+import PatientPage from './PatientPage.js';
+import Navbar from './Navbar'
 // App component - represents the whole app
 export default class App extends Component {
   render() {
     return (
-      <LoginPage/>
+      <div className = "App">
+      <Navbar />
+      <PatientPage />
+      </div>
     )
   }
 }
-{/*<PatientPage />*/}
-
-import PatientPage from './PatientPage.js';
