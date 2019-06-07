@@ -8,11 +8,13 @@
     "visualize": "meteor --production --extra-packages bundle-visualizer"
   },
   "dependencies": {
-    "@babel/runtime": "^7.3.4",
+    "@babel/runtime": "^7.3.5",
     "meteor-node-stubs": "^0.4.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-mounter": "^1.2.0"
+    "react-mounter": "^1.2.0",
+    "react-router": "*",
+    "react-router-dom": "*"
   },
   "meteor": {
     "mainModule": {

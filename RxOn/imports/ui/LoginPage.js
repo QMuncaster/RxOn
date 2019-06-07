@@ -3,7 +3,7 @@ import { Users } from '../api/users.js';
 import React, { Component } from 'react';
 
 
-class LoginPage extends Component {
+export default class LoginPage extends Component {
 
     createAccount() {
         Users.insert({
@@ -16,9 +16,9 @@ class LoginPage extends Component {
         FlowRouter.go('/createaccount');
     }
 
-    loginAccount(){
+    loginAccount() {
         //TODO:
-        FlowRouter.go('/patientpage');
+        FlowRouter.go('/patient');
     }
 
 
@@ -46,12 +46,10 @@ class LoginPage extends Component {
                     }}>
                         Create Account
                     </button>
-                    <button className="ui button login" onClick={this.loginAccount()}> Login</button>
+                    <button className="ui button login" onClick={() => {this.loginAccount()}}> Login</button>
                 </p>
             </form>
         );
 
     }
 }
-
-export default LoginPage;
