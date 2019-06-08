@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import "./styling/PatientProfile.css";
+import  faker from 'faker';
 
 export default class PatientProfile extends Component {
 
@@ -10,7 +11,6 @@ export default class PatientProfile extends Component {
         //     date: new Date(),
         // });
         //TODO:
-        // FlowRouter.go('/createaccount');
     }
 
 
@@ -20,9 +20,8 @@ export default class PatientProfile extends Component {
                 <h2>Your Profile</h2>
                 <div className="names-section">
                     <div className="image-section">
-                        {/* TODO. fix the loading images*/}
-                        <img src={"../../client/images/user.png"} alt="user selfie"/>
-                        <a href="#">Change Image</a>
+                        <img  src={faker.image.avatar()} alt ="user selfie"/>
+                        {/*<a href="#">Change Image</a>*/}
                     </div>
                     <div className="name-section">
                         <div className="gender-section">
