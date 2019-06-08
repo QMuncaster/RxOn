@@ -1,7 +1,9 @@
 .table-container {
 }
 
-.thead {
+.th {
+    padding: 10px;
+    text-align: center;
 }
 
 .table {

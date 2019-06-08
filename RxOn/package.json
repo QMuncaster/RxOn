@@ -15,7 +15,7 @@
     "react-dom": "^16.8.6",
     "react-mounter": "^1.2.0",
     "react-router": "*",
-    "react-router-dom": "*"
+    "react-router-dom": "^5.0.1"
   },
   "meteor": {
     "mainModule": {

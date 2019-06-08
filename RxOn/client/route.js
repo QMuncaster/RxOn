@@ -10,16 +10,19 @@ import PatientProfile from '../imports/ui/PatientProfile';
 import Navbar from "../imports/ui/Navbar";
 import PharmacyProfile from '../imports/ui/PharmacyProfile';
 import SignupPage from '../imports/ui/SignupPage';
+import PatientPage from '../imports/ui/PatientPage';
 
 // const browserHistory = createBrowserHistory();
 
 export const renderRoutes = () => (
     <div>
+        <BrowserRouter>
         <Navbar/>
-    <BrowserRouter>
+    
         <Switch>
             <Route exact path="/" component={Login}/>
             <Route exact path="/createaccount" component={Login}/>
+            <Route exact path="/home" component={PatientPage}/>
             <Route exact path="/patient" component={Patient}/>
             <Route exact path="/patient/profile" component={PatientProfile}/>
             <Route exact path="/pharmacy/profile" component ={PharmacyProfile}/>
