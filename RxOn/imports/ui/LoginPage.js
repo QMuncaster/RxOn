@@ -3,9 +3,18 @@ import { Users } from '../api/users.js';
 import React, { Component } from 'react';
 import "./styling/LoginPage.css";
 import PatientPage from "./PatientPage";
+import PharmacyProfile from "./PharmacyProfile";
 
 
 export default class LoginPage extends Component {
+
+    state ={
+        userType: "patient"
+    }
+
+    updateUserType =(event) =>{
+        this.setState({userType:event.target.value});
+    }
 
     createAccount= () => {
         this.props.history.push('/signup');
@@ -18,14 +27,11 @@ export default class LoginPage extends Component {
     }
 
     loginAccount=() =>{
-        //TODO:
-        // if ()
-        this.props.history.push('/patient/profile');
-        // true ? (
-        //     <Redirect to="/patient"/>
-        // ) : (
-        //     <PatientPage/>
-        // )
+        if (this.state.userType==="patient") {
+            this.props.history.push('/patient/profile');
+        } else {
+            this.props.history.push('/pharmacy/profile');
+        }
     }
 
 
@@ -33,8 +39,8 @@ export default class LoginPage extends Component {
         return (
 
             <form>
-                <input type="radio" name="user type " defaultChecked/> Patient
-                <input type="radio" name="user type "/> Pharmacy
+                <input type="radio" name="user type " value="patient" defaultChecked onChange={this.updateUserType}/> Patient
+                <input type="radio" name="user type " value="pharmacy" onChange={this.updateUserType}/> Pharmacy
                 <p>
                     <label className="email box">
                         Email:
