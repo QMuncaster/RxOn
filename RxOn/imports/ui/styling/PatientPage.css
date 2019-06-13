@@ -1,0 +1,23 @@
+.button {
+    background-color:#DADFF7;
+    color: #232C33;
+    border: 2px solid #232C33;
+    border-radius: 8px;
+    font-size: 1vw;
+    padding: 12px 28px;
+    float: right;
+}
+.button2 {
+    background-color:white;
+    color: #232C33;
+    border: 2px solid #232C33;
+    border-radius: 8px;
+    font-size: 1vw;
+    padding: 12px 28px;
+  }
+
+.button-container {
+    padding-top: 10px;
+    padding-left: 785px;
+}
+  

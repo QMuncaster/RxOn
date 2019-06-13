@@ -1,0 +1,10 @@
+
+.buttons-section {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.buttons-section button {
+    margin-right: 10px;
+}
