@@ -1,15 +1,24 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import './styling/SignUpPage.css';
 
 export default class SignupPage extends Component {
 
     createProfile() {
-        // Patients.update({
-        //     userType,
-        //     UserID,
-        //     date: new Date(),
-        // });
-        //TODO:
+        Accounts.createUser({
+            email: email.value,
+            password: password.value
+        },
+        (error) => {
+            alert(error);
+        });
+        // https://guide.meteor.com/accounts.html#dont-use-profile
+        // Don't want to use profile to store patient information
+        // So need to move this logic to server side so can use onCreateUser:
+            // Accounts.onCreateUser((options, user) => {
+            //     user.firstname = firstname.value;
+            //     return user;
+            // });
     }
 
 
@@ -19,7 +28,7 @@ export default class SignupPage extends Component {
                 <h2>Create Account </h2>
                 <div className="names-section">
                     <div className="image-section">
-                       
+
                         {/*<a href="#">Change Image</a>*/}
                     </div>
                     <div className="name-section">
@@ -61,9 +70,14 @@ export default class SignupPage extends Component {
                         <input type="text" id="phone-part1" />
                         <input type="text" id="phone-part2" />
                         <input type="text" id="phone-part3" />
+                    </span>
 
+                    <span>
                         <label>Email:</label>
                         <input type="email" id="email" />
+
+                        <label>Password:</label>
+                        <input type="email" id="password" />
                     </span>
                 </div>
 
@@ -76,7 +90,7 @@ export default class SignupPage extends Component {
                 </div>
 
             </div>
-            
+
         );
     }
 }

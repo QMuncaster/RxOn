@@ -25,18 +25,19 @@ export default class LoginPage extends Component {
 
     createAccount = (event) => {
         event.preventDefault();
-        // this.props.history.push('/signup');
-        console.log(this.state.email);
-        console.log(this.state.password);
-        Accounts.createUser({
-            email: this.state.email,
-            password: this.state.password
-        });
+        this.props.history.push('/signup');
     }
 
     loginAccount = (event) => {
         event.preventDefault();
-        Meteor.loginWithPassword(this.state.email, this.state.password);
+        Meteor.loginWithPassword({email: this.state.email}, this.state.password, (error) => {
+            if (error) {
+                alert(error.reason);
+            }
+            else {
+                this.props.history.push('/home')
+            }
+        });
         // if (this.state.userType === "patient") {
         //     this.props.history.push('/patient/profile');
         // } else {
