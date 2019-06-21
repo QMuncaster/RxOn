@@ -7,7 +7,6 @@ import '../imports/api/prescriptions.js';
 Accounts.onCreateUser((options, user) => {
     // options are basically the arguments to createUser
     // user is the actual user object
-    console.log("on createng");
     user.firstname = options.profile.firstname;
     user.lastname = options.profile.lastname;
     user.address = options.profile.address;

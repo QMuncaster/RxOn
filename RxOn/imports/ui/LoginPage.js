@@ -5,22 +5,10 @@ export default class LoginPage extends Component {
 
     state = {
         userType: "patient",
-        email: "",
-        password: "",
     }
 
     updateUserType = (event) => {
         this.setState({ userType: event.target.value });
-    }
-
-    // using react to get this info & store as state is kind of bloated
-    // TODO: replace with findReactDOM
-    handleEmailInput = (event) => {
-        this.setState({ email: event.target.value });
-    }
-
-    handlePasswordInput = (event) => {
-        this.setState({ password: event.target.value });
     }
 
     createAccount = (event) => {
@@ -30,7 +18,7 @@ export default class LoginPage extends Component {
 
     loginAccount = (event) => {
         event.preventDefault();
-        Meteor.loginWithPassword({email: this.state.email}, this.state.password, (error) => {
+        Meteor.loginWithPassword({email: email.value}, password.value, (error) => {
             if (error) {
                 alert(error.reason);
             }
@@ -58,10 +46,8 @@ export default class LoginPage extends Component {
                 <form>
                     <input type="radio" name="user type " value="patient" defaultChecked onChange={this.updateUserType} /> Patient
                     <input type="radio" name="user type " value="pharmacy" onChange={this.updateUserType} /> Pharmacy
-                    <input className={"email content"} type="text" id="email" className="fadeIn second" name="email" placeholder="email"
-                        value={this.state.email} onChange={this.handleEmailInput}/>
-                    <input className={"email content"} type="text" id="password" className="fadeIn third" name="login" placeholder="password"
-                        value={this.state.password} onChange={this.handlePasswordInput}/>
+                    <input className={"email content"} type="text" id="email" className="fadeIn second" name="email" placeholder="email"/>
+                    <input className={"email content"} type="text" id="password" className="fadeIn third" name="login" placeholder="password"/>
                     <input onClick={this.loginAccount} type="submit" className="fadeIn fourth" value="Log In"/>
 
                     <button id="buttonCreateAccount" className="fadeIn fourth"  className="ui button create account" onClick={this.createAccount}>

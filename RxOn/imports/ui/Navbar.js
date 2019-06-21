@@ -9,6 +9,9 @@ class Navbar extends Component {
         Meteor.logout((error) => {
             if (error) {alert(error)}
             this.props.history.push('/');
+            // TODO: clean up routing
+            // currently gives console error
+            // Exception in delivering result of invoking 'logout': TypeError: "this.props.history is undefined"
         })
     }
 
@@ -30,7 +33,6 @@ class Navbar extends Component {
                         {/* The welcome message below for logged in users probably shouldn't be a list element either */}
                         {this.props.currentUser ?
                             <li className="li" style={{ color: 'white', textDecoration: 'none' }}>
-{                            console.log(this.props)}
                                 {this.props.currentUser.firstname + " " + this.props.currentUser.lastname}
                             </li>
                             : ''};
