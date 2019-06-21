@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PatientPrescription from "./PatientPrescription";
 
 
 export default class PharmacySidebar extends Component {
@@ -11,6 +12,12 @@ export default class PharmacySidebar extends Component {
         //     UserID,
         //     date: new Date(),
         // });
+    }
+
+    renderPrescriptions() {
+        return this.props.prescriptions.map((px) => (
+            <PatientPrescription key={px._id} prescription={px} />
+        ));
     }
 
     render() {
@@ -34,3 +41,16 @@ export default class PharmacySidebar extends Component {
 
     }
 }
+
+//get prescription from data base
+
+const mapStateToProps = (state) => {
+    return {
+        prescriptions: state.prescriptions
+
+    };
+
+};
+
+
+export default connect(mapStateToProps)(MessageList);
