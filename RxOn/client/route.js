@@ -13,6 +13,7 @@ import PharmacyProfile from "../imports/ui/PharmacyProfile";
 import SignupPage from "../imports/ui/SignupPage";
 import PatientPage from "../imports/ui/PatientPage";
 import Login2 from "../imports/ui/login_components/Login";
+import App from "../imports/ui/prescription_modal/App"
 // const browserHistory = createBrowserHistory();
 
 export const renderRoutes = ({ store }) => (
@@ -21,6 +22,7 @@ export const renderRoutes = ({ store }) => (
       <Navbar />
       <Switch>
         <Route exact path="/" component={Login} />
+        <Route exact path="/app" component={App} />
         <Route exact path="/login" component={Login2} />
         <Route exact path="/createaccount" component={Login} />
         <Route exact path="/home" component={PatientPage} />
