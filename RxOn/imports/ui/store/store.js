@@ -1,12 +1,15 @@
 import { createStore, combineReducers } from "redux";
+import { reducer as formReducer } from "redux-form";
 
-// basic reducer
-const fooReducer = (state = {}, action) => {
+// stub reducer
+const stubReducer = (state = {}, action) => {
   return state;
 };
 // root reducer
 const reducer = combineReducers({
-  foo: fooReducer
+  // this does not do anything but I have it here to play with for manual testing
+  stub: stubReducer,
+  form: formReducer
 });
 // create store
 const store = createStore(
