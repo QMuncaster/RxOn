@@ -105,7 +105,7 @@ class PatientPage extends Component {
         {this.renderAddPrescriptionBox()}
 
         <table className="table">
-          
+          <thead>
             <tr>
               <th className="th">Prescription</th>
               <th className="th">Strength</th>
@@ -113,7 +113,8 @@ class PatientPage extends Component {
               <th className="th">Request Date</th>
               <th className="th">Status</th>
             </tr>
-        
+          </thead>
+
           <tbody>
             {this.renderPrescriptions()}
           </tbody>

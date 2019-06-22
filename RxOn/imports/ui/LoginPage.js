@@ -1,67 +1,66 @@
-import { Users } from '../api/users.js';
 import React, { Component } from 'react';
 import "./styling/LoginPage.css";
-import PatientPage from "./PatientPage";
-import PharmacyProfile from "./PharmacyProfile";
-
 
 export default class LoginPage extends Component {
 
-    state ={
-        userType: "patient"
+    state = {
+        userType: "patient",
     }
 
-    updateUserType =(event) =>{
-        this.setState({userType:event.target.value});
+    updateUserType = (event) => {
+        this.setState({ userType: event.target.value });
     }
 
-    createAccount= () => {
+    createAccount = (event) => {
+        event.preventDefault();
         this.props.history.push('/signup');
-        // Users.insert({
-        //     userType,
-        //     UserID,
-        //     date: new Date(),
-        //
-        // });
     }
 
-    loginAccount=() =>{
-        if (this.state.userType==="patient") {
-            this.props.history.push('/patient/profile');
-        } else {
-            this.props.history.push('/pharmacy/profile');
-        }
+    loginAccount = (event) => {
+        event.preventDefault();
+        Meteor.loginWithPassword({email: email.value}, password.value, (error) => {
+            if (error) {
+                alert(error.reason);
+            }
+            else {
+                this.props.history.push('/home')
+            }
+        });
+        // if (this.state.userType === "patient") {
+        //     this.props.history.push('/patient/profile');
+        // } else {
+        //     this.props.history.push('/pharmacy/profile');
+        // }
     }
-
 
     render() {
         return (
 
-            <form>
-                <input type="radio" name="user type " value="patient" defaultChecked onChange={this.updateUserType}/> Patient
-                <input type="radio" name="user type " value="pharmacy" onChange={this.updateUserType}/> Pharmacy
-                <p>
-                    <label className="email box">
-                        Email:
-                        <input className={"email content"}/>
-                    </label>
-                </p>
-                <p>
-                    <label className="password box">
-                        Password:
-                        <input type="password" className={"email content"}/>
-                    </label>
+            <div className="wrapper fadeInDown">
+                <div id="formContent">
 
+                <div className="fadeIn first">
+                    <img src="./styling/rxon.png" id="icon" alt="logo" width="42" height="42"/>
+                </div>
 
-                </p>
-                <div className="buttons-section">
-                    <button  className="ui button login" onClick={this.loginAccount}> Login
-                    </button>
-                    <button  className="ui button create account" onClick= {this.createAccount}>
+                <form>
+                    <input type="radio" name="user type " value="patient" defaultChecked onChange={this.updateUserType} /> Patient
+                    <input type="radio" name="user type " value="pharmacy" onChange={this.updateUserType} /> Pharmacy
+                    <input className={"email content"} type="text" id="email" className="fadeIn second" name="email" placeholder="email"/>
+                    <input className={"email content"} type="text" id="password" className="fadeIn third" name="login" placeholder="password"/>
+                    <input onClick={this.loginAccount} type="submit" className="fadeIn fourth" value="Log In"/>
+
+                    <button id="buttonCreateAccount" className="fadeIn fourth"  className="ui button create account" onClick={this.createAccount}>
                         Create Account
                     </button>
+                </form>
+
+                <div id="formFooter">
+                    <a className="underlineHover" href="#">Forgot Password?</a>
                 </div>
-            </form>
+
+            </div>
+            </div>
 
         );
 
