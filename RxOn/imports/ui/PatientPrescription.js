@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Prescriptions } from '../api/prescriptions.js';
 import "./styling/PatientPrescription"
 
-// Patient prescription component - represents a single row in prescription table
 export default class PatientPrescription extends Component {
 
   cancelPrescription() {
@@ -24,7 +23,7 @@ export default class PatientPrescription extends Component {
           </button>
         </td>
       </tr>
-     
+
     );
   }
 }
