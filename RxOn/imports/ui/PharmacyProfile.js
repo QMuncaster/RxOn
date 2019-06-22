@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Prescriptions} from '../api/prescriptions';
 import PrescriptionForPharmacy from './PrescriptionForPharmacy';
 import {withTracker} from 'meteor/react-meteor-data';
+import './styling/PharmacyPrescription.css';
 
 class PharmacytProfile extends Component {
 
@@ -19,15 +20,15 @@ class PharmacytProfile extends Component {
     render() {
         return (
             <div className="pharmacy-profile-page">
-                <div className="Pharmacy-Headings">
-                    <h2 className="prescription-header-individual"> Pending</h2>
-                    <div>
+                <div  className="Pharmacy-Headings">
+                    <h2 id="pharmHeading" className="prescription-header-individual"> Pending</h2>
+                    <div id="pendingBox">
                         {this.renderPrescriptions("pending")}
                     </div>
                 </div>
                 <div className="Pharmacy-Headings">
-                    <h2 className="prescription-header-individual"> Filled</h2>
-                    <div>
+                    <h2 id="pharmHeading" className="prescription-header-individual"> Filled</h2>
+                    <div id="filledBox">
                         {this.renderPrescriptions("filled")}
                     </div>
                 </div>
