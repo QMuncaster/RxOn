@@ -22,18 +22,18 @@ export default class PharmacySidebar extends Component {
 
     render() {
         return (
-            <div className="pharmacy sidebar">
+            <div className="pharmacy-sidebar">
                 <div className="info-section">
                         <div className="gender-section">
-                            <label className="Company Name">Company Name</label>
-                            <input type="text" />
-                            <label className="Company Address">Company Address</label>
-                            <input type="text" />
-                            <label className="Company contact">Company Contact</label>
-                            <input type="text" />
+                            <label  className="company-info">Company Name: XXX</label>
+                            {/*<input type="text" />*/}
+                            <label className="company-info">Company Address:XXX</label>
+                            {/*<input type="text" />*/}
+                            <label className="company-info">Company Contact:XXX</label>
+                            {/*<input type="text" />*/}
                         </div>
                         <div className="setting">
-                            <button className={"ui button setting"} onClick={()=>{this.updatePharmacyProfile.bind(this)}}>Settings</button>
+                            <button className="ui-button-setting" onClick={()=>{this.updatePharmacyProfile.bind(this)}}>Settings</button>
                         </div>
                     </div>
                 </div>
@@ -42,15 +42,16 @@ export default class PharmacySidebar extends Component {
     }
 }
 
-//get prescription from data base
+//TODO:Progress-4
+// get prescription from data base
+//
+// const mapStateToProps = (state) => {
+//     return {
+//         prescriptions: state.prescriptions
+//
+//     };
+//
+// };
 
-const mapStateToProps = (state) => {
-    return {
-        prescriptions: state.prescriptions
-
-    };
-
-};
-
-
-export default connect(mapStateToProps)(MessageList);
+//TODO: Progress-4
+// export default connect(mapStateToProps)(MessageList);
