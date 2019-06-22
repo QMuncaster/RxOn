@@ -1,0 +1,81 @@
+#rxForm {
+    background-color: white;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-color: white;
+}
+
+
+#fillButton {
+background-color: #008CBA; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+#username {
+    font-size: 20px;
+    padding: 18px;
+}
+
+#rxInfo {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#itemName {
+    color: black;
+}
+
+#pharmHeading {
+    color: rgb(213, 215, 219);
+    font-size: 50px;
+}
+
+#pendingBox {
+    padding-right: 0px;
+}
+
+#filledBox {
+    padding-left: 0px;
+
+}
+
+.pharmacy-profile-page-heading{
+  display:flex;
+
+}
+
+.company-info{
+    font-size:14px;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    padding:6px;
+
+}
+
+.pharmacy-sidebar{
+    background-color:lightsteelblue;
+    border: 1px;
+    display:flex;
+    align-items: center;
+    height:20vh;
+    width: 40vh;
+    padding:20px;
+    border-radius:20px;
+
+}
+.ui-button-setting {
+    float:right;
+}
+
+.info-section{
+    width:100%;
+}
