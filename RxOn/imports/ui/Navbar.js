@@ -20,6 +20,8 @@ class Navbar extends Component {
             <nav className="navWrapper">
                 <div className="container">
                     <ul className="right">
+                     <li className="li">
+                      <Link to="/login" style={{ color: "white", textDecoration: "none" }}> Login2 </Link> </li>
                         {/* Only show logout button if someones logged i */}
                         {/* This should be done for the profile tab as well but honestly its getting too complicated */}
                         {/* Might be easier to have a "loggedInNavBar" and a "loggedOutNavBar" component */}

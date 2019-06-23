@@ -1,0 +1,32 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .Login {
+    text-align: center;
+    background: white
+  }
+  
+  .Login-header {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  .Login-link {
+    color: #61dafb;
+  }
+  
+  .Login__header {
+    color: rgb(53, 70, 79);
+    margin: 45px 0 90px;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
