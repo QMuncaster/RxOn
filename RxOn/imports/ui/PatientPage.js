@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Prescriptions } from '../api/prescriptions.js';
+import { Prescriptions } from '../collections/prescriptions.js';
 import PatientPrescription from './PatientPrescription.js';
 import "./styling/PatientPage.css"
 import "./styling/PatientPrescription.css"

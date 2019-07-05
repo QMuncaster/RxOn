@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Prescriptions } from '../api/prescriptions.js';
+import { Prescriptions } from '../collections/prescriptions.js';
 import "./styling/PatientPrescription"
 
 export default class PatientPrescription extends Component {
