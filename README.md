@@ -35,8 +35,8 @@ This leaves us with two solutions:
 
 Here are some links
 
-*[Config MongoUrl](https://forums.meteor.com/t/how-to-config-monogo-url-on-setting-js/33178)
-*[Similar to above](https://forums.meteor.com/t/what-are-all-the-meteor-settings-json-options/8573)
+* [Config MongoUrl](https://forums.meteor.com/t/how-to-config-monogo-url-on-setting-js/33178)
+* [Another similar forum](https://forums.meteor.com/t/what-are-all-the-meteor-settings-json-options/8573)
 
 ### Meteor and MongoDB notes for quick reference
  Create a collection on the server within MongoDB, and an interface to that collection to be used on the server. 
