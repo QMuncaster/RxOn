@@ -90,46 +90,45 @@ class PatientPage extends Component {
 
   render() {
     return (
-      <div>
 
-        <PatientSideBar />
-      <div className="container">
-        {/* // header could be its own component, with added navbar */}
-        <header>      
-          <h1>Patient Portal</h1>
-        </header>
-
-        
+      <div className="parentDiv">         
+        <div className="childSideBar">
+          <PatientSideBar />
+        </div>
+        <div className="childRxTable">
+          <header>      
+            <h1>Patient Portal</h1>
+          </header>
 
         {/* // addPrescriptionBox should be its own component
         // but then we would need redux to share state (on whether the popup is open or closed)
         // since its a pain to share state through react 
         // TODO: make own component, use redux to track whether its open or not*/}
-        {this.renderAddPrescriptionBox()}
+          {this.renderAddPrescriptionBox()}
 
-        <table className="table">
-          <thead>
-            <tr>
-              <th className="th">Prescription</th>
-              <th className="th">Strength</th>
-              <th className="th">Dose</th>
-              <th className="th">Request Date</th>
-              <th className="th">Status</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {this.renderPrescriptions()}
-          </tbody>
-        </table>
-      </div>
-      <div className="button-container">
-      <button className="button2" onClick={this.openAddPrescriptionBox.bind(this)}>
-        Add Prescription
-      </button>
-      </div>
-      </div>
-     
+          <table className="rxTable">
+            <thead>
+              <tr>
+                <th className="th">Prescription</th>
+                <th className="th">Strength</th>
+                <th className="th">Dose</th>
+                <th className="th">Request Date</th>
+                <th className="th">Status</th>
+              </tr>
+            </thead>
+          
+            <tbody>
+              {this.renderPrescriptions()}
+            </tbody>
+          </table>
+          <div className="button-container">
+          <button className="button2" onClick={this.openAddPrescriptionBox.bind(this)}>
+            Add Prescription
+          </button>
+        </div>
+      </div>  
+    </div>
+  
     );
   }
 }
