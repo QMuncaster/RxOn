@@ -34,9 +34,9 @@ This leaves us with two solutions:
 * Or just put the commands in package.json directly. Which what I did although very bad practice, it will make it easy for us to work together on it. Of course someone can tinker with our db but we are kids running a no-name project :D. This is jsut a temporary solution for the time being.
 
 Here are some links
-[Config MongoUrl](https://forums.meteor.com/t/how-to-config-monogo-url-on-setting-js/33178)
 
-[Similar to above](https://forums.meteor.com/t/what-are-all-the-meteor-settings-json-options/8573)
+*[Config MongoUrl](https://forums.meteor.com/t/how-to-config-monogo-url-on-setting-js/33178)
+*[Similar to above](https://forums.meteor.com/t/what-are-all-the-meteor-settings-json-options/8573)
 
 ### Meteor and MongoDB notes for quick reference
  Create a collection on the server within MongoDB, and an interface to that collection to be used on the server. 
