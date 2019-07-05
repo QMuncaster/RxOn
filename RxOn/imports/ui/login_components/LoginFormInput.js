@@ -5,7 +5,6 @@ We could have put all this into LoginForm direclty
 */
 import React from "react";
 const loginFormInput = props => {
-  console.log(props);
   const { name, label, input, type, meta } = props;
   return (
     <div className="loginForm__wrapper">
