@@ -20,6 +20,23 @@ Schema is as follows
     ]
 }
 ```
+### Notes about connecting to Atlas
+Meteor uses enviroment variables that one can provide to the application.
+The variable of inter here is called MONGO_URL. We set this to our database connecting url string.
+We can do this in command line, but we would have to do the following each time we run meteor
+```
+export MONGO_URL=connetingUrlString
+meteor
+```
+I looked online and there is no way to set these during development. They are meant to be set in deployment enviroment.
+This leaves us with two solutions: 
+* Have a bash script that runs the commands and then point ```start scripts``` to this bash script
+* Or just put the commands in package.json directly. Which what I did although very bad practice, it will make it easy for us to work together on it. Of course someone can tinker with our db but we are kids running a no-name project :D. This is jsut a temporary solution for the time being.
+
+Here are some links
+[Config MONGOURL](https://forums.meteor.com/t/how-to-config-monogo-url-on-setting-js/33178)
+[Similar to above](https://forums.meteor.com/t/what-are-all-the-meteor-settings-json-options/8573)
+
 ### Meteor and MongoDB notes for quick reference
  Create a collection on the server within MongoDB, and an interface to that collection to be used on the server. 
  It’s a fairly straightforward layer on top of the underlying Node MongoDB driver, but with a __synchronous API__
