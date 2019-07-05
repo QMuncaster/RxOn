@@ -5,6 +5,7 @@ import { Prescriptions } from '../api/prescriptions.js';
 import PatientPrescription from './PatientPrescription.js';
 import "./styling/PatientPage.css"
 import "./styling/PatientPrescription.css"
+import PatientSideBar from './PatientSideBar.js';
 
 // Patient Page component - represents the patient page???
 // Not sure how to structure this, just wanted to separate this from the App component...
@@ -90,6 +91,8 @@ class PatientPage extends Component {
   render() {
     return (
       <div>
+
+        <PatientSideBar />
       <div className="container">
         {/* // header could be its own component, with added navbar */}
         <header>      
