@@ -1,6 +1,7 @@
 ﻿# RxOn
 ### This branch is for updating db schema
 Schema is as follows
+```javascript
 {
     ListOFPrescriptions [
         {
@@ -18,3 +19,4 @@ Schema is as follows
         ...
     ]
 }
+```
