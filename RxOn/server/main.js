@@ -10,6 +10,8 @@ Accounts.onCreateUser((options, user) => {
     user.firstname = options.profile.firstname;
     user.lastname = options.profile.lastname;
     user.address = options.profile.address;
+    user.dateofbirth = options.profile.dateofbirth;
+    user.phonenumber = options.profile.phonenumber;
     return user;
 });
 
@@ -39,7 +41,7 @@ Meteor.publish('userData', function () {
       return Meteor.users.find({ _id: this.userId }, {
         // 0 = exclude from return document
         // 1 = include in return document
-        fields: { firstname: 1, lastname: 1, dateofbirth: 1 } 
+        fields: { firstname: 1, lastname: 1, address: 1, dateofbirth: 1, phonenumber: 1} 
       });
     } else {
       this.ready();

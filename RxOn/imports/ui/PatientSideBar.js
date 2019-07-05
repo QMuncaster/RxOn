@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
-import { Link, NavLink } from 'react-router-dom'
-import './styling/Navbar.css'
 import { withTracker } from 'meteor/react-meteor-data';
+import './styling/PatientSideBar.css';
 
 class PatientSideBar extends Component {
 
     render() {
         return (
-            <div className="pharmacy-sidebar">
+            <div className="patient-sidebar">
                 <div className="info-section">
+                        <div class="profile-userpic">
+					        <img class="img-responsive" alt=""/>
+				        </div>
                     <div className="gender-section">
                         <ul>
 
                         {this.props.currentUser ?
-                            <li> First Name: {this.props.currentUser.firstname}  </li> : ''}
+                            <li className="listItem"> First Name: {this.props.currentUser.firstname}  </li> : ''}
 
                         {this.props.currentUser ?
-                            <li> Last Name: {this.props.currentUser.lastname}  </li> : ''}
+                            <li className="listItem"> Last Name: {this.props.currentUser.lastname}  </li> : ''}
                             
                         {this.props.currentUser ?
-                            <li> Date of Birth: {this.props.currentUser.dateofbirth} </li> : ''}
+                            <li className="listItem"> Date of Birth: {this.props.currentUser.dateofbirth} </li> : ''}
 
                         </ul>
                      </div>
