@@ -1,12 +1,19 @@
 import { Mongo } from "meteor/mongo";
+import SimpleSchema from 'simpl-schema'
 
-Prescriptions = new Mongo.Collection("prescriptions");
+const Prescriptions = new Mongo.Collection("prescriptions");
 // by default all fields are required. need to specify if optional
-PrescriptionsSchema = new SimpleSchema({
+const PrescriptionsSchema = new SimpleSchema({
   _ID: {
     type: String,
     autoValue: function() {
       return this.docId;
+    }
+  },
+  userID: {
+    type: String,
+    autoValue: function() {
+      return this.userId;
     }
   },
   name: String,
@@ -39,7 +46,10 @@ PrescriptionsSchema = new SimpleSchema({
         return new Date();
       }
     },
-    denyInsert: true,
     optional: true
   }
 });
+
+Prescriptions.attachSchema( PrescriptionsSchema );
+
+export default Prescriptions;
