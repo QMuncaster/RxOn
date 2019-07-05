@@ -11,10 +11,9 @@ export default class PatientPrescription extends Component {
   render() {
     return (
      <tr className="tr">
-        <td className="th">{this.props.prescription.name}</td>
-        <td className="th">{this.props.prescription.strength}</td>
-        <td className="th">{this.props.prescription.dose}</td>
-        <td className="th">{this.props.prescription.date.toLocaleDateString("en-US")}</td>
+        <td className="th">{this.props.prescription.rxName}</td>
+        <td className="th">{this.props.prescription.rxStrength}</td>
+        <td className="th">{this.props.prescription.rxDose}</td>
         <td className="th">{this.props.prescription.status}</td>
         <td className="delete">
           {/* TODO: add functionality so canceling can only be done for pending prescriptions */}

@@ -35,13 +35,14 @@ class PatientPage extends Component {
       alert("All fields are required.");
       return;
     }
+    // const userId = Meteor.userId();
 
     Prescriptions.insert({
-      name,
-      strength,
-      dose,
-      date: new Date(),
-      status: "pending"
+      //userId: userId,
+      //userName: first and last name
+      rxName: name,
+      rxStrength: strength,
+      rxDose: dose,
     });
 
     // Clear form inputs
