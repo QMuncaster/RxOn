@@ -1,5 +1,5 @@
 ﻿# RxOn
-
+# This branch is for workshop 5
 ### Project Description
 
 RxOn is an online pharmacy platform that provides basic services of a brick and mortar pharmacy. There are two user types: 1-Patient  2-Pharmacist. The basic data it stores are prescriptions and their statuses for each patient. Patients can add prescriptions, and pharmacists can approve and fill prescriptions. Additional functionality can include payment integration, live-chat with pharmacists, and image recognition for prescription uploads.
