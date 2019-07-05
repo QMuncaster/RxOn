@@ -21,7 +21,8 @@
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.1",
     "redux-form": "^8.2.4",
-    "redux-modal": "^3.0.1"
+    "redux-modal": "^3.0.1",
+    "simpl-schema": "^1.5.5"
   },
   "meteor": {
     "mainModule": {
