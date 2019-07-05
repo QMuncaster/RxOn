@@ -1,17 +1,19 @@
 ﻿# RxOn
 ### This branch is for updating db schema
 Schema is as follows
-```javascript
+```
 {
     ListOFPrescriptions [
         {
-            _id: mongo default generated id
-            userID: this corresponds to the user id created by accounts
+            _ID: mongo default generated id, obtained through collection2 package this.docId
+            userID: this corresponds to the user id created by accounts // currently not added
             name: First and Last names of Patient
-            Prescription: {name, dose, strength}
-            Status: {shipped, pending, canceled, ready for pick up, out of stock, Complete}
-            createdAt: mongodb default
-            updatedAt: mongodb default
+            rxName: separated them for ease of use
+            rxDose: // see above
+            rxStrength: // see above
+            Status: One of {'pending', 'shipped', 'complete' ,'canceled'}
+            createdAt: using simple schema autovalue
+            updatedAt: using simple schema autovalue
         },
         {
             another object like above
