@@ -8,8 +8,8 @@ class PatientSideBar extends Component {
         return (
             <div className="patient-sidebar">
                 <div className="info-section">
-                        <div class="profile-userpic">
-					        <img class="img-responsive" alt=""/>
+                        <div className="profile-userpic">
+					        <img className="img-responsive" alt=""/>
 				        </div>
                     <div className="gender-section">
                         <ul>
