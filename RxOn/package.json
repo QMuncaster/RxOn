@@ -2,7 +2,7 @@
   "name": "RxOn",
   "private": true,
   "scripts": {
-    "start": "meteor run",
+    "start": "MONGO_URL='mongmongodb+srv://rxon:rxon_cs436i@rxon-wcylo.mongodb.net/test?retryWrites=true&w=majority' meteor",
     "test": "meteor test --once --driver-package meteortesting:mocha",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
     "visualize": "meteor --production --extra-packages bundle-visualizer"
@@ -13,6 +13,7 @@
     "faker": "^4.1.0",
     "indexof": "0.0.1",
     "meteor-node-stubs": "^0.4.1",
+    "pify": "^4.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-mounter": "^1.2.0",
@@ -21,7 +22,8 @@
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.1",
     "redux-form": "^8.2.4",
-    "redux-modal": "^3.0.1"
+    "redux-modal": "^3.0.1",
+    "simpl-schema": "^1.5.5"
   },
   "meteor": {
     "mainModule": {

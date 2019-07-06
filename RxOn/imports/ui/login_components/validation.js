@@ -1,7 +1,7 @@
 /*
 This is just some basic client side validation of login form
 It is seprate from server side validation
-We dont need to send request to server to check for these things 
+We dont need to send request to server to check for these things
 */
 export const required = value => (value ? null : "This value is required");
 export const minLength = (value = "") => {
@@ -11,5 +11,5 @@ export const minLength = (value = "") => {
 };
 
 export const maxLength = (value = "") => {
-  return value.length > 10 ? "Username is too long" : null;
+  return value.length > 50 ? "Username is too long" : null;
 };

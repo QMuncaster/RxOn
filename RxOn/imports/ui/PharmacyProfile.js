@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Prescriptions} from '../api/prescriptions';
+import {Prescriptions} from '../collections/prescriptions';
 import PrescriptionForPharmacy from './PrescriptionForPharmacy';
 import {withTracker} from 'meteor/react-meteor-data';
 import './styling/PharmacyPrescription.css';

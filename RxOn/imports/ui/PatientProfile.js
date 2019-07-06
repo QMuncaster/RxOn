@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import "./styling/PatientProfile.css";
 import  faker from 'faker';
+import { withTracker } from 'meteor/react-meteor-data';
 
-export default class PatientProfile extends Component {
+ class PatientProfile extends Component {
 
     updateProfile() {
         // Patients.update({
@@ -32,13 +33,23 @@ export default class PatientProfile extends Component {
                             <label htmlFor="mx">Mx.</label>
                             <input type="radio" id="mx" name="gender-radio-group" value="mx" />
                         </div>
+
                         <div className="firstname-section">
-                            <label>Frist Name:</label>
-                            <input type="text" id="firstname" />
+                            <label>First Name:</label>    
+                                {this.props.currentUser ?
+                                    <input type="text" id="firstname" placeholder={this.props.currentUser.firstname}  /> 
+                                    :
+                                    <input type="text" id="firstname" placeholder="enter first name"/>
+                                }
                         </div>
+
                         <div className="lastname-section">
                             <label>Last Name:</label>
-                            <input type="text" id="lastname" />
+                                {this.props.currentUser ?
+                                    <input type="text" id="lastname" placeholder={this.props.currentUser.lastname}  /> 
+                                    :
+                                    <input type="text" id="lastname" placeholder="enter last name"/>
+                                }
                         </div>
                     </div>
                 </div>
@@ -80,3 +91,11 @@ export default class PatientProfile extends Component {
         );
     }
 }
+
+export default withTracker(() => {
+    Meteor.subscribe('userData');
+
+    return {
+        currentUser: Meteor.user()
+    };
+})(PatientProfile);
