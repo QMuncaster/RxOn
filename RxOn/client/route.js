@@ -5,14 +5,13 @@ import { Router, Route, Redirect } from "react-router-dom";
 import { createBrowserHistory } from 'history';
 
 // route components
-import Login from "../imports/ui/LoginPage";
 import Patient from "../imports/ui/PatientPage";
 import PatientProfile from "../imports/ui/PatientProfile";
 import Navbar from "../imports/ui/Navbar";
 import PharmacyProfile from "../imports/ui/PharmacyProfile";
 import SignupPage from "../imports/ui/SignupPage";
 import PatientPage from "../imports/ui/PatientPage";
-import Login2 from "../imports/ui/login_components/Login";
+import Login from "../imports/ui/login_components/Login";
 import App from "../imports/ui/prescription_modal/App"
 const history = createBrowserHistory();
 
@@ -35,12 +34,12 @@ export const renderRoutes = ({ store }) => (
     <Router history={history}>
       <Navbar />
       <Switch>
-        <Route exact path="/" component={Login} />
-        <Route exact path="/login" component={Login2} />
+        <Route exact path="/login" component={Login} />
         <Route exact path="/createaccount" component={Login} />
         <Route exact path="/signup" component={SignupPage} />
-
+        
         <PrivateRoute exact path="/app" component={App} />
+        <PrivateRoute exact path="/" component={PatientPage} />
         <PrivateRoute exact path="/home" component={PatientPage} />
         <PrivateRoute exact path="/patient" component={Patient} />
         <PrivateRoute exact path="/pharmacy/profile" component={PharmacyProfile} />
