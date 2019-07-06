@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Prescriptions} from '../api/prescriptions.js';
+import {Prescriptions} from '../collections/prescriptions.js';
 import "./styling/PharmacyPrescription";
 
 
@@ -32,18 +32,18 @@ export default class PrescriptionForPharmacy extends Component {
                 <div id="rxInfo" className="prescription-middle-info">
                     <div className="prescription-item">
                         <span id="itemName" className="prescription-item-tag"> Name:   </span>
-                        {this.props.prescription.name}
+                        {this.props.prescription.rxName}
                     </div>
                     <div className="prescription-item">
                         <span id="itemName" className="prescription-item-tag"> Strength:   </span>
-                        {this.props.prescription.strength}
+                        {this.props.prescription.rxStrength}
                     </div>
                     <div className="prescription-item">
                         <span id="itemName" className="prescription-item-tag"> Dose:   </span>
-                        {this.props.prescription.dose} </div>
+                        {this.props.prescription.rxDose} </div>
                     <div className="prescription-item">
                         <span id="itemName" className="prescription-item-tag"> Date:   </span>
-                        {this.props.prescription.date.toLocaleDateString("en-US")} </div>
+                        {this.props.prescription.createdAt.toString("en-US")} </div>
                     <div className="prescription-item">
                         <span id="itemName" className="prescription-item-tag"> Status:   </span>
                         {this.props.prescription.status} </div>

@@ -1,4 +1,4 @@
-import '../imports/api/prescriptions.js';
+import '../imports/collections/prescriptions.js';
 
 
 // https://guide.meteor.com/accounts.html#dont-use-profile
