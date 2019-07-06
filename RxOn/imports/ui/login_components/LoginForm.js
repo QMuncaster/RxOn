@@ -16,7 +16,7 @@ class LoginForm extends Component {
           name="userName"
           type="text"
           component={LoginFormInput}
-          label="Username"
+          label="Email"
           className="loginForm__input"
           validate={[required, minLength, maxLength]}
         />
@@ -36,7 +36,7 @@ class LoginForm extends Component {
           className="loginForm__input--inline"
         />
         <button type="submit" className="loginForm__btn">
-          Submit
+          Log In
         </button>
       </form>
     );

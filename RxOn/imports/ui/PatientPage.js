@@ -38,7 +38,7 @@ class PatientPage extends Component {
     // const userId = Meteor.userId();
 
     Prescriptions.insert({
-      //userId: userId,
+      patientId: Meteor.userId(),
       //userName: first and last name
       rxName: name,
       rxStrength: strength,
@@ -93,15 +93,15 @@ class PatientPage extends Component {
       <div>
       <div className="container">
         {/* // header could be its own component, with added navbar */}
-        <header>      
+        <header>
           <h1>Patient Portal</h1>
         </header>
 
-        
+
 
         {/* // addPrescriptionBox should be its own component
         // but then we would need redux to share state (on whether the popup is open or closed)
-        // since its a pain to share state through react 
+        // since its a pain to share state through react
         // TODO: make own component, use redux to track whether its open or not*/}
         {this.renderAddPrescriptionBox()}
 
@@ -127,14 +127,14 @@ class PatientPage extends Component {
       </button>
       </div>
       </div>
-     
+
     );
   }
 }
 
 export default withTracker(() => {
   return {
-    prescriptions: Prescriptions.find({}, { sort: { createdAt: -1 } }).fetch(),
+    prescriptions: Prescriptions.find({patientId:Meteor.userId() }, { sort: { createdAt: -1 } }).fetch(),
   };
 })(PatientPage);
 

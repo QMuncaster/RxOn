@@ -5,12 +5,14 @@ export const Prescriptions = new Mongo.Collection("prescriptions");
 // by default all fields are required. need to specify if optional
 const PrescriptionsSchema = new SimpleSchema({
   _id: String,
-  // userId: {
-  //   type: String,
-  //   autoValue: function() {
-  //     return this.userId;
-  //   }
-  // },
+  patientId: {
+    type: String,
+    defaultValue: "fake1234"
+  },
+  pharmacyId:{
+    type: String,
+    defaultValue: "fake1234"
+  },
   //userName: String,
   rxName: String,
   rxDose: String,
