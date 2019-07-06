@@ -2,17 +2,28 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import './styling/Navbar.css'
 import { withTracker } from 'meteor/react-meteor-data';
+import { Tracker } from 'meteor/tracker';
+
+// reactive variable that we can override for logging out
+let loggedIn = !!Meteor.user();
+Tracker.autorun(() => {
+    loggedIn = !!Meteor.user();
+});
 
 class Navbar extends Component {
 
     logout = () => {
+        loggedIn = false; 
+        this.forceUpdate();
         Meteor.logout((error) => {
             if (error) { alert(error) }
         });
     }
 
     render() {
-        if (Meteor.user()) {
+        // if just use this.props.currentUser, cannot set property to false before waiting for server response
+        // so the NavBar would take a couple seconds to close after logging out
+        if (loggedIn) {
             return (
                 <nav className="navWrapper">
                     <div className="container">
@@ -40,6 +51,6 @@ export default withTracker(() => {
     Meteor.subscribe('userData');
 
     return {
-        currentUser: Meteor.user()   // not really using right now, but leaving in for account types later
+        currentUser: Meteor.user()
     };
 })(Navbar);
