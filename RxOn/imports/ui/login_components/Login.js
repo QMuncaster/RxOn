@@ -15,25 +15,9 @@ class Login extends Component {
       await pify(Meteor.loginWithPassword)({ email: values.userName }, values.password);
       this.props.history.push('/home');
     } catch (error) {
-      switch (error.reason) {
-        // kind of uncomfortable that we have to hardcode to the reason
-        // but they share the same status codes
-        case "User not found":
-          throw new SubmissionError({
-            userName: error.reason
-          });
-
-        case "Incorrect password":
-          throw new SubmissionError({
-            password: error.reason
-          });
-
-        default:
-          throw new SubmissionError({
-            userName: error.reason,
-            password: error.reason
-          });
-      }
+      throw new SubmissionError({
+        password: "Invalid login."
+      });
     }
   }
 
@@ -61,5 +45,3 @@ class Login extends Component {
 }
 
 export default withRouter(Login);
-
-
