@@ -1,8 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { render } from 'react-dom';
-import { renderRoutes } from './route.js';
+import { renderRoutes } from '../imports/startup/routes.js';
 import store from "../imports/ui/store/store"
-import { Tracker } from 'meteor/tracker'
 
 Meteor.startup(() => {
     render(renderRoutes({store}), document.getElementById('render-target'));

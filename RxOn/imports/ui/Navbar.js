@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import './styling/Navbar.css'
 import { withTracker } from 'meteor/react-meteor-data';
 import { Tracker } from 'meteor/tracker';
 import { withRouter } from "react-router-dom";
+import './styling/Navbar.css'
 
 // reactive variable that we can override for logging out
 // if just use this.props.currentUser, cannot set property to false before waiting for server response

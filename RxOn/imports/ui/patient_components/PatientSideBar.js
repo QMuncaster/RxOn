@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
-import './styling/PatientSideBar.css';
+import '../styling/PatientSideBar.css';
 
 class PatientSideBar extends Component {
 

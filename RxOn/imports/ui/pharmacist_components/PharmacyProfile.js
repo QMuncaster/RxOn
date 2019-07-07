@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import {Prescriptions} from '../collections/prescriptions';
-import PrescriptionForPharmacy from './PrescriptionForPharmacy';
 import {withTracker} from 'meteor/react-meteor-data';
-import './styling/PharmacyPrescription.css';
-import PharmarcySidebar from "./PharmarcySidebar";
+import {Prescriptions} from '../../collections/prescriptions';
+import PrescriptionForPharmacy from './PrescriptionForPharmacy';
+import PharmacySidebar from "./PharmacySidebar";
+import '../styling/PharmacyPrescription.css';
 
-class PharmacytProfile extends Component {
+class PharmacyProfile extends Component {
 
     renderPrescriptions(status) {
         return this.props.prescriptions.map((px) => {
@@ -21,7 +21,7 @@ class PharmacytProfile extends Component {
     render() {
         return (
             <div className="pharmacy-profile-page-heading" >
-                <PharmarcySidebar/>
+                <PharmacySidebar/>
                 <div className="pharmacy-profile-page">
                     <div  className="Pharmacy-Headings">
                         <h2 id="pharmHeading" className="prescription-header-individual"> Pending</h2>
@@ -47,5 +47,5 @@ export default withTracker(() => {
     return {
         prescriptions: Prescriptions.find({}, {sort: {createdAt: -1}}).fetch(),
     };
-})(PharmacytProfile);
+})(PharmacyProfile);
 

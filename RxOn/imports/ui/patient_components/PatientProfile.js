@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import "./styling/PatientProfile.css";
 import  faker from 'faker';
 import { withTracker } from 'meteor/react-meteor-data';
+import "../styling/PatientProfile.css";
 
  class PatientProfile extends Component {
 

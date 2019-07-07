@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PatientPrescription from "./PatientPrescription";
+import PatientPrescription from "../patient_components/PatientPrescription";
 
 
 export default class PharmacySidebar extends Component {

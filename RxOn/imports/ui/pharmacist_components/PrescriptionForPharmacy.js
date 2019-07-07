@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Prescriptions} from '../collections/prescriptions.js';
-import "./styling/PharmacyPrescription";
+import {Prescriptions} from '../../collections/prescriptions.js';
+import "../styling/PharmacyPrescription";
 
 
 export default class PrescriptionForPharmacy extends Component {

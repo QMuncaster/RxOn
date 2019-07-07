@@ -1,11 +1,11 @@
 import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Prescriptions } from '../collections/prescriptions.js';
+import { Prescriptions } from '../../collections/prescriptions.js';
 import PatientPrescription from './PatientPrescription.js';
-import "./styling/PatientPage.css"
-import "./styling/PatientPrescription.css"
 import PatientSideBar from './PatientSideBar.js';
+import "../styling/PatientPage.css"
+import "../styling/PatientPrescription.css"
 
 // Patient Page component - represents the patient page???
 // Not sure how to structure this, just wanted to separate this from the App component...
