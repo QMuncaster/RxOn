@@ -44,8 +44,7 @@ export const renderRoutes = ({ store }) => (
             if (error) { alert(error) }
             history.push("/login");
           });
-           // TODO: replace with actual component
-          return (<h1>LOGGING OUT</h1>); 
+          return <Login />
         }} />
 
         <Route exact path="/login" render={() => (
@@ -53,7 +52,7 @@ export const renderRoutes = ({ store }) => (
             <Redirect to='/home' /> :
             <Login />
         )} />
-        
+
         <Route exact path="/signup" component={SignupPage} />
         <Route render={() => (<h1>404 page not found</h1>)} />
       </Switch>
