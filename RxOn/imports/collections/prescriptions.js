@@ -50,11 +50,10 @@ const PrescriptionsSchema = new SimpleSchema({
 });
 
 
+
 Meteor.methods({
   'prescriptions.insert'(name, strength, dose) {
-    if (! this.userId) {
-      throw new Meteor.Error('not-authorized');
-    }
+    if (! this.userId) { throw new Meteor.Error('not-authorized'); }
   
     // TODO: validation of arguments before inserting
     Prescriptions.insert({
@@ -63,6 +62,15 @@ Meteor.methods({
       rxStrength: strength,
       rxDose: dose,
     });
+  },
+
+  'prescriptions.remove'(id) {
+    if (! this.userId) { throw new Meteor.Error('not-authorized'); }
+
+    // TODO:
+    // should only be able to cancel if userId matches prescription's userId
+    // should only be able to cancel prescription with status = pending
+    Prescriptions.remove(id);
   }
 });
 
