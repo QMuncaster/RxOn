@@ -42,8 +42,8 @@ class PharmacyProfile extends Component {
 }
 
 //find out the prescription collection
-
 export default withTracker(() => {
+    Meteor.subscribe('prescriptions.all');
     return {
         prescriptions: Prescriptions.find({}, {sort: {createdAt: -1}}).fetch(),
     };

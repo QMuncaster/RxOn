@@ -52,12 +52,23 @@ const PrescriptionsSchema = new SimpleSchema({
 // apparently this is better to have in a file that only runs server side
 // not sure how to set that up though, when I move to main.js then Prescriptions is not defined
 if (Meteor.isServer) {
+  // anyone can subscribe
   Meteor.publish('prescriptions', function () {
     return Prescriptions.find({ patientId: Meteor.userId() },
       { fields: { } }); // private fields to exclude will be specified here with value 0
   });
-}
 
+  // only for pharmacist users
+  Meteor.publish('prescriptions.all', function () {
+    if (Roles.userIsInRole(this.userId, ['admin'])) {
+      return Prescriptions.find({});
+    } else {
+      // unauthorized, do not publish data
+      this.stop();
+      return;
+    }
+  });
+}
 
 Meteor.methods({
   'prescriptions.insert'(name, strength, dose) {
@@ -79,6 +90,16 @@ Meteor.methods({
     // should only be able to cancel if userId matches prescription's userId
     // should only be able to cancel prescription with status = pending
     Prescriptions.remove(id);
+  },
+
+  // only for pharmacist users
+  'prescriptions.fill'(id) {
+    var loggedInUser = Meteor.user()
+    if (!loggedInUser || !Roles.userIsInRole(loggedInUser, 'admin')) {
+      throw new Meteor.Error(403, "Access denied")
+    }
+
+    Prescriptions.update({_id: id}, {$set: {status: "filled"}})
   }
 });
 

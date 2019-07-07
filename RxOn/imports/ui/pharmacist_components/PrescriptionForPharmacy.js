@@ -8,8 +8,8 @@ export default class PrescriptionForPharmacy extends Component {
     // cond: id matches, the the status will be set to "filled"
     //mangoDB update record; uses model to update
 
-    fillPrescription(prescription) {
-        Prescriptions.update({_id: this.props.prescription._id}, {$set: {status: "filled"}})
+    fillPrescription() {
+        Meteor.call('prescriptions.fill', this.props.prescription._id);
     }
 
 
