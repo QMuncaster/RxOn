@@ -129,8 +129,9 @@ class PatientPage extends Component {
 }
 
 export default withTracker(() => {
+  Meteor.subscribe('prescriptions');
   return {
-    prescriptions: Prescriptions.find({patientId:Meteor.userId() }, { sort: { createdAt: -1 } }).fetch(),
+    prescriptions: Prescriptions.find().fetch(),
   };
 })(PatientPage);
 

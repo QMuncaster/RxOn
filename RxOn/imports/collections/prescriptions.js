@@ -11,7 +11,7 @@ const PrescriptionsSchema = new SimpleSchema({
     type: String,
     defaultValue: "fake1234"
   },
-  pharmacyId:{
+  pharmacyId: {
     type: String,
     defaultValue: "fake1234"
   },
@@ -28,7 +28,7 @@ const PrescriptionsSchema = new SimpleSchema({
     type: Date,
     // Force value to be current date (on server) upon insert
     // and prevent updates thereafter.
-    autoValue: function() {
+    autoValue: function () {
       if (this.isInsert) {
         return new Date();
       } else if (this.isUpsert) {
@@ -40,7 +40,7 @@ const PrescriptionsSchema = new SimpleSchema({
   },
   updatedAt: {
     type: Date,
-    autoValue: function() {
+    autoValue: function () {
       if (this.isUpdate) {
         return new Date();
       }
@@ -49,12 +49,20 @@ const PrescriptionsSchema = new SimpleSchema({
   }
 });
 
+// apparently this is better to have in a file that only runs server side
+// not sure how to set that up though, when I move to main.js then Prescriptions is not defined
+if (Meteor.isServer) {
+  Meteor.publish('prescriptions', function () {
+    return Prescriptions.find({ patientId: Meteor.userId() },
+      { fields: { } }); // private fields to exclude will be specified here with value 0
+  });
+}
 
 
 Meteor.methods({
   'prescriptions.insert'(name, strength, dose) {
-    if (! this.userId) { throw new Meteor.Error('not-authorized'); }
-  
+    if (!this.userId) { throw new Meteor.Error('not-authorized'); }
+
     // TODO: validation of arguments before inserting
     Prescriptions.insert({
       patientId: this.userId,
@@ -65,7 +73,7 @@ Meteor.methods({
   },
 
   'prescriptions.remove'(id) {
-    if (! this.userId) { throw new Meteor.Error('not-authorized'); }
+    if (!this.userId) { throw new Meteor.Error('not-authorized'); }
 
     // TODO:
     // should only be able to cancel if userId matches prescription's userId
@@ -74,4 +82,4 @@ Meteor.methods({
   }
 });
 
-Prescriptions.attachSchema( PrescriptionsSchema );
+Prescriptions.attachSchema(PrescriptionsSchema);
