@@ -5,7 +5,6 @@ import { Router, Route, Redirect } from "react-router-dom";
 import { createBrowserHistory } from 'history';
 
 // route components
-import Patient from "../imports/ui/PatientPage";
 import PatientProfile from "../imports/ui/PatientProfile";
 import Navbar from "../imports/ui/Navbar";
 import PharmacyProfile from "../imports/ui/PharmacyProfile";
@@ -22,9 +21,9 @@ const history = createBrowserHistory();
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
     // props is match, location, history, if we want to use in Component/Redirect
-    Meteor.userId()
-      ? <Component />
-      : <Redirect to='/login' />
+    Meteor.userId() ?
+      <Component /> :
+      <Redirect to='/login' />
   )
   } />
 )
@@ -34,16 +33,29 @@ export const renderRoutes = ({ store }) => (
     <Router history={history}>
       <Navbar />
       <Switch>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/createaccount" component={Login} />
-        <Route exact path="/signup" component={SignupPage} />
-        
         <PrivateRoute exact path="/app" component={App} />
         <PrivateRoute exact path="/" component={PatientPage} />
         <PrivateRoute exact path="/home" component={PatientPage} />
-        <PrivateRoute exact path="/patient" component={Patient} />
         <PrivateRoute exact path="/pharmacy/profile" component={PharmacyProfile} />
         <PrivateRoute exact path="/patient/profile" component={PatientProfile} />
+
+        <Route exact path="/logout" render={() => {
+          Meteor.logout((error) => {
+            if (error) { alert(error) }
+            history.push("/login");
+          });
+           // TODO: replace with actual component
+          return (<h1>LOGGING OUT</h1>); 
+        }} />
+
+        <Route exact path="/login" render={() => (
+          Meteor.userId() ?
+            <Redirect to='/home' /> :
+            <Login />
+        )} />
+        
+        <Route exact path="/signup" component={SignupPage} />
+        <Route render={() => (<h1>404 page not found</h1>)} />
       </Switch>
     </Router>
   </Provider>

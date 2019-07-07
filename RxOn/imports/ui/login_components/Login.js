@@ -3,6 +3,7 @@ import "../styling/Login.css"
 import LoginForm from "./LoginForm";
 import { SubmissionError } from "redux-form";
 import pify from 'pify';
+import { withRouter } from "react-router-dom";
 
 class Login extends Component {
 
@@ -37,7 +38,7 @@ class Login extends Component {
   }
 
   handleCreateAccount = () => {
-    this.props.history.push('/signup');
+    this.props.history.push('/signup')
   }
 
   render() {
@@ -59,6 +60,6 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);
 
 
