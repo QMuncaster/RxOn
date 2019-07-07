@@ -1,7 +1,9 @@
+import { Meteor } from 'meteor/meteor';
 import { Mongo } from "meteor/mongo";
-import SimpleSchema from 'simpl-schema'
+import SimpleSchema from 'simpl-schema';
 
 export const Prescriptions = new Mongo.Collection("prescriptions");
+
 // by default all fields are required. need to specify if optional
 const PrescriptionsSchema = new SimpleSchema({
   _id: String,
@@ -44,6 +46,23 @@ const PrescriptionsSchema = new SimpleSchema({
       }
     },
     optional: true
+  }
+});
+
+
+Meteor.methods({
+  'prescriptions.insert'(name, strength, dose) {
+    if (! this.userId) {
+      throw new Meteor.Error('not-authorized');
+    }
+  
+    // TODO: validation of arguments before inserting
+    Prescriptions.insert({
+      patientId: this.userId,
+      rxName: name,
+      rxStrength: strength,
+      rxDose: dose,
+    });
   }
 });
 

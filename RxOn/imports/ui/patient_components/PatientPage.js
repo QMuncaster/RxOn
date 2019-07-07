@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -36,15 +37,8 @@ class PatientPage extends Component {
       alert("All fields are required.");
       return;
     }
-    // const userId = Meteor.userId();
 
-    Prescriptions.insert({
-      patientId: Meteor.userId(),
-      //userName: first and last name
-      rxName: name,
-      rxStrength: strength,
-      rxDose: dose,
-    });
+    Meteor.call('prescriptions.insert', name, strength, dose);
 
     // Clear form inputs
     ReactDOM.findDOMNode(this.refs.name).value = '';
