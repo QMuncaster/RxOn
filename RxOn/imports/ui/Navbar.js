@@ -16,7 +16,7 @@ Tracker.autorun(() => {
 class Navbar extends Component {
 
     logout = () => {
-        loggedIn = false; 
+        loggedIn = false;
         this.forceUpdate();
     }
 
@@ -31,9 +31,12 @@ class Navbar extends Component {
                             <li className="li"> <Link to="/patient/profile" style={{ color: 'white', textDecoration: 'none' }} > Profile  </Link></li>
                             <li className="li"> <Link to="/home" style={{ color: 'white', textDecoration: 'none' }} > Home  </Link></li>
                             {/* TODO: change welcome message CSS on hover so not mistaken as a navbar link */}
-                            <li className="li" style={{ color: 'white', textDecoration: 'none' }}>
-                                {"Welcome " + this.props.currentUser.firstname + " " + this.props.currentUser.lastname}
-                            </li>
+                            {this.props.currentUser.firstname ?
+                                <li className="li" style={{ color: 'white', textDecoration: 'none' }}>
+                                    {"Welcome " + this.props.currentUser.firstname + " " + this.props.currentUser.lastname}
+                                </li> : ''
+                            }
+
                         </ul>
                     </div>
                 </nav>
