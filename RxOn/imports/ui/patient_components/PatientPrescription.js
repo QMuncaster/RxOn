@@ -18,7 +18,7 @@ export default class PatientPrescription extends Component {
         <td className="th">{this.props.prescription.rxName}</td>
         <td className="th">{this.props.prescription.rxStrength}</td>
         <td className="th">{this.props.prescription.rxDose}</td>
-        <td className="th">{this.props.prescription.createdAt? this.props.prescription.createdAt.toString() : ''}</td>
+        <td className="th">{this.props.prescription.createdAt? this.props.prescription.createdAt.toDateString() : ''}</td>
         <td className="th">{this.props.prescription.status}</td>
         <td className="delete">
           <button className="delete" onClick={this.cancelPrescription.bind(this)}>
