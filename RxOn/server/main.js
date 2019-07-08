@@ -1,5 +1,7 @@
 import '../imports/collections/prescriptions.js';
+import { Roles } from 'meteor/alanning:roles';
 
+const defaultRoles = ['patient'];
 
 // https://guide.meteor.com/accounts.html#dont-use-profile
 // Don't want to use profile to store patient information
@@ -7,11 +9,13 @@ import '../imports/collections/prescriptions.js';
 Accounts.onCreateUser((options, user) => {
     // options are basically the arguments to createUser
     // user is the actual user object
+    Roles.addUsersToRoles(user._id, 'patient');
     user.firstname = options.profile.firstname;
     user.lastname = options.profile.lastname;
     user.address = options.profile.address;
     user.dateofbirth = options.profile.dateofbirth;
     user.phonenumber = options.profile.phonenumber;
+    user.roles = defaultRoles;
     return user;
 });
 
@@ -47,5 +51,4 @@ Meteor.publish('userData', function () {
       this.ready();
     }
 });
-  
   
