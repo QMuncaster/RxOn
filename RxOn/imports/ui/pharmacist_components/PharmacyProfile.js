@@ -10,7 +10,6 @@ class PharmacyProfile extends Component {
     renderPrescriptions(status) {
         return this.props.prescriptions.map((px) => {
                 if (px.status === status) {
-                    console.log(px);
                     return (<PrescriptionForPharmacy key={px._id} prescription={px}/>)
                 }
             }

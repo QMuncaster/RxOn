@@ -5,16 +5,16 @@ import { Router, Route, Redirect } from "react-router-dom";
 import { createBrowserHistory } from 'history';
 
 // route components
-import Navbar from "../ui/Navbar";
+import Navbar from "../../ui/Navbar";
 
-import PatientProfile from "../ui/patient_components/PatientProfile";
-import PatientPage from "../ui/patient_components/PatientPage";
+import PatientProfile from "../../ui/patient_components/PatientProfile";
+import PatientPage from "../../ui/patient_components/PatientPage";
 
-import PharmacyProfile from "../ui/pharmacist_components/PharmacyProfile";
+import PharmacyProfile from "../../ui/pharmacist_components/PharmacyProfile";
 
-import SignupPage from "../ui/SignupPage";
-import Login from "../ui/login_components/Login";
-import App from "../ui/prescription_modal/App"
+import SignupPage from "../../ui/SignupPage";
+import Login from "../../ui/login_components/Login";
+import App from "../../ui/prescription_modal/App"
 const history = createBrowserHistory();
 
 // HANDLE AUTH FOR ROUTING
