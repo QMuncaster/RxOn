@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.3.5",
+    "@material-ui/core": "^4.2.0",
     "faker": "^4.1.0",
     "indexof": "0.0.1",
     "meteor-node-stubs": "^0.4.1",
