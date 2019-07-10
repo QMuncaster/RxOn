@@ -14,7 +14,6 @@ import PharmacyProfile from "../../ui/pharmacist_components/PharmacyProfile";
 
 import SignupPage from "../../ui/SignupPage";
 import Login from "../../ui/login_components/Login";
-import App from "../../ui/prescription_modal/App"
 const history = createBrowserHistory();
 
 // HANDLE AUTH FOR ROUTING
@@ -36,7 +35,6 @@ export const renderRoutes = ({ store }) => (
     <Router history={history}>
       <Navbar />
       <Switch>
-        <PrivateRoute exact path="/app" component={App} />
         <PrivateRoute exact path="/" component={PatientPage} />
         <PrivateRoute exact path="/home" component={PatientPage} />
         <PrivateRoute exact path="/pharmacy/profile" component={PharmacyProfile} />
