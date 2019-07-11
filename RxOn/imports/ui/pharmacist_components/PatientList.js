@@ -1,15 +1,26 @@
 import React, {Component} from 'react';
+import {withTracker} from 'meteor/react-meteor-data';
 import "../styling/PharmacyPrescription";
 import PharmacySidebar from "./PharmacySidebar";
+import {Prescriptions} from '../../collections/prescriptions';
+import PrescriptionForPharmacy from './PrescriptionForPharmacy';
 
-
-export default class PatientList extends Component {
+class PatientList extends Component {
 
     // cond: id matches, the the status will be set to "filled"
     //mangoDB update record; uses model to update
 
     fillPrescription() {
         Meteor.call('prescriptions.fill', this.props.prescription._id);
+    }
+
+    renderPrescriptions(status) {
+        return this.props.prescriptions.map((px) => {
+                if (px.status === status) {
+                    return (<PrescriptionForPharmacy key={px._id} prescription={px}/>)
+                }
+            }
+        );
     }
 
 
@@ -20,17 +31,12 @@ export default class PatientList extends Component {
                     <PharmacySidebar/>
                     <div className="pharmacy-profile-page">
                         <div  className="Pharmacy-Headings">
-                            <h2 id="pharmHeading" className="prescription-header-individual"> Pending</h2>
+                            <h2 id="pharmHeading" className="prescription-header-individual"> Patient List </h2>
                             <div id="pendingBox">
-                                
+                            {this.renderPrescriptions("pending")}
                             </div>
                         </div>
-                        <div className="Pharmacy-Headings">
-                            <h2 id="pharmHeading" className="prescription-header-individual"> Filled</h2>
-                            <div id="filledBox">
-                                
-                            </div>
-                        </div>
+                      
                     </div>
                 </div>
             );
@@ -63,4 +69,12 @@ export default class PatientList extends Component {
         //     </div>
         // );
     }
+
+//find out the prescription collection
+export default withTracker(() => {
+    Meteor.subscribe('prescriptions.all');
+    return {
+        prescriptions: Prescriptions.find({}, {sort: {createdAt: -1}}).fetch(),
+    };
+})(PatientList);
 
