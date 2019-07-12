@@ -58,6 +58,8 @@ export const renderRoutes = ({ store }) => (
             <Login />
         )} />
 
+        
+
         <Route exact path="/signup" component={SignupPage} />
         <Route render={() => (<h1>404 page not found</h1>)} />
       </Switch>

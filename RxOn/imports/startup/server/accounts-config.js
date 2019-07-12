@@ -50,3 +50,8 @@ Meteor.publish('userData', function () {
       this.ready();
     }
 });
+
+
+Meteor.publish("userList", function () {
+  return Meteor.users.find({});
+});
