@@ -52,6 +52,7 @@ Meteor.publish('userData', function () {
 });
 
 
-Meteor.publish("userList", function () {
-  return Meteor.users.find({});
+Meteor.publish('userList', function () {
+  return Meteor.users.find({}, {
+    fields: { firstname: 1 } });
 });
