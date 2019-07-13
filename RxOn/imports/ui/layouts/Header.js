@@ -28,7 +28,8 @@ class Header extends Component {
                      <MenuIcon />
                   </IconButton>
                   <Typography variant='h5' color='inherit' className={classes.grow}>
-                     Dashboard
+                     {/*Sublime is a word that allows me identify whether Roboto font is being used*/}
+                     Sublime
                   </Typography>
                   <ProfileMenu />
                </Toolbar>
