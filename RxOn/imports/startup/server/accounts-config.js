@@ -12,6 +12,7 @@ Accounts.onCreateUser((options, user) => {
     user.firstname = options.profile.firstname;
     user.lastname = options.profile.lastname;
     user.address = options.profile.address;
+    user.email = options.profile.email;
     user.dateofbirth = options.profile.dateofbirth;
     user.phonenumber = options.profile.phonenumber;
     user.roles = defaultRoles;
@@ -54,5 +55,5 @@ Meteor.publish('userData', function () {
 
 Meteor.publish('userList', function () {
   return Meteor.users.find({}, {
-    fields: { firstname: 1 } });
+    fields: { _id: 1, firstname: 1, lastname: 1, address: 1,  phonenumber: 1 } });
 });

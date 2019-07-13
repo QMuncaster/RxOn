@@ -8,8 +8,11 @@ class PatientList extends Component {
 
     renderPatients() {
             return this.props.users.map((user) => {
+                //only show users who are patients, not pharamcies
+                if (user.roles != 'admin') {
                         return <IndividualPatient key={user._id} user={user}/>
                     }
+                }
             );
         }
 
