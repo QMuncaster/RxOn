@@ -5,7 +5,6 @@ import { Router, Route, Redirect } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
 // route components
-import Navbar from '../../ui/Navbar';
 import Header from '../../ui/layouts/Header.js';
 import PatientProfile from '../../ui/patient_components/PatientProfile';
 import PatientPage from '../../ui/patient_components/PatientPage';
@@ -46,6 +45,8 @@ export const renderRoutes = ({ store }) => (
       <Provider store={store}>
          <Router history={history}>
             <CssBaseline />
+            {/*Putting header here for now, need to fix routes so that header shows
+            at every page. React router allows for this*/}
             <Header />
             <Switch>
                <PrivateRoute exact path='/' component={PatientPage} />
