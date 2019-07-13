@@ -23,13 +23,13 @@ Meteor.methods({
       });
     },
 
-    'prescriptions.remove'(id,status) {
+    'prescriptions.remove'(id) {
       if (!this.userId) { throw new Meteor.Error('not-authorized'); }
 
-        // TODO:
+      var prescriptions = Prescriptions.find({_id: id}).fetch();
         // should only be able to cancel if userId matches prescription's userId
         // should only be able to cancel prescription with status = pending
-      if(this.userId !== id || status !== "pending") {
+      if(prescriptions.length <= 0 || this.userId !== prescriptions[0].patientId || prescriptions[0].status !== "pending") {
           { throw new Meteor.Error('you are not able to cancel')}
 
       }
@@ -48,13 +48,15 @@ Meteor.methods({
     },
 
     'prescriptions.edit'(id,name,strength,dose){
-
-        //because we have admin acount here, so I am not checking the loggedInUser === the id
-        // we passed in, because I think the admin account has the right to edit all the prescription?
-        // var loggedInUser = Meteor.user();
-        // if (loggedInUser !== id) {
-        //     throw new Meteor.Error(403, "Access denied")
-        // }
+        var prescriptions = Prescriptions.find({_id: id}).fetch();
+        var loggedInUser = Meteor.user();
+        // console.log(prescriptions);
+        // console.log(loggedInUser);
+        // console.log(this.userId);
+        // console.log(prescriptions[0].patientId);
+        if (prescriptions.length <= 0 || !loggedInUser || (this.userId !== prescriptions[0].patientId && !Roles.userIsInRole(loggedInUser, 'admin'))) {
+            throw new Meteor.Error(403, "Access denied");
+        }
         check(name,String);
         check (strength, String);
         check(dose, String);

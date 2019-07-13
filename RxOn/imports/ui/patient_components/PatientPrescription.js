@@ -17,7 +17,7 @@ export default class PatientPrescription extends Component {
     }
 
     cancelPrescription() {
-        Meteor.call('prescriptions.remove', this.props.prescription._id,this.props.prescription.status);
+        Meteor.call('prescriptions.remove', this.props.prescription._id);
     }
 
 
