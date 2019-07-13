@@ -8,7 +8,7 @@ import { createBrowserHistory } from 'history';
 import Header from '../../ui/layouts/Header.js';
 import PatientProfile from '../../ui/patient_components/PatientProfile';
 import PatientPage from '../../ui/patient_components/PatientPage';
-
+import Medications from '../../ui/patient_components/MedicationsPage';
 import PharmacyProfile from '../../ui/pharmacist_components/PharmacyProfile';
 import PrescriptionTable from '../../ui/pharmacist_components/PrescriptionTable';
 import SignupPage from '../../ui/SignupPage';
@@ -34,7 +34,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 );
 
 const theme = createMuiTheme({
-   ...themes.default,
+   ...themes,
    typography: {
       useNextVariants: true,
    },
@@ -54,6 +54,7 @@ export const renderRoutes = ({ store }) => (
                <PrivateRoute exact path='/pharmacy/profile' component={PharmacyProfile} />
                <PrivateRoute exact path='/pharmacy/table' component={PrescriptionTable} />
                <PrivateRoute exact path='/patient/profile' component={PatientProfile} />
+               <PrivateRoute exact path='/playground' component={Medications} />
                <Route
                   exact
                   path='/logout'
