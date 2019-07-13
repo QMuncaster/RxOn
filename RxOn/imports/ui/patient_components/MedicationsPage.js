@@ -65,9 +65,10 @@ MedicationsPage.propTypes = {
   prescriptions: PropTypes.array.isRequired
 };
 
+const styledComponent = withStyles(styles)(MedicationsPage);
 export default withTracker(() => {
   Meteor.subscribe("prescriptions");
   return {
     prescriptions: Prescriptions.find().fetch()
   };
-})(withStyles(styles)(MedicationsPage));
+})(styledComponent);
