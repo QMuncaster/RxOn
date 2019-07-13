@@ -15,7 +15,7 @@ import PrescriptionTable from '../../ui/pharmacist_components/PrescriptionTable'
 import SignupPage from '../../ui/SignupPage';
 import Login from '../../ui/login_components/Login';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import themes from '../../ui/themes/index';
+import themes from '../../ui/mui_theme/theme';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 const history = createBrowserHistory();
