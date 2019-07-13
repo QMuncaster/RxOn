@@ -7,11 +7,11 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ProfileMenu from './ProfileMenu';
 
-const styles = theme => ({
+const styles = {
    grow: {
       flexGrow: 1,
    },
-});
+};
 
 class Header extends Component {
    constructor(props) {
