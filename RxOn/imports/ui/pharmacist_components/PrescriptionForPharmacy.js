@@ -29,9 +29,8 @@ class PrescriptionForPharmacy extends Component {
         return (
             <div id="rxForm" className="admin-prescription-form ">
                 
-                <div id="username" className="user name for prescription"> 
-                {this.props.currentUser.firstname} 
-                {this.props.currentUser.lastname}
+                <div id="username" className="usernameForRx"> 
+                {this.props.prescription.patientId}
                 </div>
                 
                 <div id="rxInfo" className="prescription-middle-info">

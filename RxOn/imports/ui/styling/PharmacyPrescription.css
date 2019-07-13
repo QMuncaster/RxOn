@@ -79,3 +79,7 @@ background-color: #008CBA; /* Green */
 .info-section{
     width:100%;
 }
+
+.usernameForRx {
+    font-size: 20px;
+}
