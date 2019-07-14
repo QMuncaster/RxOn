@@ -22,9 +22,6 @@ const styles = theme => ({
 class MedicationsPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      addingPrescription: false
-    };
   }
 
   renderMedication() {

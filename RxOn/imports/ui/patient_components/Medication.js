@@ -10,7 +10,6 @@ import Typography from "@material-ui/core/Typography";
 
 const styles = {
   root: {
-    width: "100%",
     maxWidth: 360
   },
   inline: {
