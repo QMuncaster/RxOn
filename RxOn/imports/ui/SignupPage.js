@@ -20,9 +20,9 @@ export default class SignupPage extends Component {
                     firstname: firstname.value,
                     lastname: lastname.value,
                     address: address.value,
-                    phonenumber: phonenumber.value,
+                    //phonenumber: phonenumber.value,
                     //gender: gender.value,
-                    dateofbirth: dateofbirth.value,
+                    //dateofbirth: dateofbirth.value,
                     //city: city.value,
                     //country: country.value
                 }

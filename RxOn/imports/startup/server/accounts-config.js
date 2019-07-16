@@ -12,11 +12,11 @@ Accounts.onCreateUser((options, user) => {
     user.firstname = options.profile.firstname;
     user.lastname = options.profile.lastname;
     user.address = options.profile.address;
-    user.email = options.profile.email;
+   // user.email = options.profile.email;
     user.dateofbirth = options.profile.dateofbirth;
     user.phonenumber = options.profile.phonenumber;
-    user.city = options.profile.city;
-    user.country = options.profile.country;
+    // user.city = options.profile.city;
+    // user.country = options.profile.country;
     user.roles = defaultRoles;
     return user;
 });
@@ -26,7 +26,7 @@ Accounts.onCreateUser((options, user) => {
 // but happens before a new user is actually created/inserted
 Accounts.validateNewUser(function (user) {
     // dummy implementation for testing
-    if (!user.firstname || !user.lastname || !user.address || !user.email) {
+    if (!user.firstname || !user.lastname || !user.address) {
         throw new Meteor.Error(403, 'All fields are required');
     }
     return true;
@@ -47,7 +47,7 @@ Meteor.publish('userData', function () {
       return Meteor.users.find({ _id: this.userId }, {
         // 0 = exclude from return document
         // 1 = include in return document
-        fields: { firstname: 1, lastname: 1, address: 1, dateofbirth: 1, phonenumber: 1, email: 1} 
+        fields: {firstname: 1, lastname: 1, address: 1, dateofbirth: 1, phonenumber: 1} 
       });
     } else {
       this.ready();
