@@ -1,30 +1,56 @@
-import React from 'react';
+import React, { useState, Component } from 'react';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
-export default function ProfileMenu() {
-   const [anchorEl, setAnchorEl] = React.useState(null);
+const linkStyle = {
+    color: 'black',
+    textDecoration: 'none',
+};
 
-   function handleClick(event) {
-      setAnchorEl(event.currentTarget);
-   }
+export default class ProfileMenu extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { anchorEl: null };
+    }
 
-   function handleClose() {
-      setAnchorEl(null);
-   }
+    handleClick = event => {
+        this.setState({ anchorEl: event.currentTarget });
+    };
 
-   return (
-      <div>
-         <IconButton edge='end' color='inherit' onClick={handleClick}>
-            <AccountCircle />
-         </IconButton>
-         <Menu id='profile-menu' anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
-         </Menu>
-      </div>
-   );
+    handleClose = () => {
+        this.setState({ anchorEl: null });
+    };
+    render() {
+        const { anchorEl } = this.state;
+        console.log(this.state);
+        return (
+            <div>
+                <IconButton edge="end" color="inherit" onClick={this.handleClick}>
+                    <AccountCircle />
+                </IconButton>
+                <Menu
+                    id="profile-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={this.handleClose}
+                    disableAutoFocusItem={true}
+                >
+                    <MenuItem onClick={this.handleClose}>
+                        <Link to="/patient/profile" style={linkStyle}>
+                            Profile
+                        </Link>
+                    </MenuItem>
+                    <MenuItem onClick={this.handleClose}>
+                        <Link to="/logout" style={linkStyle}>
+                            Logout
+                        </Link>
+                    </MenuItem>
+                </Menu>
+            </div>
+        );
+    }
 }
