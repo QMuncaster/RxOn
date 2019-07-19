@@ -11,6 +11,7 @@ import PatientProfile from "../../ui/patient_components/PatientProfile";
 import PatientPage from "../../ui/patient_components/PatientPage";
 
 import PharmacyProfile from "../../ui/pharmacist_components/PharmacyProfile";
+import PatientList from "../../ui/pharmacist_components/PatientList";
 
 import SignupPage from "../../ui/SignupPage";
 import Login from "../../ui/login_components/Login";
@@ -41,6 +42,7 @@ export const renderRoutes = ({ store }) => (
         <PrivateRoute exact path="/home" component={PatientPage} />
         <PrivateRoute exact path="/pharmacy/profile" component={PharmacyProfile} />
         <PrivateRoute exact path="/patient/profile" component={PatientProfile} />
+        <PrivateRoute exact path="/pharmacy/patients" component={PatientList} />
 
         <Route exact path="/logout" render={() => {
           Meteor.logout((error) => {
@@ -55,6 +57,8 @@ export const renderRoutes = ({ store }) => (
             <Redirect to='/home' /> :
             <Login />
         )} />
+
+        
 
         <Route exact path="/signup" component={SignupPage} />
         <Route render={() => (<h1>404 page not found</h1>)} />
