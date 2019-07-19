@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Prescriptions } from '../../collections/prescriptions.js';
 import PatientPrescription from './PatientPrescription.js';
-import PatientSideBar from './PatientSideBar.js';
 import "../styling/PatientPage.css"
 import "../styling/PatientPrescription.css"
 
@@ -88,7 +87,6 @@ class PatientPage extends Component {
 
       <div className="parentDiv">
         <div className="childSideBar">
-          <PatientSideBar />
         </div>
         <div className="childRxTable">
           <header>
