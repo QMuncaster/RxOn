@@ -24,13 +24,8 @@ const styles = {
 class Header extends Component {
     constructor(props) {
         super(props);
-        this.state = {userStatus: loggedIn};
+        this.state = { userStatus: loggedIn };
     }
-
-    logout = () => {
-        loggedIn = false;
-        this.forceUpdate();
-    };
 
     render() {
         const { classes } = this.props;
@@ -43,10 +38,8 @@ class Header extends Component {
                                 <MenuIcon />
                             </IconButton>
                             <Typography variant="h5" color="inherit" className={classes.grow}>
-                                {/*Sublime is a word that allows me identify whether Roboto font is being used*/}
-                                Sublime
+                                Welcome {this.props.currentUser.firstname}
                             </Typography>
-                            {/*Passing down the sate */}
                             <ProfileMenu />
                         </Toolbar>
                     </AppBar>
