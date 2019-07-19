@@ -39,21 +39,31 @@ const theme = createMuiTheme({
     },
 });
 
+const LoginContainer = () => (
+    <div className="login-container">
+        <Route exact path="/login" render={() => (Meteor.userId() ? <Redirect to="/home" /> : <Login />)} />
+    </div>
+);
+
+const MainContainer = () => (
+    <div className="main-container">
+        <Header />
+        <PrivateRoute exact path="/" component={Medications} />
+        <PrivateRoute exact path="/home" component={Medications} />
+        <PrivateRoute exact path="/pharmacy/profile" component={PharmacyProfile} />
+        <PrivateRoute exact path="/pharmacy/table" component={PrescriptionTable} />
+        <PrivateRoute exact path="/patient/profile" component={PatientProfile} />
+        <PrivateRoute exact path="/playground" component={PatientPage} />
+    </div>
+);
+
 export const renderRoutes = ({ store }) => (
     <MuiThemeProvider theme={theme}>
         <Provider store={store}>
             <Router history={history}>
                 <CssBaseline />
-                {/*Putting header here for now, need to fix routes so that header shows
-            at every page. React router allows for this*/}
-                <Header />
                 <Switch>
-                    <PrivateRoute exact path="/" component={PatientPage} />
-                    <PrivateRoute exact path="/home" component={PatientPage} />
-                    <PrivateRoute exact path="/pharmacy/profile" component={PharmacyProfile} />
-                    <PrivateRoute exact path="/pharmacy/table" component={PrescriptionTable} />
-                    <PrivateRoute exact path="/patient/profile" component={PatientProfile} />
-                    <PrivateRoute exact path="/playground" component={Medications} />
+                    <Route exact path="/(login)" component={LoginContainer} />
                     <Route
                         exact
                         path="/logout"
@@ -67,9 +77,9 @@ export const renderRoutes = ({ store }) => (
                             return <Login />;
                         }}
                     />
-                    <Route exact path="/login" render={() => (Meteor.userId() ? <Redirect to="/home" /> : <Login />)} />
                     <Route exact path="/signup" component={SignupPage} />
-                    <Route render={() => <h1>404 page not found</h1>} />
+                    {/* Has to be at the very bottom*/}
+                    <Route component={MainContainer}/>
                 </Switch>
             </Router>
         </Provider>
