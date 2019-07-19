@@ -10,6 +10,14 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Tracker } from 'meteor/tracker';
 import { withRouter } from 'react-router-dom';
 
+// reactive variable that we can override for logging out
+// if just use this.props.currentUser, cannot set property to false before waiting for server response
+// so the NavBar would take a couple seconds to disappear after logging out
+let loggedIn = !!Meteor.user();
+Tracker.autorun(() => {
+    loggedIn = !!Meteor.user();
+});
+
 const styles = {
     grow: {
         flexGrow: 1,
@@ -23,21 +31,25 @@ class Header extends Component {
 
     render() {
         const { classes } = this.props;
-        return (
-            <div className={classes.grow}>
-                <AppBar position="static">
-                    <Toolbar>
-                        <IconButton edge="start" color="inherit">
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography variant="h5" color="inherit" className={classes.grow}>
-                            Welcome {this.props.currentUser.firstname}
-                        </Typography>
-                        <ProfileMenu />
-                    </Toolbar>
-                </AppBar>
-            </div>
-        );
+        if (loggedIn) {
+            return (
+                <div className={classes.grow}>
+                    <AppBar position="static">
+                        <Toolbar>
+                            <IconButton edge="start" color="inherit">
+                                <MenuIcon />
+                            </IconButton>
+                            <Typography variant="h5" color="inherit" className={classes.grow}>
+                                Welcome {this.props.currentUser.firstname}
+                            </Typography>
+                            <ProfileMenu />
+                        </Toolbar>
+                    </AppBar>
+                </div>
+            );
+        } else {
+            return null;
+        }
     }
 }
 
