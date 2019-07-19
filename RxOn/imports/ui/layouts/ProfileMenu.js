@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { Component } from 'react';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
@@ -39,6 +39,11 @@ export default class ProfileMenu extends Component {
                     onClose={this.handleClose}
                     disableAutoFocusItem={true}
                 >
+                    <MenuItem onClick={this.handleClose}>
+                        <Link to="/home" style={linkStyle}>
+                            Home
+                        </Link>
+                    </MenuItem>
                     <MenuItem onClick={this.handleClose}>
                         <Link to="/patient/profile" style={linkStyle}>
                             Profile
