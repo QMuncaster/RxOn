@@ -1,5 +1,9 @@
 ﻿# RxOn
 
+### Progress 5 Description (for industry professionals on demo day)
+
+RxOn is an online pharmacy platform that aims to simplify through digitalization the process of requesting and filling prescriptions. The basic functionality of a patient account includes uploading, requesting refills and viewing past prescriptions, while a pharmacy account has the ability to fill prescriptions, view all patients and prescriptions.
+
 ### Project Description
 
 RxOn is an online pharmacy platform that provides basic services of a brick and mortar pharmacy. There are two user types: 1-Patient  2-Pharmacist. The basic data it stores are prescriptions and their statuses for each patient. Patients can add prescriptions, and pharmacists can approve and fill prescriptions. Additional functionality can include payment integration, live-chat with pharmacists, and image recognition for prescription uploads.
