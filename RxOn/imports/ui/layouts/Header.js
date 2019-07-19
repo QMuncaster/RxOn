@@ -10,11 +10,6 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Tracker } from 'meteor/tracker';
 import { withRouter } from 'react-router-dom';
 
-let loggedIn = !!Meteor.user();
-Tracker.autorun(() => {
-    loggedIn = !!Meteor.user();
-});
-
 const styles = {
     grow: {
         flexGrow: 1,
@@ -24,30 +19,25 @@ const styles = {
 class Header extends Component {
     constructor(props) {
         super(props);
-        this.state = { userStatus: loggedIn };
     }
 
     render() {
         const { classes } = this.props;
-        if (loggedIn) {
-            return (
-                <div className={classes.grow}>
-                    <AppBar position="static">
-                        <Toolbar>
-                            <IconButton edge="start" color="inherit">
-                                <MenuIcon />
-                            </IconButton>
-                            <Typography variant="h5" color="inherit" className={classes.grow}>
-                                Welcome {this.props.currentUser.firstname}
-                            </Typography>
-                            <ProfileMenu />
-                        </Toolbar>
-                    </AppBar>
-                </div>
-            );
-        } else {
-            return null;
-        }
+        return (
+            <div className={classes.grow}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton edge="start" color="inherit">
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h5" color="inherit" className={classes.grow}>
+                            Welcome {this.props.currentUser.firstname}
+                        </Typography>
+                        <ProfileMenu />
+                    </Toolbar>
+                </AppBar>
+            </div>
+        );
     }
 }
 

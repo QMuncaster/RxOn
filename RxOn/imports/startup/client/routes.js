@@ -47,7 +47,7 @@ const LoginContainer = () => (
 
 const MainContainer = () => (
     <div className="main-container">
-        <Header />
+        <PrivateRoute component={Header} />
         <PrivateRoute exact path="/" component={Medications} />
         <PrivateRoute exact path="/home" component={Medications} />
         <PrivateRoute exact path="/pharmacy/profile" component={PharmacyProfile} />
