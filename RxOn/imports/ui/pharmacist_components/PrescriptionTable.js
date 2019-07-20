@@ -7,50 +7,58 @@ import MUIDataTable from 'mui-datatables';
 import { Grid } from '@material-ui/core';
 
 class PrescriptionTable extends Component {
-   constructor(props) {
-      super(props);
-   }
-   render() {
-      console.log(this.props.prescriptions);
-      const columns = [
-         { name: 'status' },
-         { name: '_id' },
-         {
-            name: 'rxName',
-            options: {
-               filterType: 'textField',
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        const data = this.props.prescriptions.map(px => {
+            let retVal = new Object();
+            retVal['Status'] = px.status;
+            retVal['Name'] = px.rxName;
+            retVal['Strength'] = px.rxStrength;
+            retVal['Request Date'] = px.createdAt.toDateString();
+            return retVal;
+        });
+        console.log(this.props.prescriptions);
+        const columns = [
+            { name: 'Status' },
+            { name: 'Request Date' },
+            {
+                name: 'Name',
+                options: {
+                    filterType: 'textField',
+                },
             },
-         },
-         { name: 'rxStrength' },
-      ];
+            { name: 'Strength' },
+        ];
 
-      const options = {
-         filterType: 'dropdown',
-         responsive: 'scroll',
-         sort: 'true',
-      };
+        const options = {
+            filterType: 'dropdown',
+            responsive: 'scroll',
+            sort: 'true',
+        };
 
-      return (
-         <div style={{ padding: 20 }}>
-            <br />
-            <Grid container spacing={32}>
-               <Grid item xs={12}>
-                  <MUIDataTable
-                     title={'Prescription List'}
-                     data={this.props.prescriptions}
-                     columns={columns}
-                     options={options}
-                  />
-               </Grid>
-            </Grid>
-         </div>
-      );
-   }
+        return (
+            <div style={{ padding: 20 }}>
+                <br />
+                <Grid container spacing={32} alignItems="stretch">
+                    <Grid item xs={12}>
+                        <MUIDataTable
+                            title={'Prescription List'}
+                            data={data}
+                            columns={columns}
+                            options={options}
+                        />
+                    </Grid>
+                </Grid>
+            </div>
+        );
+    }
 }
 
 export default withTracker(() => {
-   Meteor.subscribe('prescriptions.all');
-   return {
-      prescriptions: Prescriptions.find({}, { sort: { createdAt: -1 } }).fetch(),
-   };
+    Meteor.subscribe('prescriptions.all');
+    return {
+        prescriptions: Prescriptions.find({}, { sort: { createdAt: -1 } }).fetch(),
+    };
 })(PrescriptionTable);
