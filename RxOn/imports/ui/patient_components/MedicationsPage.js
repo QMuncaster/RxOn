@@ -32,8 +32,7 @@ class MedicationsPage extends Component {
 
   render() {
     const { classes } = this.props;
-    console.log(this.props);
-    console.log(classes);
+  
     return (
       <React.Fragment>
         <Grid container direction="row" justify="center" alignItems="flex-start" spacing={0}>
@@ -61,7 +60,6 @@ MedicationsPage.propTypes = {
   classes: PropTypes.object.isRequired,
   prescriptions: PropTypes.array.isRequired
 };
-
 const styledComponent = withStyles(styles)(MedicationsPage);
 export default withTracker(() => {
   Meteor.subscribe("prescriptions");
