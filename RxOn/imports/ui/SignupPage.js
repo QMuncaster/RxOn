@@ -19,8 +19,12 @@ export default class SignupPage extends Component {
                 profile: {
                     firstname: firstname.value,
                     lastname: lastname.value,
-                    address: address.value
-                    // TODO: do same for other fields (& also update in main.js)
+                    address: address.value,
+                    //phonenumber: phonenumber.value,
+                    //gender: gender.value,
+                    //dateofbirth: dateofbirth.value,
+                    //city: city.value,
+                    //country: country.value
                 }
             },
                 (error) => {
@@ -80,9 +84,7 @@ export default class SignupPage extends Component {
 
                     <span>
                         <label>Phone Number:</label>
-                        <input type="text" id="phone-part1" />
-                        <input type="text" id="phone-part2" />
-                        <input type="text" id="phone-part3" />
+                        <input type="text" id="phonenumber" />
                     </span>
 
                     <span>

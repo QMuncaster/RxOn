@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import "../styling/PharmacyPrescription";
+import { withTracker } from 'meteor/react-meteor-data';
 
 
-export default class PrescriptionForPharmacy extends Component {
+class PrescriptionForPharmacy extends Component {
 
     // cond: id matches, the the status will be set to "filled"
     //mangoDB update record; uses model to update
@@ -27,7 +28,11 @@ export default class PrescriptionForPharmacy extends Component {
 
         return (
             <div id="rxForm" className="admin-prescription-form ">
-                <div id="username" className="user name for prescription"> User Name</div>
+                
+                <div id="username" className="usernameForRx"> 
+                {this.props.prescription.patientId}
+                </div>
+                
                 <div id="rxInfo" className="prescription-middle-info">
                     <div className="prescription-item">
                         <span id="itemName" className="prescription-item-tag"> Name:   </span>
@@ -52,3 +57,11 @@ export default class PrescriptionForPharmacy extends Component {
         );
     }
 }
+
+export default withTracker(() => {
+    Meteor.subscribe('userData');
+
+    return {
+        currentUser: Meteor.user()
+    };
+})(PrescriptionForPharmacy);

@@ -9,6 +9,7 @@ import PatientProfile from '../../ui/patient_components/PatientProfile';
 import PatientPage from '../../ui/patient_components/PatientPage';
 import MedicationsPage from '../../ui/patient_components/MedicationsPage';
 import PharmacyProfile from '../../ui/pharmacist_components/PharmacyProfile';
+import PatientList from "../../ui/pharmacist_components/PatientList";
 import PrescriptionTable from '../../ui/pharmacist_components/PrescriptionTable';
 import SignupPage from '../../ui/SignupPage';
 import Login from '../../ui/login_components/Login';
@@ -53,6 +54,7 @@ const MainContainer = () => (
         <PrivateRoute exact path="/pharmacy/profile" component={PharmacyProfile} />
         <PrivateRoute exact path="/pharmacy/table" component={PrescriptionTable} />
         <PrivateRoute exact path="/patient/profile" component={PatientProfile} />
+        <PrivateRoute exact path="/pharmacy/patients" component={PatientList} />
         <PrivateRoute exact path="/playground" component={PatientPage} />
     </div>
 );
