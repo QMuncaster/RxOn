@@ -25,7 +25,6 @@ export default class ProfileMenu extends Component {
     };
     render() {
         const { anchorEl } = this.state;
-        console.log(this.state);
         return (
             <div>
                 <IconButton edge="end" color="inherit" onClick={this.handleClick}>

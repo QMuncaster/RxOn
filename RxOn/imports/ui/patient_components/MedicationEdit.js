@@ -12,7 +12,6 @@ import IconButton from '@material-ui/core/IconButton';
 
 export default function EditAction(props) {
     const { _id, rxName, rxStrength, rxDose } = props.ContainerProps;
-    console.log(props.ContainerProps);
     const [open, setOpen] = useState(false);
     const [values, setValues] = useState({
         rxName: rxName,
