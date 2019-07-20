@@ -30,6 +30,8 @@ class PatientPage extends Component {
   submitPrescription(event) {
     event.preventDefault();
     // Find the text field via the React ref
+    const firstName = Meteor.user().firstname;
+    const lastName = Meteor.user().lastname;
     const name = ReactDOM.findDOMNode(this.refs.name).value.trim();
     const strength = ReactDOM.findDOMNode(this.refs.strength).value.trim();
     const dose = ReactDOM.findDOMNode(this.refs.dose).value.trim();
@@ -38,7 +40,7 @@ class PatientPage extends Component {
       return;
     }
 
-    Meteor.call('prescriptions.insert', name, strength, dose);
+    Meteor.call('prescriptions.insert', name, strength, dose, firstName,lastName);
 
     // Clear form inputs
     ReactDOM.findDOMNode(this.refs.name).value = '';

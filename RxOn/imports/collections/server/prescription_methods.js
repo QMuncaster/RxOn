@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Prescriptions } from "../prescriptions.js";
 
 Meteor.methods({
-    'prescriptions.insert'(name, strength, dose) {
+    'prescriptions.insert'(name, strength, dose,firstName,lastName) {
       if (!this.userId) { throw new Meteor.Error('not-authorized'); }
 
       // TODO: validation of arguments before inserting
@@ -14,12 +14,16 @@ Meteor.methods({
       check(name,String);
       check (strength, String);
       check(dose, String);
+      check(firstName,String);
+      check(lastName,String);
 
       Prescriptions.insert({
         patientId: this.userId,
         rxName: name,
         rxStrength: strength,
         rxDose: dose,
+          firstName:firstName,
+          lastName:lastName
       });
     },
 
