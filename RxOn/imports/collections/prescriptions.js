@@ -14,7 +14,8 @@ const PrescriptionsSchema = new SimpleSchema({
     type: String,
     defaultValue: "fake1234"
   },
-  //userName: String,
+  firstName:String,
+  lastName: String,
   rxName: String,
   rxDose: String,
   rxStrength: String,
