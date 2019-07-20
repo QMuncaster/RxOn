@@ -8,8 +8,8 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-import EditAction from './MedicationEdit';
-import CancelAction from './MedicationCancel';
+import EditAction from './EditMedication';
+import CancelAction from './CancelMedication';
 
 
 const styles = () => ({
