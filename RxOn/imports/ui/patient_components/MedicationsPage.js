@@ -21,9 +21,6 @@ const styles = theme => ({
     inline: {
         display: 'inline',
     },
-    addIcon: {
-        marginLeft: theme.spacing.unit * 20,
-    },
 });
 
 class MedicationsPage extends Component {
