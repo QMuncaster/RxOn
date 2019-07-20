@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Medication from './Medication';
 import Grid from '@material-ui/core/Grid';
 import MedicationCard from './MedicationCard';
+import AddAction from './AddMedication.js';
 
 const styles = theme => ({
     root: {
@@ -16,6 +17,12 @@ const styles = theme => ({
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
         margin: theme.spacing.unit * 2,
+    },
+    inline: {
+        display: 'inline',
+    },
+    addIcon: {
+        marginLeft: theme.spacing.unit * 20,
     },
 });
 
@@ -36,12 +43,19 @@ class MedicationsPage extends Component {
                 <Grid container direction="row" justify="center" alignItems="flex-start" spacing={0}>
                     <Grid item xs={6}>
                         <Paper className={classes.root}>
-                            <Typography variant="h5" component="h3">
-                                Medications
-                            </Typography>
+                            <Grid container direction="row" justify="space-between" alignItems="baseline">
+                                <Grid item>
+                                    <Typography variant="h5" component="h3" className={classes.inline}>
+                                        Medications
+                                    </Typography>
+                                </Grid>
+                                <Grid item>
+                                    <AddAction />
+                                </Grid>
+                            </Grid>
                             <Typography component="p">
-                                Here is the list of your prescriptions. 
-                                You can edit or cancel any Medication before it is filled.
+                                Here is the list of your prescriptions. You can edit or cancel any Medication before it
+                                is filled.
                             </Typography>
                             {this.renderMedication()}
                         </Paper>
