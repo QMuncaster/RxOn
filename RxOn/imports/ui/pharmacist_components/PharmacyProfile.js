@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {withTracker} from 'meteor/react-meteor-data';
 import {Prescriptions} from '../../collections/prescriptions';
 import PrescriptionForPharmacy from './PrescriptionForPharmacy';
-import PharmacySidebar from "./PharmacySidebar";
 import '../styling/PharmacyPrescription.css';
 
 class PharmacyProfile extends Component {
@@ -20,7 +19,6 @@ class PharmacyProfile extends Component {
     render() {
         return (
             <div className="pharmacy-profile-page-heading" >
-                <PharmacySidebar/>
                 <div className="pharmacy-profile-page">
                     <div  className="Pharmacy-Headings">
                         <h2 id="pharmHeading" className="prescription-header-individual"> Pending</h2>
