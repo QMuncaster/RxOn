@@ -7,13 +7,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import CancelIcon from '@material-ui/icons/Cancel';
-import EditIcon from '@material-ui/icons/Edit';
 import EditAction from './MedicationEdit';
+import CancelAction from './MedicationCancel';
 
-const styles = theme => ({
+
+const styles = () => ({
     root: {
         maxWidth: 360,
     },
@@ -50,9 +49,7 @@ function Medication(props) {
                 />
                 <ListItemSecondaryAction>
                     <EditAction ContainerProps={ContainerProps} />
-                    <IconButton edge="end" aria-label="Cancel" color="secondary">
-                        <CancelIcon />
-                    </IconButton>
+                    <CancelAction ContainerProps={ContainerProps} />
                 </ListItemSecondaryAction>
             </ListItem>
         </List>
