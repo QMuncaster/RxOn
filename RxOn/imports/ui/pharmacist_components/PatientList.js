@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {withTracker} from 'meteor/react-meteor-data';
 import "../styling/PharmacyPrescription";
-import PharmacySidebar from "./PharmacySidebar";
 import IndividualPatient from './IndividualPatient';
 
 class PatientList extends Component {
@@ -28,7 +27,6 @@ class PatientList extends Component {
     render() {
             return (
                 <div className="pharmacy-profile-page-heading" >
-                    <PharmacySidebar/>
                     <div className="pharmacy-profile-page">
                         <div  className="Pharmacy-Headings">
                             <h2 id="pharmHeading" className="prescription-header-individual"> Patient List </h2>
