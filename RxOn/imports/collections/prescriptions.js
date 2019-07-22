@@ -1,7 +1,8 @@
 import { Mongo } from "meteor/mongo";
-import SimpleSchema from 'simpl-schema'
+import SimpleSchema from 'simpl-schema';
 
 export const Prescriptions = new Mongo.Collection("prescriptions");
+
 // by default all fields are required. need to specify if optional
 const PrescriptionsSchema = new SimpleSchema({
   _id: String,
@@ -9,11 +10,12 @@ const PrescriptionsSchema = new SimpleSchema({
     type: String,
     defaultValue: "fake1234"
   },
-  pharmacyId:{
+  pharmacyId: {
     type: String,
     defaultValue: "fake1234"
   },
-  //userName: String,
+  firstName:String,
+  lastName: String,
   rxName: String,
   rxDose: String,
   rxStrength: String,
@@ -26,7 +28,7 @@ const PrescriptionsSchema = new SimpleSchema({
     type: Date,
     // Force value to be current date (on server) upon insert
     // and prevent updates thereafter.
-    autoValue: function() {
+    autoValue: function () {
       if (this.isInsert) {
         return new Date();
       } else if (this.isUpsert) {
@@ -38,7 +40,7 @@ const PrescriptionsSchema = new SimpleSchema({
   },
   updatedAt: {
     type: Date,
-    autoValue: function() {
+    autoValue: function () {
       if (this.isUpdate) {
         return new Date();
       }
@@ -47,4 +49,4 @@ const PrescriptionsSchema = new SimpleSchema({
   }
 });
 
-Prescriptions.attachSchema( PrescriptionsSchema );
+Prescriptions.attachSchema(PrescriptionsSchema);

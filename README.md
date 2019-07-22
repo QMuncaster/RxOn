@@ -1,4 +1,4 @@
-﻿# RxOn
+# RxOn
 
 ### Progress 5 Description (for industry professionals on demo day)
 

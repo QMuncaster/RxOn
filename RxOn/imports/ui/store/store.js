@@ -1,14 +1,9 @@
 import { createStore, combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
 import { reducer as modal } from 'redux-modal'
-// stub reducer
-const stubReducer = (state = {}, action) => {
-  return state;
-};
+
 // root reducer
 const reducer = combineReducers({
-  // this does not do anything but I have it here to play with for manual testing
-  stub: stubReducer,
   modal: modal,
   form: formReducer
 });

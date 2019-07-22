@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import "./styling/PatientProfile.css";
 import  faker from 'faker';
 import { withTracker } from 'meteor/react-meteor-data';
+import "../styling/PatientProfile.css";
 
  class PatientProfile extends Component {
 
@@ -11,7 +11,7 @@ import { withTracker } from 'meteor/react-meteor-data';
         //     UserID,
         //     date: new Date(),
         // });
-        //TODO:
+        //TODO: remember update patient's firstname and lastname in prescriptions as well
     }
 
 
@@ -35,9 +35,9 @@ import { withTracker } from 'meteor/react-meteor-data';
                         </div>
 
                         <div className="firstname-section">
-                            <label>First Name:</label>    
+                            <label>First Name:</label>
                                 {this.props.currentUser ?
-                                    <input type="text" id="firstname" placeholder={this.props.currentUser.firstname}  /> 
+                                    <input type="text" id="firstname" placeholder={this.props.currentUser.firstname}  />
                                     :
                                     <input type="text" id="firstname" placeholder="enter first name"/>
                                 }
@@ -46,7 +46,7 @@ import { withTracker } from 'meteor/react-meteor-data';
                         <div className="lastname-section">
                             <label>Last Name:</label>
                                 {this.props.currentUser ?
-                                    <input type="text" id="lastname" placeholder={this.props.currentUser.lastname}  /> 
+                                    <input type="text" id="lastname" placeholder={this.props.currentUser.lastname}  />
                                     :
                                     <input type="text" id="lastname" placeholder="enter last name"/>
                                 }

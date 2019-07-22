@@ -3,6 +3,7 @@ import "../styling/Login.css"
 import LoginForm from "./LoginForm";
 import { SubmissionError } from "redux-form";
 import pify from 'pify';
+import { withRouter } from "react-router-dom";
 
 class Login extends Component {
 
@@ -14,30 +15,14 @@ class Login extends Component {
       await pify(Meteor.loginWithPassword)({ email: values.userName }, values.password);
       this.props.history.push('/home');
     } catch (error) {
-      switch (error.reason) {
-        // kind of uncomfortable that we have to hardcode to the reason
-        // but they share the same status codes
-        case "User not found":
-          throw new SubmissionError({
-            userName: error.reason
-          });
-
-        case "Incorrect password":
-          throw new SubmissionError({
-            password: error.reason
-          });
-
-        default:
-          throw new SubmissionError({
-            userName: error.reason,
-            password: error.reason
-          });
-      }
+      throw new SubmissionError({
+        password: "Invalid login."
+      });
     }
   }
 
   handleCreateAccount = () => {
-    this.props.history.push('/signup');
+    this.props.history.push('/signup')
   }
 
   render() {
@@ -59,6 +44,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
-
-
+export default withRouter(Login);
