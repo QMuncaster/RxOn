@@ -6,7 +6,6 @@ import { createBrowserHistory } from 'history';
 // route components
 import Header from '../../ui/layouts/Header.js';
 import PatientProfile from '../../ui/patient_components/PatientProfile';
-import PatientPage from '../../ui/patient_components/PatientPage';
 import MedicationsPage from '../../ui/patient_components/MedicationsPage';
 import PharmacyProfile from '../../ui/pharmacist_components/PharmacyProfile';
 import PatientList from "../../ui/pharmacist_components/PatientList";
@@ -51,11 +50,9 @@ const MainContainer = () => (
         <Header/>
         <PrivateRoute exact path="/" component={MedicationsPage} />
         <PrivateRoute exact path="/home" component={MedicationsPage} />
-        <PrivateRoute exact path="/pharmacy/profile" component={PharmacyProfile} />
         <PrivateRoute exact path="/pharmacy/table" component={PrescriptionTable} />
         <PrivateRoute exact path="/patient/profile" component={PatientProfile} />
         <PrivateRoute exact path="/pharmacy/patients" component={PatientList} />
-        <PrivateRoute exact path="/playground" component={PatientPage} />
     </div>
 );
 
