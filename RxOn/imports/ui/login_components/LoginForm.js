@@ -38,6 +38,7 @@ class LoginForm extends Component {
         <button type="submit" className="loginForm__btn">
           Log In
         </button>
+        <p className="loginForm__signup">Not a member? Sign up <a href="/signup">here.</a></p>
       </form>
     );
   }

@@ -29,15 +29,8 @@ class Login extends Component {
     return (
       <div>
         <div className="Login Login-header">
-          <h1 className="Login__header">Login Page</h1>
+          <h1 className="Login__header">RxOn Login</h1>
           <LoginForm onSubmit={this.handleLoginSubmit} />
-        </div>
-
-        <div>
-          {/* TODO: Fix css for signup button */}
-          <button className="loginForm__btn" onClick={this.handleCreateAccount}>
-            Signup
-          </button>
         </div>
       </div>
     );
