@@ -15,12 +15,17 @@ export default function AddAction() {
     const [values, setValues] = useState({
         rxName: '',
         rxStrength: '',
-        rxDose: '',
+        rxDose: '', 
+        refill: false
     });
 
     const handleChange = valName => event => {
         setValues({ ...values, [valName]: event.target.value });
     };
+
+    function toggleRefill() {
+        values.refill = true;
+    }
 
     function handleClickOpen() {
         setOpen(true);
@@ -38,7 +43,8 @@ export default function AddAction() {
             values.rxStrength,
             values.rxDose,
             Meteor.user().firstname,
-            Meteor.user().lastname
+            Meteor.user().lastname,
+            values.refill,
         );
         setOpen(false);
     }
@@ -89,6 +95,12 @@ export default function AddAction() {
                         onChange={handleChange('rxDose')}
                         variant="outlined"
                     />
+                    <br />
+                   <Button  onClick={toggleRefill} color="primary">
+                    Refill?
+                   </Button>
+
+
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">

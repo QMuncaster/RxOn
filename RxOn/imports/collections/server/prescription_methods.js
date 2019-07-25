@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Prescriptions } from '../prescriptions.js';
 
 Meteor.methods({
-    'prescriptions.insert'(name, strength, dose, firstName, lastName) {
+    'prescriptions.insert'(name, strength, dose, firstName, lastName, refill) {
         if (!this.userId) {
             throw new Meteor.Error('not-authorized');
         }
@@ -18,6 +18,7 @@ Meteor.methods({
         check(dose, String);
         check(firstName, String);
         check(lastName, String);
+       // check(refill, Object);
 
         Prescriptions.insert({
             patientId: this.userId,
@@ -26,6 +27,7 @@ Meteor.methods({
             rxDose: dose,
             firstName: firstName,
             lastName: lastName,
+            refill: refill,
         });
     },
 
@@ -59,7 +61,7 @@ Meteor.methods({
         Prescriptions.update({ _id: id }, { $set: { status: 'filled' } });
     },
 
-    'prescriptions.edit'(id, name, strength, dose) {
+    'prescriptions.edit'(id, name, strength, dose, refill) {
         var prescriptions = Prescriptions.find({ _id: id }).fetch();
         var loggedInUser = Meteor.user();
         // console.log(prescriptions);
@@ -77,9 +79,10 @@ Meteor.methods({
         check(name, String);
         check(strength, String);
         check(dose, String);
+        check(refill, Object);
         Prescriptions.update(
             { _id: id },
-            { $set: { rxName: name, rxStrength: strength, rxDose: dose } }
+            { $set: { rxName: name, rxStrength: strength, rxDose: dose, refill: refill } }
         );
     },
 });
