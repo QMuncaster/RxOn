@@ -3,10 +3,6 @@ import PrescriptionTable from '../pharmacist_components/PrescriptionTable';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-
-const styles = theme => ({
-});
 
 class HomeComponent extends Component {
     constructor(props) {
@@ -20,10 +16,8 @@ class HomeComponent extends Component {
     }
 }
 
-// const styledComponent = withStyles()(HomeComponent);
 export default withTracker(() => {
     return {
         user: Meteor.user()
     };
 })(HomeComponent);
-
