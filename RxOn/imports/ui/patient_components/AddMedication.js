@@ -9,6 +9,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AddIcon from '@material-ui/icons/AddCircle';
 import IconButton from '@material-ui/core/IconButton';
+import Switch from '@material-ui/core/Switch';
 
 export default function AddAction() {
     const [open, setOpen] = useState(false);
@@ -96,9 +97,16 @@ export default function AddAction() {
                         variant="outlined"
                     />
                     <br />
-                   <Button  onClick={toggleRefill} color="primary">
+                   {/* <Button  onClick={toggleRefill} color="primary">
                     Refill?
-                   </Button>
+                   </Button> */}
+
+                   <Switch onClick={toggleRefill} color="primary">
+                       <label>
+                           Refill?
+                       </label>
+                
+                       </Switch>
 
 
                 </DialogContent>

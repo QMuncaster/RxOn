@@ -18,7 +18,7 @@ Meteor.methods({
         check(dose, String);
         check(firstName, String);
         check(lastName, String);
-       // check(refill, Object);
+        check(refill, Boolean);
 
         Prescriptions.insert({
             patientId: this.userId,
@@ -79,7 +79,7 @@ Meteor.methods({
         check(name, String);
         check(strength, String);
         check(dose, String);
-        check(refill, Object);
+        //check(refill, Object);
         Prescriptions.update(
             { _id: id },
             { $set: { rxName: name, rxStrength: strength, rxDose: dose, refill: refill } }
