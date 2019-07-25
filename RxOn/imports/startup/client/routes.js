@@ -7,7 +7,6 @@ import { createBrowserHistory } from 'history';
 import Header from '../../ui/layouts/Header.js';
 import PatientProfile from '../../ui/patient_components/PatientProfile';
 import PatientList from "../../ui/pharmacist_components/PatientList";
-import PrescriptionTable from '../../ui/pharmacist_components/PrescriptionTable';
 import SignupPage from '../../ui/SignupPage';
 import HomeComponent from '../../ui/HomeComponent';
 import Login from '../../ui/login_components/Login';
@@ -27,6 +26,15 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
         render={props =>
             // props is match, location, history, if we want to use in Component/Redirect
             Meteor.userId() ? <Component /> : <Redirect to="/login" />
+        }
+    />
+);
+
+const PrivatePharmacistRoute = ({ component: Component, ...rest }) => (
+    <Route
+        {...rest}
+        render={props =>
+            Roles.userIsInRole(Meteor.user(), ['admin']) ? <Component /> : <Redirect to="/login" />
         }
     />
 );
@@ -55,7 +63,7 @@ const MainContainer = () => (
         <PrivateRoute exact path="/profile" component={PatientProfile} />
 
         {/* pharmacist only route */}
-        <PrivateRoute exact path="/patients" component={PatientList} />
+        <PrivatePharmacistRoute exact path="/patients" component={PatientList} />
     </div>
 );
 
