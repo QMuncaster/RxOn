@@ -6,10 +6,10 @@ import { createBrowserHistory } from 'history';
 // route components
 import Header from '../../ui/layouts/Header.js';
 import PatientProfile from '../../ui/patient_components/PatientProfile';
-import MedicationsPage from '../../ui/patient_components/MedicationsPage';
 import PatientList from "../../ui/pharmacist_components/PatientList";
 import PrescriptionTable from '../../ui/pharmacist_components/PrescriptionTable';
 import SignupPage from '../../ui/SignupPage';
+import HomeComponent from '../../ui/HomeComponent';
 import Login from '../../ui/login_components/Login';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import themes from '../../ui/mui_theme/theme';
@@ -47,11 +47,15 @@ const LoginContainer = () => (
 const MainContainer = () => (
     <div className="main-container">
         <Header/>
-        <PrivateRoute exact path="/" component={MedicationsPage} />
-        <PrivateRoute exact path="/home" component={MedicationsPage} />
-        <PrivateRoute exact path="/pharmacy/table" component={PrescriptionTable} />
-        <PrivateRoute exact path="/patient/profile" component={PatientProfile} />
-        <PrivateRoute exact path="/pharmacy/patients" component={PatientList} />
+        {/* shared route, different component based on user */}
+        <PrivateRoute exact path="/" component={HomeComponent} />
+        <PrivateRoute exact path="/home" component={HomeComponent} />
+
+        {/* shared route, same component for now */}
+        <PrivateRoute exact path="/profile" component={PatientProfile} />
+
+        {/* pharmacist only route */}
+        <PrivateRoute exact path="/patients" component={PatientList} />
     </div>
 );
 
@@ -62,17 +66,14 @@ export const renderRoutes = ({ store }) => (
                 <CssBaseline />
                 <Switch>
                     <Route exact path="/(login)" component={LoginContainer} />
-                    <Route
-                        exact
-                        path="/logout"
-                        render={() => {
+                    <Route exact path="/logout" render={() => {
                             Meteor.logout(error => {
                                 if (error) {
                                     alert(error);
                                 }
-                                history.push('/login');
+                                history.push('/login'); // actually redirects to login
                             });
-                            return <Login />;
+                            return <Login />; // just shows login component on logout page...
                         }}
                     />
                     <Route exact path="/signup" component={SignupPage} />
