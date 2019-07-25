@@ -8,7 +8,7 @@ import Header from '../../ui/layouts/Header.js';
 import PatientProfile from '../../ui/patient_components/PatientProfile';
 import PatientList from "../../ui/pharmacist_components/PatientList";
 import SignupPage from '../../ui/SignupPage';
-import HomeComponent from '../../ui/HomeComponent';
+import HomeComponent from '../../ui/layouts/HomeComponent';
 import Login from '../../ui/login_components/Login';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import themes from '../../ui/mui_theme/theme';
