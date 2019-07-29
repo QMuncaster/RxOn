@@ -29,8 +29,8 @@ function renderActions(props) {
     if (props.hideActions == undefined || props.hideActions == false) {
         return (
             <ListItemSecondaryAction>
-                <EditAction ContainerProps={ContainerProps} />
-                <CancelAction ContainerProps={ContainerProps} />
+                <EditAction ContainerProps={props.ContainerProps} />
+                <CancelAction ContainerProps={props.ContainerProps} />
             </ListItemSecondaryAction>
         )
     }
@@ -40,6 +40,7 @@ function Medication(props) {
     const { classes, ContainerProps } = props;
     const name = ContainerProps.rxName + ' ' + ContainerProps.rxStrength;
     const directions = ContainerProps.rxDose;
+    
 
     return (
         <List>

@@ -61,6 +61,18 @@ Meteor.methods({
         Prescriptions.update({ _id: id }, { $set: { status: 'filled' } });
     },
 
+    'prescriptions.refill'(id) {
+        var loggedInUser = Meteor.user();
+        if (!loggedInUser || !Roles.userIsInRole(loggedInUser, 'admin')) {
+            throw new Meteor.Error(403, 'Access denied');
+        }
+
+        if ( {status: 'filled'} ) {
+        Prescriptions.update({ _id: id }, { $set: { refill: false } });
+        Prescriptions.update({ _id: id }, { $set: { status: 'pending' } });
+        }
+    },
+
     'prescriptions.edit'(id, name, strength, dose, refill) {
         var prescriptions = Prescriptions.find({ _id: id }).fetch();
         var loggedInUser = Meteor.user();
