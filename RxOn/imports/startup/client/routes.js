@@ -7,7 +7,7 @@ import { createBrowserHistory } from 'history';
 import Header from '../../ui/layouts/Header.js';
 import PatientProfile from '../../ui/patient_components/PatientProfile';
 import MedicationsPage from '../../ui/patient_components/MedicationsPage';
-import ImageUpload from '../../ui/patient_components/ImageUpload';
+import ImageUpload from '../../ui/patient_components/image_upload/FileUpload.js';
 import PatientList from "../../ui/pharmacist_components/PatientList";
 import PrescriptionTable from '../../ui/pharmacist_components/PrescriptionTable';
 import SignupPage from '../../ui/SignupPage';
