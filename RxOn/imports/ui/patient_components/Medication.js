@@ -28,6 +28,7 @@ function Medication(props) {
     const { classes, ContainerProps } = props;
     const name = ContainerProps.rxName + ' ' + ContainerProps.rxStrength;
     const directions = ContainerProps.rxDose;
+
     return (
         <List>
             <ListItem alignItems="flex-start" divider={true}>
@@ -46,6 +47,9 @@ function Medication(props) {
                             </Typography>
                         </React.Fragment>
                     }
+                    
+
+                   
                 />
                 <ListItemSecondaryAction>
                     <EditAction ContainerProps={ContainerProps} />
