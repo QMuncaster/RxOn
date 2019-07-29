@@ -1,3 +1,4 @@
+// THIS FILE MUST BE IN A "server" DIRECTORY INSIDE the "imports" DIRECTORY.
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
 import { Random } from 'meteor/random';
