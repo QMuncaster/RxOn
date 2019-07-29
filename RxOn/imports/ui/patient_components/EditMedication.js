@@ -29,8 +29,12 @@ export default function EditAction(props) {
         setOpen(true);
     }
 
-    function toggleRefill() {
-        refill = !refill;
+    function toggleRefillTrue() {
+        values.refill = true;
+    }
+    
+    function toggleRefillFalse() {
+          values.refill = false;
     }
 
     function handleClose() {
@@ -90,9 +94,12 @@ export default function EditAction(props) {
                     />
                      <br />
 
-                    <Switch onClick={toggleRefill} color="primary" >
-                
-                    </Switch>
+                    <Button  onClick={toggleRefillTrue} color="primary">
+                    Yes, Refill
+                   </Button>
+                   <Button  onClick={toggleRefillFalse} color="primary">
+                    No, Refill
+                   </Button>
 
                 </DialogContent>
                 <DialogActions>
