@@ -64,6 +64,7 @@ class PrescriptionTable extends Component {
                         if (tableMeta.rowData !== undefined) {
                             _id = tableMeta.rowData[4];
                         }
+                        
                         return (
                             <Button
                                 size="small"

@@ -58,19 +58,24 @@ Meteor.methods({
             throw new Meteor.Error(403, 'Access denied');
         }
 
+        
+
         Prescriptions.update({ _id: id }, { $set: { status: 'filled' } });
     },
 
     'prescriptions.refill'(id) {
         var loggedInUser = Meteor.user();
+        var prescriptions = Prescriptions.find({ _id: id }).fetch();
+
         if (!loggedInUser || !Roles.userIsInRole(loggedInUser, 'admin')) {
             throw new Meteor.Error(403, 'Access denied');
         }
 
-        if ( {status: 'filled'} ) {
-        Prescriptions.update({ _id: id }, { $set: { refill: false } });
-        Prescriptions.update({ _id: id }, { $set: { status: 'pending' } });
+       //can only refill if the status is 'filled' and the refill token is true
+        if (prescriptions[0].status === 'filled' && prescriptions[0].refill === true) {
+        Prescriptions.update({ _id: id }, { $set: { refill: false, status: 'refilled' } });
         }
+        
     },
 
     'prescriptions.edit'(id, name, strength, dose, refill) {
