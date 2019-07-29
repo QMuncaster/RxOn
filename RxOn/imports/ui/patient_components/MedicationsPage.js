@@ -57,7 +57,7 @@ class MedicationsPage extends Component {
                             {this.renderMedication()}
                         </Paper>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={3}>
                         <MedicationCard />
                     </Grid>
                 </Grid>
