@@ -9,7 +9,9 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AddIcon from '@material-ui/icons/AddCircle';
 import IconButton from '@material-ui/core/IconButton';
-import Switch from '@material-ui/core/Switch';
+// import RadioGroup from '@material-ui/core/RadioGroup';
+// import Radio from '@material-ui/core/Radio';
+
 
 export default function AddAction() {
     const [open, setOpen] = useState(false);
@@ -24,9 +26,14 @@ export default function AddAction() {
         setValues({ ...values, [valName]: event.target.value });
     };
 
-    function toggleRefill() {
-        values.refill = true;
+    function toggleRefillTrue() {
+      values.refill = true;
     }
+
+    function toggleRefillFalse() {
+        values.refill = false;
+    }
+
 
     function handleClickOpen() {
         setOpen(true);
@@ -97,16 +104,26 @@ export default function AddAction() {
                         variant="outlined"
                     />
                     <br />
-                   {/* <Button  onClick={toggleRefill} color="primary">
-                    Refill?
-                   </Button> */}
+                   <Button  onClick={toggleRefillTrue} color="primary">
+                    Yes, Refill
+                   </Button>
+                   <Button  onClick={toggleRefillFalse} color="primary">
+                    No, Refill
+                   </Button>
 
-                   <Switch onClick={toggleRefill} color="primary">
-                       <label>
-                           Refill?
-                       </label>
-                
-                       </Switch>
+
+
+
+{/* <RadioGroup>
+  
+          <Radio value="true" label="true" />
+          <Radio value="false" label="false" />
+ 
+        </RadioGroup> */}
+                           
+                 
+
+            
 
 
                 </DialogContent>

@@ -9,14 +9,16 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
+import Switch from '@material-ui/core/Switch';
 
 export default function EditAction(props) {
-    const { _id, rxName, rxStrength, rxDose } = props.ContainerProps;
+    const { _id, rxName, rxStrength, rxDose, refill } = props.ContainerProps;
     const [open, setOpen] = useState(false);
     const [values, setValues] = useState({
         rxName: rxName,
         rxStrength: rxStrength,
         rxDose: rxDose,
+        refill: refill
     });
 
     const handleChange = valName => event => {
@@ -27,13 +29,17 @@ export default function EditAction(props) {
         setOpen(true);
     }
 
+    function toggleRefill() {
+        refill = !refill;
+    }
+
     function handleClose() {
-        setValues({ rxName: rxName, rxStrength: rxStrength, rxDose: rxDose });
+        setValues({ rxName: rxName, rxStrength: rxStrength, rxDose: rxDose, refill: refill });
         setOpen(false);
     }
 
     function handleSave() {
-        Meteor.call('prescriptions.edit', _id, values.rxName, values.rxStrength, values.rxDose);
+        Meteor.call('prescriptions.edit', _id, values.rxName, values.rxStrength, values.rxDose, values.refill);
         setOpen(false);
     }
 
@@ -82,6 +88,12 @@ export default function EditAction(props) {
                         fullWidth={true}
                         onChange={handleChange('rxDose')}
                     />
+                     <br />
+
+                    <Switch onClick={toggleRefill} color="primary" >
+                
+                    </Switch>
+
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
