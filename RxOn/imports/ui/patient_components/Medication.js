@@ -26,6 +26,7 @@ const styles = () => ({
 
 // hide action buttons depend on different pages
 function renderActions(props) {
+    const { ContainerProps } = props;
     if (props.hideActions == undefined || props.hideActions == false) {
         return (
             <ListItemSecondaryAction>
