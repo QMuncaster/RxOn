@@ -25,7 +25,7 @@ const styles = theme => ({
   },
 });
 
-function SimpleCard(props) {
+function MedicationCard(props) {
   const { classes } = props;
   return (
     <Card className={classes.card}>
@@ -41,8 +41,8 @@ function SimpleCard(props) {
   );
 }
 
-SimpleCard.propTypes = {
+MedicationCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SimpleCard);
+export default withStyles(styles)(MedicationCard);
