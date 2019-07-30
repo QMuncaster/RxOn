@@ -14,7 +14,7 @@ class IndividualFile extends Component {
     removeFile() {
         let conf = confirm('Are you sure you want to delete the file?') || false;
         if (conf == true) {
-            Meteor.call('RemoveFile', this.props.fileId, function(err, res) {
+            Meteor.call('images.removeFile', this.props.fileId, function(err, res) {
                 if (err) console.log(err);
             });
         }
