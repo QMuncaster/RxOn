@@ -26,7 +26,10 @@ const styles = () => ({
 
 // hide action buttons depend on different pages
 function renderActions(props) {
-    if (props.hideActions == undefined || props.hideActions == false) {
+    const { ContainerProps } = props;
+    const status = ContainerProps.status;
+   
+    if (status == 'pending') {
         return (
             <ListItemSecondaryAction>
                 <EditAction ContainerProps={props.ContainerProps} />

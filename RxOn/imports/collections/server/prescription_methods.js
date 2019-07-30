@@ -58,8 +58,6 @@ Meteor.methods({
             throw new Meteor.Error(403, 'Access denied');
         }
 
-        
-
         Prescriptions.update({ _id: id }, { $set: { status: 'filled' } });
     },
 
