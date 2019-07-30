@@ -74,8 +74,7 @@ Meteor.methods({
        //can only refill if the status is 'filled' and the refill token is true
         if (prescriptions[0].status === 'filled' && prescriptions[0].refill === true) {
         Prescriptions.update({ _id: id }, { $set: { refill: false, status: 'refilled' } });
-        }
-        
+        }  
     },
 
     'prescriptions.edit'(id, name, strength, dose, refill) {
@@ -85,11 +84,14 @@ Meteor.methods({
         // console.log(loggedInUser);
         // console.log(this.userId);
         // console.log(prescriptions[0].patientId);
+       
+        
         if (
             prescriptions.length <= 0 ||
             !loggedInUser ||
             (this.userId !== prescriptions[0].patientId &&
-                !Roles.userIsInRole(loggedInUser, 'admin'))
+                !Roles.userIsInRole(loggedInUser, 'admin')) ||
+                prescriptions[0].status !== 'pending'
         ) {
             throw new Meteor.Error(403, 'Access denied');
         }
