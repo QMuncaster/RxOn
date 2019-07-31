@@ -5,23 +5,23 @@ import IndividualPatient from './IndividualPatient';
 
 class PatientList extends Component {
 
+
     renderPatients() {
             return this.props.users.map((user) => {
                 //only show users who are patients, not pharamcies
                 if (user.roles != 'admin') {
-                        return <IndividualPatient key={user._id} user={user}/>
+                        return <IndividualPatient key={user._id} user={user} />
                     }
                 }
             );
         }
 
-    
+
     // renderPatientsAlphabetical() {
     //     const patientListAlph = renderPatients()
     //     .sort((a, b) => a.lastName.localeCompare(b.lastName))
     //     .map((item, i) => <List key={i} data={item} />);
     // }
-
 
 
     render() {
