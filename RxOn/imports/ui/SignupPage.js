@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import './styling/SignUpPage.css';
-
 
 export default class SignupPage extends Component {
 

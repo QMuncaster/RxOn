@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import "../styling/Login.css"
 import { SubmissionError } from "redux-form";
 import pify from 'pify';
 import { withRouter } from "react-router-dom";
 import SignupForm from "./SignupForm";
-
 
 class Signup extends Component {
 
@@ -32,8 +30,8 @@ handleSubmit = async (values) => {
 render() {
     return (
         <div>
-            <div className="Login Login-header">
-                <h1 className="Login__header">RxOn Signup</h1>
+            <div>
+                <h1>RxOn Signup</h1>
                 <SignupForm onSubmit={this.handleSubmit} />
             </div>
         </div>
