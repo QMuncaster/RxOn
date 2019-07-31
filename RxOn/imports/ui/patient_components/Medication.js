@@ -24,7 +24,7 @@ const styles = () => ({
     },
 });
 
-// hide action buttons depend on different pages
+
 function renderActions(props) {
     const { ContainerProps } = props;
     const status = ContainerProps.status;
