@@ -49,9 +49,9 @@ class IndividualPatient extends Component {
 const styledComponent = withStyles(styles)(IndividualPatient);
 // pass in props, props is passed from parent automatically so that we can filter prescriptions by user._id
 export default withTracker(props => {
-    Meteor.subscribe('prescriptions');
-    // console.log(props);
+    Meteor.subscribe('prescriptions.all');
+    console.log(props);
     return {
-        prescriptions: Prescriptions.find({"patientId" : props.user._id}).fetch(),
+        prescriptions: Prescriptions.find({"patientId":props.user._id}).fetch(),
     };
 })(styledComponent);

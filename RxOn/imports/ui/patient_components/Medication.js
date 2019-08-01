@@ -28,8 +28,9 @@ const styles = () => ({
 function renderActions(props) {
     const { ContainerProps } = props;
     const status = ContainerProps.status;
-   
-    if (status == 'pending') {
+
+    if ((props.hideActions == undefined || props.hideActions == false) && (status == 'pending')) {
+
         return (
             <ListItemSecondaryAction>
                 <EditAction ContainerProps={props.ContainerProps} />
