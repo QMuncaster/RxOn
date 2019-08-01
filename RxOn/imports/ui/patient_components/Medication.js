@@ -24,6 +24,19 @@ const styles = () => ({
     },
 });
 
+// hide action buttons depend on different pages
+function renderActions(props) {
+    const { ContainerProps } = props;
+    if (props.hideActions == undefined || props.hideActions == false) {
+        return (
+            <ListItemSecondaryAction>
+                <EditAction ContainerProps={ContainerProps} />
+                <CancelAction ContainerProps={ContainerProps} />
+            </ListItemSecondaryAction>
+        )
+    }
+}
+
 function Medication(props) {
     const { classes, ContainerProps } = props;
     const name = ContainerProps.rxName + ' ' + ContainerProps.rxStrength;
@@ -47,10 +60,7 @@ function Medication(props) {
                         </React.Fragment>
                     }
                 />
-                <ListItemSecondaryAction>
-                    <EditAction ContainerProps={ContainerProps} />
-                    <CancelAction ContainerProps={ContainerProps} />
-                </ListItemSecondaryAction>
+                {renderActions(props)}
             </ListItem>
         </List>
     );

@@ -31,15 +31,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     />
 );
 
-const PrivatePharmacistRoute = ({ component: Component, ...rest }) => (
-    <Route
-        {...rest}
-        render={props =>
-            Roles.userIsInRole(Meteor.user(), ['admin']) ? <Component /> : <Redirect to="/login" />
-        }
-    />
-);
-
 const theme = createMuiTheme({
     ...themes,
     typography: {
@@ -63,8 +54,12 @@ const MainContainer = () => (
         {/* shared route, same component for now */}
         <PrivateRoute exact path="/profile" component={PatientProfile} />
 
-        {/* pharmacist only route */}
-        <PrivatePharmacistRoute exact path="/patients" component={PatientList} />
+        {/* this should be a pharmacist only route, but difficult to implement due to race condition
+        on userIsInRole function. 
+        See: https://github.com/alanning/meteor-roles/issues/183
+        For now just leave route as patient-accessible, and rely on good pub/sub security to not show data*/}
+        <PrivateRoute exact path="/patients" component={PatientList} />
+
     </div>
 );
 
