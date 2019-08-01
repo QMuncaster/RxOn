@@ -44,7 +44,7 @@ export default class ProfileMenu extends Component {
                         </Link>
                     </MenuItem>
                     <MenuItem onClick={this.handleClose}>
-                        <Link to="/patient/profile" style={linkStyle}>
+                        <Link to="/profile" style={linkStyle}>
                             Profile
                         </Link>
                     </MenuItem>
