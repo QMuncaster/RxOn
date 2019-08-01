@@ -31,30 +31,55 @@ class TextFields extends React.Component {
         firstName: '',
         firstNameError: false,
         firstNameErrorText: '',
+
         lastName: '',
+        lastNameError: false,
+        lastNameErrorText: '',
+
         sex: '',
+        sexError: false,
+        sexErrorText: '',
+
         email: '',
-        password: '',  // don't know if this is good practice
+        emailError: false,
+        emailErrorText: '',
+
+        password: '', // don't know if this is good practice
+        passwordError: false,
+        passwordErrorText: ''
     };
 
     handleChange = (name) => event => {
         this.setState({ [name]: event.target.value });
     };
 
-    validateFields = () => {
-        if (!this.state.firstName) {
-            this.setState({ firstNameError: true, firstNameErrorText: "Field is required." });
-        } 
-        
-        if (!this.state.email || !this.state.password || !this.state.firstName || !this.state.lastName || !this.state.sex) {
-            throw Error;
+    validateReqFields = (fields) => {
+        let invalid = false;
+        for (let f of fields) {
+            if (!f.value) {
+                this.setState({ [f.error]: true, [f.text]: "Field is required." });
+                invalid = true;
+            }
+            else {
+                this.setState({ [f.error]: false });
+            }
         }
+        if (invalid) throw new Error();
     }
 
     handleSubmit = async (values) => {
-        this.validateFields();
+        document.getElementById("submit_btn").disabled = true;
         try {
-            console.log(this.state);
+            this.validateReqFields(
+                [
+                    { value: this.state.firstName, error: 'firstNameError', text: 'firstNameErrorText' },
+                    { value: this.state.lastName, error: 'lastNameError', text: 'lastNameErrorText' },
+                    { value: this.state.sex, error: 'sexError', text: 'sexErrorText' },
+                    { value: this.state.email, error: 'emailError', text: 'emailErrorText' },
+                    { value: this.state.password, error: 'passwordError', text: 'passwordErrorText' },
+                ]
+            );
+
             await pify(Accounts.createUser)({
                 email: this.state.email,
                 password: this.state.password,
@@ -66,12 +91,8 @@ class TextFields extends React.Component {
             });
             this.props.history.push('/home');
         } catch (error) {
-            alert(error);
-            // document.getElementById("submit_btn").disabled = false;
-            // console.log(error);
-            // throw new SubmissionError({
-            //     password: error
-            // });
+            document.getElementById("submit_btn").disabled = false;
+            this.setState({ errorMessage: error.reason? "Error: " + error.reason : ''});
         }
     }
 
@@ -85,9 +106,9 @@ class TextFields extends React.Component {
                         required
                         id="firstName"
                         label="First Name"
+                        value={this.state.firstName}
                         error={this.state.firstNameError}
                         helperText={this.state.firstNameErrorText}
-                        value={this.state.firstName}
                         onChange={this.handleChange('firstName')}
                         className={classes.textField}
                         margin="normal"
@@ -98,6 +119,8 @@ class TextFields extends React.Component {
                         id="lastName"
                         label="Last Name"
                         value={this.state.lastName}
+                        error={this.state.lastNameError}
+                        helperText={this.state.lastNameErrorText}
                         onChange={this.handleChange('lastName')}
                         className={classes.textField}
                         margin="normal"
@@ -110,6 +133,8 @@ class TextFields extends React.Component {
                         label="Sex"
                         className={classes.textField}
                         value={this.state.sex}
+                        error={this.state.sexError}
+                        helperText={this.state.sexErrorText}
                         onChange={this.handleChange('sex', '')}
                         SelectProps={{
                             MenuProps: {
@@ -130,9 +155,10 @@ class TextFields extends React.Component {
                         id="email"
                         label="Email"
                         value={this.state.email}
+                        error={this.state.emailError}
+                        helperText={this.state.emailErrorText}
                         onChange={this.handleChange('email', '')}
                         className={classes.textField}
-                        helperText="This will be your login username"
                         margin="normal"
                     />
 
@@ -141,6 +167,8 @@ class TextFields extends React.Component {
                         id="standard-password-input"
                         label="Password"
                         value={this.state.password}
+                        error={this.state.passwordError}
+                        helperText={this.state.passwordErrorText}
                         onChange={this.handleChange('password', '')}
                         className={classes.textField}
                         type="password"
@@ -148,14 +176,14 @@ class TextFields extends React.Component {
                     />
                 </div>
 
-
-                    <Typography component="div">
-                        Fields marked with * are required.
-                    </Typography>
+                <Typography component="div" color='error'>
+                    <br />
+                    {this.state.errorMessage}
+                </Typography>
 
                 <div>
                     <br />
-                    <Button variant="contained" color="primary" className={classes.button} onClick={this.handleSubmit}>
+                    <Button variant="contained" id="submit_btn" color="primary" className={classes.button} onClick={this.handleSubmit}>
                         Signup
                     </Button>
                 </div>
