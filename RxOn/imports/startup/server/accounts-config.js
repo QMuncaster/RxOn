@@ -23,7 +23,7 @@ Accounts.onCreateUser((options, user) => {
 // but happens before a new user is actually created/inserted
 Accounts.validateNewUser(function (user) {
     // dummy implementation for testing
-    if (!user.firstname || !user.lastname || !user.address || !user.address) {
+    if (!user.firstname || !user.lastname || !user.sex || !user.address) {
         throw new Meteor.Error(403, 'All fields are required');
     }
     return true;
