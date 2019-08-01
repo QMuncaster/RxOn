@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { SubmissionError } from "redux-form";
 import pify from 'pify';
 import { withRouter } from "react-router-dom";
-import SignupForm from "./SignupForm";
+import TextFields from "./SignupForm";
 
 class Signup extends Component {
 
@@ -32,7 +32,7 @@ render() {
         <div>
             <div>
                 <h1>RxOn Signup</h1>
-                <SignupForm onSubmit={this.handleSubmit} />
+                <TextFields />
             </div>
         </div>
     );
