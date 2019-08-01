@@ -46,7 +46,9 @@ class TextFields extends React.Component {
 
         password: '', // don't know if this is good practice
         passwordError: false,
-        passwordErrorText: ''
+        passwordErrorText: '',
+
+        isSubmitDisabled: false,
     };
 
     handleChange = (name) => event => {
@@ -67,8 +69,8 @@ class TextFields extends React.Component {
         if (invalid) throw new Error();
     }
 
-    handleSubmit = async (values) => {
-        document.getElementById("submit_btn").disabled = true;
+    handleSubmit = async () => {
+        this.setState({ isSubmitDisabled: true });
         try {
             this.validateReqFields(
                 [
@@ -91,8 +93,7 @@ class TextFields extends React.Component {
             });
             this.props.history.push('/home');
         } catch (error) {
-            document.getElementById("submit_btn").disabled = false;
-            this.setState({ errorMessage: error.reason? "Error: " + error.reason : ''});
+            this.setState({ isSubmitDisabled: false, errorMessage: error.reason });
         }
     }
 
@@ -183,7 +184,8 @@ class TextFields extends React.Component {
 
                 <div>
                     <br />
-                    <Button variant="contained" id="submit_btn" color="primary" className={classes.button} onClick={this.handleSubmit}>
+                    <Button variant="contained" color="primary" className={classes.button} 
+                        onClick={this.handleSubmit} disabled={this.state.isSubmitDisabled}>
                         Signup
                     </Button>
                 </div>
