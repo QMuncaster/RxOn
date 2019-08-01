@@ -7,13 +7,12 @@ import { createBrowserHistory } from 'history';
 import Header from '../../ui/layouts/Header.js';
 import PatientProfile from '../../ui/patient_components/PatientProfile';
 import PatientList from "../../ui/pharmacist_components/PatientList";
-import SignupPage from '../../ui/SignupPage';
+import SignupPage from '../../ui/signup_components/Signup';
 import HomeComponent from '../../ui/layouts/HomeComponent';
 import Login from '../../ui/login_components/Login';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import themes from '../../ui/mui_theme/theme';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import App from '../../ui/signup_components/Signup';
 
 const history = createBrowserHistory();
 
@@ -69,14 +68,13 @@ export const renderRoutes = ({ store }) => (
             <Router history={history}>
                 <CssBaseline />
                 <Switch>
-                    <Route exact path="/app" component={App} />
                     <Route exact path="/login" component={LoginContainer} />
                     <Route exact path="/logout" render={() => {
                             Meteor.logout(error => {
                                 if (error) {
                                     alert(error);
                                 }
-                                history.push('/login'); // actually redirects to login
+                                // history.push('/login'); // actually redirects to login, but lose form input
                             });
                             return <Login />; // just shows login component on logout page...
                         }}

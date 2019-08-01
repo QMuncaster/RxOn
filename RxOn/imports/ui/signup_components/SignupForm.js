@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import pify from 'pify';
 import Typography from '@material-ui/core/Typography';
+import { withRouter } from "react-router-dom";
 
 const styles = theme => ({
     container: {
@@ -25,7 +26,7 @@ const styles = theme => ({
 
 const sexes = [{ label: 'Male', value: 'Male' }, { label: 'Female', value: 'Female' }, { label: 'Other', value: 'Other' }];
 
-class TextFields extends React.Component {
+class SignupForm extends React.Component {
 
     state = {
         firstName: '',
@@ -195,8 +196,8 @@ class TextFields extends React.Component {
     }
 }
 
-TextFields.propTypes = {
+SignupForm.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(TextFields);
+export default withStyles(styles)(withRouter(SignupForm));
