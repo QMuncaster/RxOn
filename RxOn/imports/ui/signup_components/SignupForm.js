@@ -41,6 +41,10 @@ class SignupForm extends React.Component {
         sexError: false,
         sexErrorText: '',
 
+        address: '',
+        addressError: false,
+        addressErrorText: '',
+
         email: '',
         emailError: false,
         emailErrorText: '',
@@ -78,6 +82,7 @@ class SignupForm extends React.Component {
                     { value: this.state.firstName, error: 'firstNameError', text: 'firstNameErrorText' },
                     { value: this.state.lastName, error: 'lastNameError', text: 'lastNameErrorText' },
                     { value: this.state.sex, error: 'sexError', text: 'sexErrorText' },
+                    { value: this.state.address, error: 'addressError', text: 'addressErrorText' },
                     { value: this.state.email, error: 'emailError', text: 'emailErrorText' },
                     { value: this.state.password, error: 'passwordError', text: 'passwordErrorText' },
                 ]
@@ -89,7 +94,8 @@ class SignupForm extends React.Component {
                 profile: {
                     firstname: this.state.firstName,
                     lastname: this.state.lastName,
-                    address: this.state.sex,
+                    sex: this.state.sex,
+                    address: this.state.address,
                 }
             });
             this.props.history.push('/home');
@@ -154,6 +160,18 @@ class SignupForm extends React.Component {
 
                     <TextField
                         required
+                        id="address"
+                        label="Address"
+                        value={this.state.address}
+                        error={this.state.addressError}
+                        helperText={this.state.addressErrorText}
+                        onChange={this.handleChange('address')}
+                        className={classes.textField}
+                        margin="normal"
+                    />
+
+                    <TextField
+                        required
                         id="email"
                         label="Email"
                         value={this.state.email}
@@ -166,7 +184,7 @@ class SignupForm extends React.Component {
 
                     <TextField
                         required
-                        id="standard-password-input"
+                        id="password"
                         label="Password"
                         value={this.state.password}
                         error={this.state.passwordError}
