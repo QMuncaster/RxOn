@@ -37,37 +37,22 @@ class TextFields extends React.Component {
         password: '',  // don't know if this is good practice
     };
 
-    // handleChange = (name, error, text) => event => {
-    //     this.setState({ [name]: event.target.value });
-    //     if (event.target.value === '') {
-    //         this.setState({ [error]: true })
-    //         this.setState({ [text]: 'This field is required.' })
-    //     }
-    // };
-
-    // handleChange = (name) => event => {
-    //     console.log("handle called");
-    //     console.log(name);
-    //     this.setState({ [name]: event.target.value });
-    // };
-
-    handleChange(name) {
+    handleChange = (name) => event => {
         this.setState({ [name]: event.target.value });
-    }
+    };
 
-    validateChange (event, error, text) {
-        if (event.target.value === '') {
-            this.setState({ [error]: true })
-            this.setState({ [text]: 'This field is required.' })
+    validateFields = () => {
+        if (!this.state.firstName) {
+            this.setState({ firstNameError: true, firstNameErrorText: "Field is required." });
         } 
-        else {
-            this.setState({ [error]: false })
-            this.setState({ [text]: '' })
+        
+        if (!this.state.email || !this.state.password || !this.state.firstName || !this.state.lastName || !this.state.sex) {
+            throw Error;
         }
     }
 
     handleSubmit = async (values) => {
-        // document.getElementById("submit_btn").disabled = true;
+        this.validateFields();
         try {
             console.log(this.state);
             await pify(Accounts.createUser)({
@@ -103,9 +88,7 @@ class TextFields extends React.Component {
                         error={this.state.firstNameError}
                         helperText={this.state.firstNameErrorText}
                         value={this.state.firstName}
-                        onChange={(event) => { 
-                            this.handleChange('firstName'); 
-                            this.validateChange(event, 'firstNameError', 'firstNameErrorText');}}                        
+                        onChange={this.handleChange('firstName')}
                         className={classes.textField}
                         margin="normal"
                     />
@@ -115,14 +98,12 @@ class TextFields extends React.Component {
                         id="lastName"
                         label="Last Name"
                         value={this.state.lastName}
-                        onChange={() => {
-                            this.handleChange('lastName'); 
-                        }}
+                        onChange={this.handleChange('lastName')}
                         className={classes.textField}
                         margin="normal"
                     />
 
-                    {/* <TextField
+                    <TextField
                         required
                         id="standard-select-sex"
                         select
@@ -164,7 +145,7 @@ class TextFields extends React.Component {
                         className={classes.textField}
                         type="password"
                         margin="normal"
-                    /> */}
+                    />
                 </div>
 
 
