@@ -9,7 +9,7 @@ body {
   }
   
   .Login-header {
-    min-height: 100vh;
+    min-height: 90vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,7 +24,20 @@ body {
   
   .Login__header {
     color: rgb(53, 70, 79);
-    margin: 45px 0 90px;
+    margin: 0px 0 15px;
+  }
+
+  .loginForm__signup {
+    background-color: rgb(43, 72, 231);
+    min-height: 49px;
+    width: 100%;
+    margin-top: 0rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    border-radius: 3px;
+    outline: 0;
+    
   }
   
   * {
