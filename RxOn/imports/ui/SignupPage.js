@@ -1,18 +1,27 @@
-import React, { Component } from 'react';
-import './styling/SignUpPage.css';
+
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import React, { useState } from 'react';
 
 
-export default class SignupPage extends Component {
+export default function AddPatient() {
+    const [open, setOpen] = useState(false);
+    const [values, setValues] = useState({
+        firstname: '',
+        lastname: '',
+        address: '', 
+       
+    });
 
-    constructor() {
-        super();
-        // lock to avoid spamming create request
-        this.state = { isRequesting: false };
-    }
+    const handleChange = valName => event => {
+        setValues({ ...values, [valName]: event.target.value });
+    };
 
-    createProfile() {
-        if (!this.state.isRequesting) { 
-            this.setState({ isRequesting: true });
+   
+    function handleSave() {
+        Meteor.call(
             Accounts.createUser({
                 email: email.value,
                 password: password.value,
@@ -26,86 +35,99 @@ export default class SignupPage extends Component {
                     //city: city.value,
                     //country: country.value
                 }
-            },
-                (error) => {
-                    if (error) {
-                        alert(error);
-                        this.setState({ isRequesting: false });
-                    }
-                    else {
-                        this.props.history.push('/home')
-                    }
-                });
-        }
-    }
-
-    render() {
-        return (
-            <div className="profile-page">
-                <h2>Create Account </h2>
-                <div className="names-section">
-                    <div className="image-section">
-
-                        {/*<a href="#">Change Image</a>*/}
-                    </div>
-                    <div className="name-section">
-                        <div className="gender-section">
-                            <label htmlFor="mr">Mr.</label>
-                            <input type="radio" id="mr" name="gender-radio-group" value="mr" defaultChecked />
-                            <label htmlFor="mrs">Mrs.</label>
-                            <input type="radio" id="mrs" name="gender-radio-group" value="mrs" />
-                            <label htmlFor="mx">Mx.</label>
-                            <input type="radio" id="mx" name="gender-radio-group" value="mx" />
-                        </div>
-                        <div className="firstname-section">
-                            <label>First Name:</label>
-                            <input type="text" id="firstname" />
-                        </div>
-                        <div className="lastname-section">
-                            <label>Last Name:</label>
-                            <input type="text" id="lastname" />
-                        </div>
-                    </div>
-                </div>
-
-                <div className="contact-section">
-                    <span>
-                        <label>Address:</label>
-                        <input type="text" id="address" />
-                    </span>
-
-                    <span>
-                        <label>City:</label>
-                        <input type="text" id="city" />
-
-                        <label>Country:</label>
-                        <input type="text" id="country" />
-                    </span>
-
-                    <span>
-                        <label>Phone Number:</label>
-                        <input type="text" id="phonenumber" />
-                    </span>
-
-                    <span>
-                        <label>Email:</label>
-                        <input type="email" id="email" />
-
-                        <label>Password:</label>
-                        <input type="email" id="password" />
-                    </span>
-                </div>
-
-                <div className="emergency-section">
-
-                </div>
-
-                <div className="action-buttons-section">
-                    <button className="ui button update-button" onClick={() => this.createProfile()}> Create Account </button>
-                </div>
-
-            </div>
-
+            })
         );
     }
+
+    
+  return (
+    <React.Fragment>
+      <div style={{ paddingLeft: 150, paddingRight: 150, paddingTop: 75 }}>
+      <Typography variant="h2" gutterBottom>
+        SignUp Page
+      </Typography>
+      
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="firstname"
+            name="firstname"
+            label="First Name"
+            fullWidth
+            autoComplete="fname"
+            //onChange={handleChange('firstname')}
+          /> 
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="lastname"
+            name="lastname"
+            label="Last Name"
+            fullWidth
+            autoComplete="lastname"
+            //onChange={handleChange('lastname')}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            required
+            id="address"
+            name="address"
+            label="Address"
+            fullWidth
+            autoComplete="address"
+          />
+        </Grid>
+        
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="email"
+            name="email"
+            label="Email"
+            fullWidth
+            autoComplete="email"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField id="state" name="state" label="State/Province/Region" fullWidth />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="password"
+            name="password"
+            label="Password"
+            fullWidth
+            autoComplete="password"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            id="country"
+            name="country"
+            label="Country"
+            fullWidth
+            autoComplete="billing country"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          {/* <FormControlLabel
+            control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
+            label="Use this address for payment details"
+          /> */}
+
+        <div style={{ paddingTop: 20 }}>
+        <Button onClick={handleSave} color="primary">
+                        Sign Up
+         </Button>
+          </div>
+
+        </Grid>
+      </Grid>
+      </div>
+    </React.Fragment>
+  );
 }
