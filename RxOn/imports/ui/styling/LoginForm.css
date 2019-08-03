@@ -1,6 +1,11 @@
-.loginForm {
+  .loginForm {
     min-width: 350px;
   }
+  .signupContainer {
+    display: in-line;
+    min-width: 350px;
+  }
+
   .loginForm__wrapper {
     padding: 8px 0;
   }
@@ -33,8 +38,19 @@
     border-radius: 3px;
     outline: 0;
   }
-  .loginForm__btn:active {
+  .loginForm__btn:active, .loginForm__btn:disabled {
     color: rgb(43, 72, 231);
     background-color: transparent;
     border: rgb(43, 72, 231);
+  }
+  .loginForm__signup {
+    display: block;
+    width: 100%;
+    height: 42px;
+    font-size: 1.5rem;
+    color: rgb(0, 0, 0);
+    padding-left: 1rem;
+    border-radius: 3px;
+    border: 0px;
+    outline: 0;
   }

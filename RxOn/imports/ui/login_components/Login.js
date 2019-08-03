@@ -8,6 +8,8 @@ import { withRouter } from "react-router-dom";
 class Login extends Component {
 
   handleLoginSubmit = async (values) => {
+    // I COULD use react state here... but this is just a lot easier
+    document.getElementById("submit_btn").disabled = true;
     try {
       // I had to convert login function to a promise instead of using its callback
       // Otherwise the callback would lose the SubmissionError functionality for showing error on form
@@ -15,6 +17,7 @@ class Login extends Component {
       await pify(Meteor.loginWithPassword)({ email: values.userName }, values.password);
       this.props.history.push('/home');
     } catch (error) {
+      document.getElementById("submit_btn").disabled = false;
       throw new SubmissionError({
         password: "Invalid login."
       });
@@ -29,15 +32,8 @@ class Login extends Component {
     return (
       <div>
         <div className="Login Login-header">
-          <h1 className="Login__header">Login Page</h1>
+          <h1 className="Login__header">RxOn Login</h1>
           <LoginForm onSubmit={this.handleLoginSubmit} />
-        </div>
-
-        <div>
-          {/* TODO: Fix css for signup button */}
-          <button className="loginForm__btn" onClick={this.handleCreateAccount}>
-            Signup
-          </button>
         </div>
       </div>
     );
