@@ -94,12 +94,12 @@ export default function EditAction(props) {
                     />
                      <br />
 
-                    <Button  onClick={toggleRefillTrue} color="primary">
-                    Yes, Refill
-                   </Button>
-                   <Button  onClick={toggleRefillFalse} color="primary">
-                    No, Refill
-                   </Button>
+            
+                   <TextField
+                   type="text"
+                   placeholder={values.refill}
+                   variant="outlined"
+                   />
 
                 </DialogContent>
                 <DialogActions>
@@ -109,6 +109,7 @@ export default function EditAction(props) {
                     <Button onClick={handleSave} color="primary">
                         Save
                     </Button>
+                    
                 </DialogActions>
             </Dialog>
         </React.Fragment>
