@@ -33,7 +33,16 @@ class Login extends Component {
       <div>
         <div className="Login Login-header">
           <h1 className="Login__header">RxOn Login</h1>
+          <div className="Login_form">
           <LoginForm onSubmit={this.handleLoginSubmit} />
+          </div>
+        </div>
+
+        <div>
+          {/* TODO: Fix css for signup button */}
+          <button className="loginForm__signup" onClick={this.handleCreateAccount}>
+            Signup
+          </button>
         </div>
       </div>
     );

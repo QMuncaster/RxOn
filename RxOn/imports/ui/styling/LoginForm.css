@@ -31,7 +31,7 @@
     background-color: rgb(43, 72, 231);
     min-height: 49px;
     width: 100%;
-    margin-top: 2rem;
+    margin-top: 0rem;
     font-size: 1rem;
     font-weight: bold;
     color: white;
@@ -43,6 +43,7 @@
     background-color: transparent;
     border: rgb(43, 72, 231);
   }
+<<<<<<< HEAD
   .loginForm__signup {
     display: block;
     width: 100%;
@@ -54,3 +55,7 @@
     border: 0px;
     outline: 0;
   }
+=======
+
+  
+>>>>>>> project_6-refill

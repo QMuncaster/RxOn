@@ -18,7 +18,7 @@ Meteor.methods({
         check(dose, String);
         check(firstName, String);
         check(lastName, String);
-        check(refill, Boolean);
+        check(refill, Number);
 
         Prescriptions.insert({
             patientId: this.userId,
@@ -69,9 +69,9 @@ Meteor.methods({
             throw new Meteor.Error(403, 'Access denied');
         }
 
-       //can only refill if the status is 'filled' and the refill token is true
-        if (prescriptions[0].status === 'filled' && prescriptions[0].refill === true) {
-        Prescriptions.update({ _id: id }, { $set: { refill: false, status: 'refilled' } });
+       //can only refill if the status is 'filled' and there is > 0 refill tokens available
+        if (prescriptions[0].status === 'filled' && prescriptions[0].refill > 0) {
+        Prescriptions.update({ _id: id }, { $set: { refill: refill--, status: 'refilled' } });
         }  
     },
 

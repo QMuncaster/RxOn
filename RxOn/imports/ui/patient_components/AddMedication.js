@@ -19,22 +19,24 @@ export default function AddAction() {
         rxName: '',
         rxStrength: '',
         rxDose: '', 
-        refill: false
+        refill: 0
     });
 
     const handleChange = valName => event => {
         setValues({ ...values, [valName]: event.target.value });
     };
 
-    function toggleRefillTrue() {
-      values.refill = true;
+    function addRefill() {
+      values.refill++;
     }
 
-    function toggleRefillFalse() {
-        values.refill = false;
+    function displayRefill() {
+        values.refill;
     }
+
 
     function handleClickOpen() {
+        values.refill = 0;
         setOpen(true);
     }
 
@@ -103,12 +105,17 @@ export default function AddAction() {
                         variant="outlined"
                     />
                     <br />
-                   <Button  onClick={toggleRefillTrue} color="primary">
-                    Yes, Refill
+                   <Button  onClick={addRefill} color="primary">
+                    Add Refill
                    </Button>
-                   <Button  onClick={toggleRefillFalse} color="primary">
-                    No, Refill
-                   </Button>
+                   <TextField
+                   type="text"
+                   placeholder={values.refill}
+                   variant="outlined"
+                   //onChange={displayRefill()}
+                   />
+
+                   
 
 
 
