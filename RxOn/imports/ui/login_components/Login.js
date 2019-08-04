@@ -38,12 +38,6 @@ class Login extends Component {
           </div>
         </div>
 
-        <div>
-          {/* TODO: Fix css for signup button */}
-          <button className="loginForm__signup" onClick={this.handleCreateAccount}>
-            Signup
-          </button>
-        </div>
       </div>
     );
   }
