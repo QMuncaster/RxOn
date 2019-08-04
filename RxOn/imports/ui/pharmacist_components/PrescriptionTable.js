@@ -34,7 +34,7 @@ class PrescriptionTable extends Component {
             retVal['Name'] = px.rxName;
             retVal['Strength'] = px.rxStrength;
             retVal['Request Date'] = px.createdAt.toDateString();
-            retVal['Refill Elegibility'] = px.refill;
+            retVal['Refills Remaining'] = px.refill;
             return retVal;
         });
         const columns = [
@@ -54,8 +54,12 @@ class PrescriptionTable extends Component {
                     filter: false,
                 },
             },
+            
+            {name: 'Refills Remaining'},
+
+
             {
-                name: 'Refill Elegibility',
+                name: '',
                 options: {
                     sort: false,
                     empty: true,
@@ -82,8 +86,9 @@ class PrescriptionTable extends Component {
                 },
             },
 
+            
             {
-                name: 'Actions',
+                name: '',
                 options: {
                     sort: false,
                     empty: true,
