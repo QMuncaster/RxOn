@@ -62,7 +62,6 @@ export default function EditAction(props) {
                     />
                     <br />
                     <TextField
-                        autoFocus
                         margin="dense"
                         label="Medication Strength"
                         type="text"
@@ -73,7 +72,6 @@ export default function EditAction(props) {
                     />
                     <br />
                     <TextField
-                        autoFocus
                         margin="dense"
                         label="Medication Dose"
                         type="text"
