@@ -13,8 +13,7 @@ class Signup extends Component {
              
                 <div>
                     <br />
-                    <Button variant="contained" color="primary" 
-                        >
+                    <Button variant="contained" color="primary" to="/">
                         LOGIN
                     </Button>
                 </div>
