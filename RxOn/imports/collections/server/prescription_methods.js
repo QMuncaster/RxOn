@@ -71,7 +71,7 @@ Meteor.methods({
 
        //can only refill if the status is 'filled' and there is > 0 refill tokens available
         if (prescriptions[0].status === 'filled' && prescriptions[0].refill > 0) {
-        Prescriptions.update({ _id: id }, { $set: { refill: refill--, status: 'refilled' } });
+        Prescriptions.update({ _id: id }, { $set: { refill: prescriptions[0].refill--, status: 'refilled' } });
         }  
     },
 
