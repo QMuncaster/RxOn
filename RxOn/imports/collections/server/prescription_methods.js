@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Prescriptions } from '../prescriptions.js';
 
 Meteor.methods({
-    'prescriptions.insert'(name, strength, dose, firstName, lastName) {
+    'prescriptions.insert'(name, strength, dose, firstName, lastName, refill) {
         if (!this.userId) {
             throw new Meteor.Error('not-authorized');
         }
@@ -18,6 +18,7 @@ Meteor.methods({
         check(dose, String);
         check(firstName, String);
         check(lastName, String);
+        check(refill, Number);
 
         Prescriptions.insert({
             patientId: this.userId,
@@ -26,6 +27,7 @@ Meteor.methods({
             rxDose: dose,
             firstName: firstName,
             lastName: lastName,
+            refill: refill,
         });
     },
 
@@ -59,27 +61,45 @@ Meteor.methods({
         Prescriptions.update({ _id: id }, { $set: { status: 'filled' } });
     },
 
-    'prescriptions.edit'(id, name, strength, dose) {
+    'prescriptions.refill'(id) {
+        var loggedInUser = Meteor.user();
+        var prescriptions = Prescriptions.find({ _id: id }).fetch();
+
+        if (!loggedInUser || !Roles.userIsInRole(loggedInUser, 'admin')) {
+            throw new Meteor.Error(403, 'Access denied');
+        }
+
+       //can only refill if the status is 'filled' and there is > 0 refill tokens available
+        if (prescriptions[0].status === 'filled' && prescriptions[0].refill > 0) {
+        Prescriptions.update({ _id: id }, { $set: { refill: refill--, status: 'refilled' } });
+        }  
+    },
+
+    'prescriptions.edit'(id, name, strength, dose, refill) {
         var prescriptions = Prescriptions.find({ _id: id }).fetch();
         var loggedInUser = Meteor.user();
         // console.log(prescriptions);
         // console.log(loggedInUser);
         // console.log(this.userId);
         // console.log(prescriptions[0].patientId);
+       
+        
         if (
             prescriptions.length <= 0 ||
             !loggedInUser ||
             (this.userId !== prescriptions[0].patientId &&
-                !Roles.userIsInRole(loggedInUser, 'admin'))
+                !Roles.userIsInRole(loggedInUser, 'admin')) ||
+                prescriptions[0].status !== 'pending'
         ) {
             throw new Meteor.Error(403, 'Access denied');
         }
         check(name, String);
         check(strength, String);
         check(dose, String);
+        //check(refill, Object);
         Prescriptions.update(
             { _id: id },
-            { $set: { rxName: name, rxStrength: strength, rxDose: dose } }
+            { $set: { rxName: name, rxStrength: strength, rxDose: dose, refill: refill } }
         );
     },
 });

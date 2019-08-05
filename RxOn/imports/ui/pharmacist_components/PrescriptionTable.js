@@ -34,6 +34,7 @@ class PrescriptionTable extends Component {
             retVal['Name'] = px.rxName;
             retVal['Strength'] = px.rxStrength;
             retVal['Request Date'] = px.createdAt.toDateString();
+            retVal['Refill Elegibility'] = px.refill;
             return retVal;
         });
         const columns = [
@@ -53,6 +54,34 @@ class PrescriptionTable extends Component {
                     filter: false,
                 },
             },
+            {
+                name: 'Refill Elegibility',
+                options: {
+                    sort: false,
+                    empty: true,
+                    customBodyRender: (value, tableMeta, updateValue) => {
+                        let _id;
+                        if (tableMeta.rowData !== undefined) {
+                            _id = tableMeta.rowData[4];
+                        }
+                        
+                        return (
+                            <Button
+                                size="small"
+                                variant="outlined"
+                                color="primary"
+                                onClick={() => {
+
+                                    Meteor.call('prescriptions.refill', _id);
+                                }}
+                            >
+                                Refill
+                            </Button>
+                        );
+                    },
+                },
+            },
+
             {
                 name: 'Actions',
                 options: {

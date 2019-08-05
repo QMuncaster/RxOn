@@ -19,9 +19,13 @@ const PrescriptionsSchema = new SimpleSchema({
   rxName: String,
   rxDose: String,
   rxStrength: String,
+  refill: {
+    type: Number,
+    defaultValue: 0
+  },
   status: {
     type: String,
-    allowedValues: ["pending", "filled", "complete", "canceled"],
+    allowedValues: ["pending", "filled", "complete", "canceled", "refilled"],
     defaultValue: "pending"
   },
   createdAt: {
