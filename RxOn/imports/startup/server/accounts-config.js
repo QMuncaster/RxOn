@@ -47,7 +47,7 @@ Meteor.publish('userData', function () {
       return Meteor.users.find({ _id: this.userId }, {
         // 0 = exclude from return document
         // 1 = include in return document
-        fields: {firstname: 1, lastname: 1, address: 1, dateofbirth: 1, phonenumber: 1} 
+        fields: {firstname: 1, lastname: 1, address: 1, dateofbirth: 1, phonenumber: 1}
       });
     } else {
       this.ready();
@@ -56,6 +56,14 @@ Meteor.publish('userData', function () {
 
 
 Meteor.publish('userList', function () {
-  return Meteor.users.find({}, {
-    fields: { _id: 1, firstname: 1, lastname: 1, address: 1,  phonenumber: 1, email: 1 } });
+  if (Roles.userIsInRole(this.userId, ['admin'])) {
+    return Meteor.users.find({}, {
+        fields: { _id: 1,firstname: 1, lastname: 1, address: 1, phonenumber: 1, email: 1},
+        sort: { lastname : -1 }
+    });
+  } else {
+    // unauthorized, do not publish data
+    this.stop();
+    return;
+  }
 });

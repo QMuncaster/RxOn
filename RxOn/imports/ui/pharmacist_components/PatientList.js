@@ -48,6 +48,6 @@ export default withTracker(() => {
     Meteor.subscribe('userList');
 
     return {
-        users: Meteor.users.find({}).fetch()
+        users: Meteor.users.find({}, {}).fetch()
     };
 })(PatientList);
