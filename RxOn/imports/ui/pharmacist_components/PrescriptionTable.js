@@ -64,24 +64,32 @@ class PrescriptionTable extends Component {
                     sort: false,
                     empty: true,
                     customBodyRender: (value, tableMeta, updateValue) => {
-                        let _id;
+                        let _id, _status, _refill;
                         if (tableMeta.rowData !== undefined) {
                             _id = tableMeta.rowData[4];
+                            _status = tableMeta.rowData[0];
+                            _refill = tableMeta.rowData[5];
                         }
-                        
-                        return (
-                            <Button
-                                size="small"
-                                variant="outlined"
-                                color="primary"
-                                onClick={() => {
 
-                                    Meteor.call('prescriptions.refill', _id);
-                                }}
-                            >
-                                Refill
-                            </Button>
-                        );
+                        if (_status == 'filled' && _refill > 0) {
+                        
+                            return (
+                                <Button
+                                    size="small"
+                                    variant="outlined"
+                                    color="primary"
+                                    onClick={() => {
+    
+                                        Meteor.call('prescriptions.refill', _id);
+                                    }}
+                                >
+                                    Refill
+                                </Button>
+                            );
+                                }
+                        
+                       
+                            
                     },
                 },
             },
@@ -93,10 +101,13 @@ class PrescriptionTable extends Component {
                     sort: false,
                     empty: true,
                     customBodyRender: (value, tableMeta, updateValue) => {
-                        let _id;
+                        let _id, _status;
                         if (tableMeta.rowData !== undefined) {
                             _id = tableMeta.rowData[4];
+                            _status = tableMeta.rowData[0];
                         }
+
+                       if (_status == 'pending') {
                         return (
                             <Button
                                 size="small"
@@ -109,6 +120,10 @@ class PrescriptionTable extends Component {
                                 Fill
                             </Button>
                         );
+
+                            }
+                           
+                            
                     },
                 },
             },
