@@ -1,10 +1,8 @@
 import { createStore, combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
-import { reducer as modal } from 'redux-modal'
 
 // root reducer
 const reducer = combineReducers({
-  modal: modal,
   form: formReducer
 });
 // create store
