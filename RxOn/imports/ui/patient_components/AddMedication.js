@@ -27,12 +27,25 @@ export default function AddAction() {
     };
 
     function addRefill() {
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value++;
+        document.getElementById('number').value = value;
+      
       values.refill++;
     }
 
-    function displayRefill() {
-        values.refill;
-    }
+    function minusRefill() {
+        if (values.refill > 0) {
+            values.refill--;
+        }
+
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value < 1 ? value = 1 : '';
+        value--;
+        document.getElementById('number').value = value;
+      }
 
 
     function handleClickOpen() {
@@ -105,33 +118,15 @@ export default function AddAction() {
                         variant="outlined"
                     />
                     <br />
-                   <Button  onClick={addRefill} color="primary">
-                    Add Refill
-                   </Button>
-                   <TextField
-                   type="text"
-                   placeholder={values.refill}
-                   variant="outlined"
-                   //onChange={displayRefill()}
-                   />
-
                    
-
-
-
-
-{/* <RadioGroup>
-  
-          <Radio value="true" label="true" />
-          <Radio value="false" label="false" />
+                   <Button  onClick={minusRefill} color="primary">
+                    -
+                   </Button>
+                   <input type="number" id="number" value="0" />
+                   <Button  onClick={addRefill} color="primary">
+                    +
+                   </Button>
  
-        </RadioGroup> */}
-                           
-                 
-
-            
-
-
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
