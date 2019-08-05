@@ -17,13 +17,6 @@ class PatientList extends Component {
         }
 
 
-    // renderPatientsAlphabetical() {
-    //     const patientListAlph = renderPatients()
-    //     .sort((a, b) => a.lastName.localeCompare(b.lastName))
-    //     .map((item, i) => <List key={i} data={item} />);
-    // }
-
-
     render() {
             return (
                 <div className="pharmacy-profile-page-heading" >

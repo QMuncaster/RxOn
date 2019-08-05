@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import "../styling/PharmacyPrescription";
-//import Medication from "../patient_components/Medication";
 import {withStyles} from "@material-ui/core";
 import {withTracker} from "meteor/react-meteor-data";
 import {Meteor} from "meteor/meteor";
@@ -9,9 +8,7 @@ import ViewMedicationsDialog from "./ViewMedications";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-//import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-// import styles from "../patient_components/MedicationsPage";
 
 const styles = theme => ({
     root: {

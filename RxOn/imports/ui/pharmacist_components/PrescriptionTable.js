@@ -39,14 +39,18 @@ class PrescriptionTable extends Component {
         });
         const columns = [
             { name: 'Status' },
+            
             { name: 'Request Date' },
+
             {
                 name: 'Name',
                 options: {
                     filterType: 'textField',
                 },
             },
+
             { name: 'Strength' },
+
             {
                 name: '_id',
                 options: {
@@ -54,9 +58,8 @@ class PrescriptionTable extends Component {
                     filter: false,
                 },
             },
-            
-            {name: 'Refills Remaining'},
 
+            { name: 'Refills Remaining' },
 
             {
                 name: '',
@@ -71,30 +74,22 @@ class PrescriptionTable extends Component {
                             _refill = tableMeta.rowData[5];
                         }
 
-                        if (_status == 'filled' && _refill > 0) {
-                        
+                        if ((_status == 'filled' || _status == 'refilled') && _refill > 0) {
+
                             return (
                                 <Button
                                     size="small"
                                     variant="outlined"
                                     color="primary"
-                                    onClick={() => {
-    
-                                        Meteor.call('prescriptions.refill', _id);
-                                    }}
-                                >
+                                    onClick={() => { Meteor.call('prescriptions.refill', _id);}} >
                                     Refill
                                 </Button>
                             );
-                                }
-                        
-                       
-                            
+                        }
                     },
                 },
             },
 
-            
             {
                 name: '',
                 options: {
@@ -107,23 +102,17 @@ class PrescriptionTable extends Component {
                             _status = tableMeta.rowData[0];
                         }
 
-                       if (_status == 'pending') {
-                        return (
-                            <Button
-                                size="small"
-                                variant="outlined"
-                                color="primary"
-                                onClick={() => {
-                                    Meteor.call('prescriptions.fill', _id);
-                                }}
-                            >
-                                Fill
+                        if (_status == 'pending') {
+                            return (
+                                <Button
+                                    size="small"
+                                    variant="outlined"
+                                    color="primary"
+                                    onClick={() => {Meteor.call('prescriptions.fill', _id);}}>
+                                    Fill
                             </Button>
-                        );
-
-                            }
-                           
-                            
+                            );
+                        }
                     },
                 },
             },
