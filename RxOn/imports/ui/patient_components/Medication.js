@@ -40,10 +40,13 @@ function renderActions(props) {
     }
 }
 
+
+
 function Medication(props) {
     const { classes, ContainerProps } = props;
     const name = ContainerProps.rxName + ' ' + ContainerProps.rxStrength;
     const directions = ContainerProps.rxDose;
+    const refills = ContainerProps.refill;
     
 
     return (
@@ -62,10 +65,15 @@ function Medication(props) {
                             <Typography component="span" className={classes.inline} color="textPrimary">
                                 {directions}
                             </Typography>
+
+                            <Typography component="span" className={classes.inline} color="textSecondary">
+                                Refills:{' '}
+                            </Typography>
+                            <Typography component="span" className={classes.inline} color="textPrimary">
+                                {refills}
+                            </Typography>
                         </React.Fragment>
                     }
-                    
-
                    
                 />
                 {renderActions(props)}

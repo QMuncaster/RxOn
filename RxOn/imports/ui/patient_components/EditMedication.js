@@ -29,14 +29,26 @@ export default function EditAction(props) {
         setOpen(true);
     }
 
-    function toggleRefillTrue() {
-        values.refill = true;
-    }
-    
-    function toggleRefillFalse() {
-          values.refill = false;
+    function addRefill() {
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value++;
+        document.getElementById('number').value = value;
+      
+      values.refill++;
     }
 
+    function minusRefill() {
+        if (values.refill > 0) {
+            values.refill--;
+        }
+
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value < 1 ? value = 1 : '';
+        value--;
+        document.getElementById('number').value = value;
+      }
     function handleClose() {
         setValues({ rxName: rxName, rxStrength: rxStrength, rxDose: rxDose, refill: refill });
         setOpen(false);
@@ -95,11 +107,13 @@ export default function EditAction(props) {
                      <br />
 
             
-                   <TextField
-                   type="text"
-                   placeholder={values.refill}
-                   variant="outlined"
-                   />
+                    <Button  onClick={minusRefill} color="primary">
+                    -
+                   </Button>
+                   <input type="number" id="number" value={values.refill} />
+                   <Button  onClick={addRefill} color="primary">
+                    +
+                   </Button>
 
                 </DialogContent>
                 <DialogActions>
