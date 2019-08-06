@@ -74,6 +74,11 @@ class SignupForm extends React.Component {
         if (invalid) throw new Error();
     }
 
+    capitalizeFirstLetter = (word) => {
+            if (typeof word !== 'string') return "";
+            return word.charAt(0).toUpperCase() + word.slice(1);
+    }
+
     handleSubmit = async () => {
         this.setState({ isSubmitDisabled: true });
         try {
@@ -92,8 +97,8 @@ class SignupForm extends React.Component {
                 email: this.state.email,
                 password: this.state.password,
                 profile: {
-                    firstname: this.state.firstName,
-                    lastname: this.state.lastName,
+                    firstname: this.capitalizeFirstLetter(this.state.firstName),
+                    lastname: this.capitalizeFirstLetter(this.state.lastName),
                     sex: this.state.sex,
                     address: this.state.address,
                 }
@@ -102,14 +107,14 @@ class SignupForm extends React.Component {
         } catch (error) {
             this.setState({ isSubmitDisabled: false, errorMessage: error.reason });
         }
-    }
+    };
 
     render() {
         const { classes } = this.props;
 
         return (
             <form className={classes.container} noValidate autoComplete="off">
-                
+
                 <div >
                     <TextField
                         required
@@ -204,7 +209,7 @@ class SignupForm extends React.Component {
 
                 <div>
                     <br />
-                    <Button variant="contained" color="primary" className={classes.button} 
+                    <Button variant="contained" color="primary" className={classes.button}
                         onClick={this.handleSubmit} disabled={this.state.isSubmitDisabled}>
                         Signup
                     </Button>
