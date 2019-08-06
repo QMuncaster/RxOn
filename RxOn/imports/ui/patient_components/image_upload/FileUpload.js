@@ -11,7 +11,7 @@ const debug = require('debug')('demo:file');
 class FileUploadComponent extends Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
       uploading: [],
       progress: 0,
@@ -36,7 +36,7 @@ class FileUploadComponent extends Component {
           file: file,
           meta: {
             locator: self.props.fileLocator,
-            userId: Meteor.userId() // Optional, used to check on server for file tampering
+            patientId: Meteor.userId() // Optional, used to check on server for file tampering
           },
           streams: 'dynamic',
           chunkSize: 'dynamic',
@@ -119,9 +119,11 @@ class FileUploadComponent extends Component {
       // Run through each file that the user has stored
       // (make sure the subscription only sends files owned by this user)
       let display = fileCursors.map((aFile, key) => {
-        // console.log('A file: ', aFile.link(), aFile.get('name'))
+        console.log('A file: ', aFile);
+        let cur = Images.findOne({_id: aFile._id});
+        console.log("image cursor findOne ", cur);
         let link = Images.findOne({_id: aFile._id}).link();  //The "view/download" link
-
+        console.log(link);
         // Send out components that show details of each file
         return <div key={'file' + key}>
           <IndividualFile
@@ -165,11 +167,10 @@ class FileUploadComponent extends Component {
 // in a separate file to provide separation of concerns.
 //
 export default withTracker( ( props ) => {
-  const filesHandle = Meteor.subscribe('files.all');
+  const filesHandle = Meteor.subscribe('images');
   const docsReadyYet = filesHandle.ready();
-  console.log("Images on client: ", Images);
   const files = Images.find({}, {sort: {name: 1}}).fetch();
-
+  console.log("Images on client: ", files);
   return {
     docsReadyYet,
     files,
