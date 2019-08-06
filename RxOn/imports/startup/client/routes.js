@@ -54,7 +54,7 @@ const MainContainer = () => (
         <PrivateRoute exact path="/profile" component={PatientProfile} />
 
         {/* this should be a pharmacist only route, but difficult to implement due to race condition
-        on userIsInRole function. 
+        on userIsInRole function.
         See: https://github.com/alanning/meteor-roles/issues/183
         For now just leave route as patient-accessible, and rely on good pub/sub security to not show data*/}
         <PrivateRoute exact path="/patients" component={PatientList} />

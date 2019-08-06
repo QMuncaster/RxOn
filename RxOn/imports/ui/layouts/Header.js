@@ -63,16 +63,18 @@ class Header extends Component {
     }
 
 
-    render() {
-        const { classes } = this.props;
-        // const links = Meteor.user().roles ==="admin"? ["/home","/profile","/patients"]: ["/home","/profile"];
-        const links = ["/home","/profile","/patients"];
-        const tabs = ['Home', 'Profile', 'Patients'];
+    renderDrawer(classes){
+        console.log("MEEteor userRRRR:");
+        console.log(Meteor.user());
+        let links = [];
+        let tabs = [];
+        if(loggedIn && Meteor.user().roles) {
+            links = Meteor.user().roles.indexOf("admin") >= 0 ? ["/home", "/profile", "/patients"] : ["/home", "profile"];
+            tabs = Meteor.user().roles.indexOf("admin") >= 0 ? ['Home', 'Profile', 'Patients'] : ['Home', 'Profile'];
+        }
 
-
-        const drawer = (
-            <div>
-                <div className={classes.toolbar} />
+        return (
+            <div className={classes.toolbar}>
                 <Divider />
                 <List>{ tabs.map((text, index) => (
                     <ListItem button component="a" key={text} href={links[index]}>
@@ -86,7 +88,17 @@ class Header extends Component {
             </div>
         );
 
+    }
+
+    render() {
+        const { classes } = this.props;
+        console.log(this.props);
+        console.log("Meteor user id:" + Meteor.userId());
+        console.log("Meteor user by currentUser:" + this.props.currentUser);
+
         if (loggedIn) {
+            console.log("this is the meteor user" + Meteor.user());
+            console.log("this is the props" + this.props);
             return (
                 <div className={classes.grow}>
                     <AppBar position="static">
@@ -101,18 +113,18 @@ class Header extends Component {
                         </Toolbar>
                     </AppBar>
                     <Drawer
+                        width="350px"
                         className={classes.drawer}
                         variant="persistent"
                         anchor="left"
                         open={this.state.open}
-                        // onClose={this.handleDrawerToggle}
                     >
                         <div >
                             <IconButton onClick={this.handleDrawerToggle.bind(this)}>
                                 <MenuIcon />
                             </IconButton>
                         </div>
-                        {drawer}
+                        {this.renderDrawer(classes)}
                     </Drawer>
                 </div>
             );
