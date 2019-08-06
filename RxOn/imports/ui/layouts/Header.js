@@ -64,13 +64,12 @@ class Header extends Component {
 
 
     renderDrawer(classes){
-        let links = ["/home", "/profile", "/patients"];
-        let tabs = ['Home', 'Profile', 'Patients'];
+        let links = ["/home", "profile"];
+        let tabs = ['Home', 'Profile'];
 
-        if(loggedIn && Meteor.user().roles && Meteor.user().roles.indexOf("admin") < 0) {
-            console.log( "you don't know hat is this? " + Meteor.user().roles);
-            links = ["/home", "profile"];
-            tabs = ['Home', 'Profile'];
+        if(loggedIn && Meteor.user().roles && Meteor.user().roles.indexOf("admin") >= 0) {
+             links = ["/home", "/profile", "/patients"];
+             tabs = ['Home', 'Profile', 'Patients'];
         }
 
         return (
