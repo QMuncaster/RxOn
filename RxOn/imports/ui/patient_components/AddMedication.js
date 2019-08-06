@@ -38,7 +38,14 @@ export default function AddAction() {
             values.rxStrength,
             values.rxDose,
             Meteor.user().firstname,
-            Meteor.user().lastname
+            Meteor.user().lastname,
+            (err, result) => {
+                if (err) {
+                    alert('Medication Add Error');
+                } else {
+                    console.log('result of insert: ', result);
+                }
+            }
         );
         setOpen(false);
     }
@@ -46,13 +53,19 @@ export default function AddAction() {
     return (
         <React.Fragment>
             <IconButton edge="end" variant="outlined" onClick={handleClickOpen}>
-                <AddIcon fontSize="large"/>
+                <AddIcon fontSize="large" />
             </IconButton>
-            <Dialog open={open} onClose={handleClose} aria-labelledby="add-dialog-title" maxWidth="sm">
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="add-dialog-title"
+                maxWidth="sm"
+            >
                 <DialogTitle id="edit-dialog-title">Add New Medication</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Please enter information of new medication that you wish to add then click Add.
+                        Please enter information of new medication that you wish to add then click
+                        Add.
                     </DialogContentText>
                     <TextField
                         autoFocus
@@ -89,6 +102,18 @@ export default function AddAction() {
                         onChange={handleChange('rxDose')}
                         variant="outlined"
                     />
+                    <br />
+                    <input
+                        accept="image/*"
+                        id="outlined-button-file"
+                        multiple
+                        type="file"
+                    />
+                    <label htmlFor="outlined-button-file">
+                        <Button variant="outlined" color="primary" component="span">
+                            Upload
+                        </Button>
+                    </label>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
