@@ -7,14 +7,15 @@ class PatientList extends Component {
 
 
     renderPatients() {
-            return this.props.users.map((user) => {
-                //only show users who are patients, not pharamcies
-                if (user.roles != 'admin') {
-                        return <IndividualPatient key={user._id} user={user} />
-                    }
+        console.log(this.props.users);
+        return this.props.users.map((user) => {
+            //only show users who are patients, not pharamcies
+            if (user.roles != 'admin') {
+                    return <IndividualPatient key={user._id} user={user} />
                 }
-            );
-        }
+            }
+        );
+    }
 
 
     render() {
@@ -41,6 +42,7 @@ export default withTracker(() => {
     Meteor.subscribe('userList');
 
     return {
-        users: Meteor.users.find({}).fetch()
+        users: Meteor.users.find({}, {
+            sort: {lastname: 1}}).fetch()
     };
 })(PatientList);
