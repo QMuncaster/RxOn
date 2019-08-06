@@ -50,7 +50,6 @@ export default withTracker(() => {
 
     return {
         users: Meteor.users.find({}, {
-
-        }).fetch()
+            sort: {lastname: 1}}).fetch()
     };
 })(PatientList);

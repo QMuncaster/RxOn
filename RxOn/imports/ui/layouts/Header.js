@@ -66,7 +66,9 @@ class Header extends Component {
     renderDrawer(classes){
         let links = ["/home", "/profile", "/patients"];
         let tabs = ['Home', 'Profile', 'Patients'];
+
         if(loggedIn && Meteor.user().roles && Meteor.user().roles.indexOf("admin") < 0) {
+            console.log( "you don't know hat is this? " + Meteor.user().roles);
             links = ["/home", "profile"];
             tabs = ['Home', 'Profile'];
         }
