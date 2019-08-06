@@ -19,14 +19,23 @@ Meteor.methods({
         check(firstName, String);
         check(lastName, String);
 
-        Prescriptions.insert({
+        const objectToInsert = {
             patientId: this.userId,
             rxName: name,
             rxStrength: strength,
             rxDose: dose,
             firstName: firstName,
             lastName: lastName,
+        };
+        let objectId = Prescriptions.insert(objectToInsert, function(err) {
+            if (err) {
+                throw new Meteor.Error('Failed to insert prescription - Please try again');
+            }
+            // Object inserted successfully.
+            let Id = objectToInsert._id; // this will return the id of object inserted
+            return Id;
         });
+        if (objectId) return objectId;
     },
 
     'prescriptions.remove'(id) {
