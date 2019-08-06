@@ -64,25 +64,23 @@ class Header extends Component {
 
 
     renderDrawer(classes){
-        console.log("MEEteor userRRRR:");
-        console.log(Meteor.user());
-        let links = [];
-        let tabs = [];
-        if(loggedIn && Meteor.user().roles) {
-            links = Meteor.user().roles.indexOf("admin") >= 0 ? ["/home", "/profile", "/patients"] : ["/home", "profile"];
-            tabs = Meteor.user().roles.indexOf("admin") >= 0 ? ['Home', 'Profile', 'Patients'] : ['Home', 'Profile'];
+        let links = ["/home", "/profile", "/patients"];
+        let tabs = ['Home', 'Profile', 'Patients'];
+        if(loggedIn && Meteor.user().roles && Meteor.user().roles.indexOf("admin") < 0) {
+            links = ["/home", "profile"];
+            tabs = ['Home', 'Profile'];
         }
 
         return (
             <div className={classes.toolbar}>
                 <Divider />
-                <List>{ tabs.map((text, index) => (
+                <List>
+                    { tabs.map((text, index) => (
                     <ListItem button component="a" key={text} href={links[index]}>
                         <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
-                ))}
-
+                    ))}
                 </List>
                 <Divider />
             </div>
@@ -113,7 +111,6 @@ class Header extends Component {
                         </Toolbar>
                     </AppBar>
                     <Drawer
-                        width="350px"
                         className={classes.drawer}
                         variant="persistent"
                         anchor="left"
