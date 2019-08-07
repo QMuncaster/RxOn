@@ -28,13 +28,7 @@ class LoginForm extends Component {
           className="loginForm__input"
           validate={[required]}
         />
-        <Field
-          name="remember"
-          type="checkbox"
-          component={LoginFormInput}
-          label="Remember me?"
-          className="loginForm__input--inline"
-        />
+        <br></br>
         <button type="submit" className="loginForm__btn" id="submit_btn">
           Log In
         </button>
