@@ -31,6 +31,7 @@ export default class MedicationInput extends Component {
                placeholder="Medication Strength (e.g 100 mg)"
                multiline={true}
                fullWidth={true}
+               value={values.rxStrength}
                onChange={handleChange('rxStrength')}
                variant="outlined"
             />
@@ -43,6 +44,7 @@ export default class MedicationInput extends Component {
                placeholder="Prescribed Dosage (e.g one tablet twice a day)"
                multiline={true}
                fullWidth={true}
+               value={values.rxDose}
                onChange={handleChange('rxDose')}
                variant="outlined"
             />
