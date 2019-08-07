@@ -17,44 +17,40 @@ export default function EditAction(props) {
         rxName: rxName,
         rxStrength: rxStrength,
         rxDose: rxDose,
-        refill: refill
+        refill: refill,
     });
 
     const handleChange = valName => event => {
-        setValues({ ...values, [valName]: event.target.value });
+        let val = event.target.value;
+        if (event.target.type === 'number') {
+            val = parseInt(val, 10);
+        }
+        setValues({ ...values, [valName]: val });
     };
 
     function handleClickOpen() {
         setOpen(true);
     }
 
-    function addRefill() {
-        var value = parseInt(document.getElementById('number').value, 10);
-        value = isNaN(value) ? 0 : value;
-        value++;
-        document.getElementById('number').value = value;
-      
-      values.refill++;
-    }
-
-    function minusRefill() {
-        if (values.refill > 0) {
-            values.refill--;
-        }
-
-        var value = parseInt(document.getElementById('number').value, 10);
-        value = isNaN(value) ? 0 : value;
-        value < 1 ? value = 1 : '';
-        value--;
-        document.getElementById('number').value = value;
-      }
     function handleClose() {
-        setValues({ rxName: rxName, rxStrength: rxStrength, rxDose: rxDose, refill: refill });
+        setValues({
+            rxName: rxName,
+            rxStrength: rxStrength,
+            rxDose: rxDose,
+            refill: refill,
+        });
         setOpen(false);
     }
 
     function handleSave() {
-        Meteor.call('prescriptions.edit', _id, values.rxName, values.rxStrength, values.rxDose, values.refill);
+        Meteor.call(
+            'prescriptions.edit',
+            _id,
+            values.rxName,
+            values.rxStrength,
+            values.rxDose,
+            values.refill
+        );
         setOpen(false);
     }
 
@@ -63,13 +59,23 @@ export default function EditAction(props) {
             <IconButton variant="outlined" color="primary" onClick={handleClickOpen}>
                 <EditIcon />
             </IconButton>
-            <Dialog open={open} onClose={handleClose} aria-labelledby="edit-dialog-title" maxWidth="xs">
-                <DialogTitle id="edit-dialog-title">Edit Medication Information</DialogTitle>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="edit-dialog-title"
+                maxWidth="xs"
+            >
+                <DialogTitle id="edit-dialog-title">
+                    Edit Medication Information
+                </DialogTitle>
                 <DialogContent>
-                    <DialogContentText>Please enter new information below then click save.</DialogContentText>
+                    <DialogContentText>
+                        Please enter new information below then click save.
+                    </DialogContentText>
                     <br />
                     <DialogContentText>
-                        You will be able to edit the medication's information until it has been filled
+                        You will be able to edit the medication's information until it has
+                        been filled
                     </DialogContentText>
                     <TextField
                         autoFocus
@@ -101,17 +107,19 @@ export default function EditAction(props) {
                         fullWidth={true}
                         onChange={handleChange('rxDose')}
                     />
-                     <br />
-
-            
-                    <Button  onClick={minusRefill} color="primary">
-                    -
-                   </Button>
-                   <input type="number" id="number" value={values.refill} />
-                   <Button  onClick={addRefill} color="primary">
-                    +
-                   </Button>
-
+                    <br />
+                    <TextField
+                        id="outlined-number"
+                        label="Number of refills"
+                        value={values.refill}
+                        onChange={handleChange('refill')}
+                        type="number"
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        margin="dense"
+                        variant="outlined"
+                    />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
@@ -120,7 +128,6 @@ export default function EditAction(props) {
                     <Button onClick={handleSave} color="primary">
                         Save
                     </Button>
-                    
                 </DialogActions>
             </Dialog>
         </React.Fragment>

@@ -99,11 +99,9 @@ class MedicationStepper extends Component {
     handleChange = input => e => {
         let val = e.target.value;
         if (e.target.type === 'number') {
-            console.log("parsed it as a number");
             val = parseInt(val, 10);
         }
         this.setState({ [input]: val });
-        console.log("hadnle chabnge ",this.state);
     };
 
     setViewLink = val => {
