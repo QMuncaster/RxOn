@@ -64,7 +64,7 @@ class MedicationStepper extends Component {
     };
 
     handleSubmit = () => {
-      const { activeStep, rxName, rxStrength, rxDose } = this.state;
+      const { activeStep, rxName, rxStrength, rxDose, imgId } = this.state;
       this.setState({
           activeStep: activeStep + 1,
       });
@@ -75,6 +75,7 @@ class MedicationStepper extends Component {
          rxDose,
          Meteor.user().firstname,
          Meteor.user().lastname,
+         imgId,
          (err, result) => {
              if (err) {
                  alert('Medication Add Error');
