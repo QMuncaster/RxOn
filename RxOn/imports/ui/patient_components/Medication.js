@@ -12,7 +12,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import EditAction from './EditMedication';
 import CancelAction from './CancelMedication';
-import { log } from 'util';
+import {  deepOrange, deepPurple } from '@material-ui/core/colors';
 
 const styles = () => ({
     root: {
@@ -24,6 +24,18 @@ const styles = () => ({
     avatar: {
         margin: 10,
     },
+
+      orangeAvatar: {
+        margin: 10,
+        color: '#fff',
+        backgroundColor: deepOrange[500],
+      },
+
+      purpleAvatar: {
+        margin: 10,
+        color: '#fff',
+        backgroundColor: deepPurple[500],
+      },
 });
 
 
@@ -49,10 +61,32 @@ function Medication(props) {
     const name = ContainerProps.rxName + ' ' + ContainerProps.rxStrength;
     const directions = ContainerProps.rxDose;
    const refills = ContainerProps.refill;
+   const status = ContainerProps.status;
 
     // let link = ContainerProps.imgId
     //     ? Images.findOne({ _id: ContainerProps.imgId }).link()
     //     : '';
+
+
+    function returnStatus() {
+        if (status == 'pending') {
+            return 'P'
+        }
+
+        if (status == 'filled' || status == 'refilled') {
+            return 'F'
+        }
+    }
+
+    function returnColor() {
+        if (status == 'pending') {
+        return classes.orangeAvatar
+        }
+
+        if (status == 'filled' || status == 'refilled') {
+           return classes.purpleAvatar
+        }
+    }
 
     function handleClick() {
         console.log('the img id is ', ContainerProps.imgId);
@@ -63,6 +97,7 @@ function Medication(props) {
         //let link = Images.findOne({ _id: ContainerProps.imgId }).link();
     }
 
+
     return (
         <List>
             <ListItem
@@ -71,9 +106,13 @@ function Medication(props) {
                 button={true}
                 onClick={handleClick}
             >
-                <ListItemAvatar>
-                    <Avatar>PH</Avatar>
-                </ListItemAvatar>
+               
+            <ListItemAvatar>
+            <Avatar className= {returnColor()}>
+                {returnStatus()}
+            </Avatar>
+            </ListItemAvatar>
+                
                 <ListItemText
                     primary={name}
                     secondary={
