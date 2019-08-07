@@ -14,7 +14,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import ProfileMenu from './ProfileMenu';
-import {Link} from '@material-ui/core';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Tracker } from 'meteor/tracker';
 import { withRouter } from 'react-router-dom';
@@ -32,18 +31,6 @@ const styles = {
     grow: {
         flexGrow: 1,
     },
-
-   // MuiDrawer_paper: {
-   //  // flex:auto,
-   //  display: flex,
-   //  zIndex: 1200,
-   //  outline: none,
-   //  position: fixed,
-   //  overflowY: auto,
-   //  flexDirection: column,
-   //  webkitOverflowScrolling: touch
-   //  }
-
 };
 
 class Header extends Component {
@@ -56,12 +43,9 @@ class Header extends Component {
 
     }
 
-
-
     handleDrawerToggle() {
        this.setState({open:!this.state.open})
     }
-
 
     renderDrawer(classes){
         let links = ["/home", "profile"];
@@ -91,13 +75,8 @@ class Header extends Component {
 
     render() {
         const { classes } = this.props;
-        console.log(this.props);
-        console.log("Meteor user id:" + Meteor.userId());
-        console.log("Meteor user by currentUser:" + this.props.currentUser);
 
         if (loggedIn) {
-            console.log("this is the meteor user" + Meteor.user());
-            console.log("this is the props" + this.props);
             return (
                 <div className={classes.grow}>
                     <AppBar position="static">

@@ -9,9 +9,6 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AddIcon from '@material-ui/icons/AddCircle';
 import IconButton from '@material-ui/core/IconButton';
-// import RadioGroup from '@material-ui/core/RadioGroup';
-// import Radio from '@material-ui/core/Radio';
-
 
 export default function AddAction() {
     const [open, setOpen] = useState(false);

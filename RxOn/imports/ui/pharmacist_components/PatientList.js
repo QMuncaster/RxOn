@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import {withTracker} from 'meteor/react-meteor-data';
-import "../styling/PharmacyPrescription";
 import IndividualPatient from './IndividualPatient';
 
 class PatientList extends Component {
 
 
     renderPatients() {
-        console.log(this.props.users);
         return this.props.users.map((user) => {
             //only show users who are patients, not pharamcies
             if (user.roles != 'admin') {

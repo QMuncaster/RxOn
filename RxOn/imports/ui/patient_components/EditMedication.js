@@ -9,7 +9,6 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
-//import Switch from '@material-ui/core/Switch';
 
 export default function EditAction(props) {
     const { _id, rxName, rxStrength, rxDose, refill } = props.ContainerProps;
