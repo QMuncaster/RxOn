@@ -20,7 +20,11 @@ export default function ViewMedicationsDialog(props) {
     }
 
     function renderMedication() {
-        return props.prescriptions.map(px => <Medication key={px._id} ContainerProps={px} hideActions={true}/>);
+        if (props.prescriptions && props.prescriptions.length > 0) {
+
+            return props.prescriptions.map(px => <Medication key={px._id} ContainerProps={px} hideActions={true}/>);
+        }
+        return <div> Oops, no prescriptions available! </div>;
     }
 
     return (

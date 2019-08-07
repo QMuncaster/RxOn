@@ -7,7 +7,6 @@ Meteor.methods({
             throw new Meteor.Error('not-authorized');
         }
 
-        // TODO: validation of arguments before inserting
         // https://docs.meteor.com/api/check.html
         // https://stackoverflow.com/questions/37237023/meteor-check-vs-new-simpleschema-for-verifying-publish-arguments
         // it seems like schema already help with the validation.
@@ -72,13 +71,13 @@ Meteor.methods({
        //can only refill if the status is 'filled' and there is > 0 refill tokens available
         if ((prescriptions[0].status === 'filled' || 'refilled') && prescriptions[0].refill > 0) {
         Prescriptions.update({ _id: id }, { $set: { refill: prescriptions[0].refill-1, status: 'refilled' } });
-        }  
+        }
     },
 
     'prescriptions.edit'(id, name, strength, dose, refill) {
         var prescriptions = Prescriptions.find({ _id: id }).fetch();
         var loggedInUser = Meteor.user();
-        
+
         if (
             prescriptions.length <= 0 ||
             !loggedInUser ||

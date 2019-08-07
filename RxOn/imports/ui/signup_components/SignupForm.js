@@ -36,6 +36,10 @@ class SignupForm extends React.Component {
         sexError: false,
         sexErrorText: '',
 
+        age: null,
+        ageError: false,
+        ageErrorText: '',
+
         address: '',
         addressError: false,
         addressErrorText: '',
@@ -81,6 +85,7 @@ class SignupForm extends React.Component {
                 [
                     { value: this.state.firstName, error: 'firstNameError', text: 'firstNameErrorText' },
                     { value: this.state.lastName, error: 'lastNameError', text: 'lastNameErrorText' },
+                    { value: this.state.age, error: 'ageError', text: 'ageErrorText' },
                     { value: this.state.sex, error: 'sexError', text: 'sexErrorText' },
                     { value: this.state.address, error: 'addressError', text: 'addressErrorText' },
                     { value: this.state.email, error: 'emailError', text: 'emailErrorText' },
@@ -95,6 +100,7 @@ class SignupForm extends React.Component {
                     firstname: this.capitalizeFirstLetter(this.state.firstName),
                     lastname: this.capitalizeFirstLetter(this.state.lastName),
                     sex: this.state.sex,
+                    age: this.state.age,
                     address: this.state.address,
                 }
             });
@@ -158,6 +164,20 @@ class SignupForm extends React.Component {
                             </MenuItem>
                         ))}
                     </TextField>
+
+                    <br/>
+
+                    <TextField
+                        required
+                        id="age"
+                        label="Age"
+                        value={this.state.age}
+                        error={this.state.ageError}
+                        helperText={this.state.ageErrorText}
+                        onChange={this.handleChange('age')}
+                        className={classes.textField}
+                        margin="normal"
+                    />
 
                     <TextField
                         required

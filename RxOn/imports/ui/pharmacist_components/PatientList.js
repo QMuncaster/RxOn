@@ -1,8 +1,26 @@
 import React, {Component} from 'react';
 import {withTracker} from 'meteor/react-meteor-data';
 import IndividualPatient from './IndividualPatient';
+import {withStyles} from "@material-ui/core";
+import Typography from '@material-ui/core/Typography';
+
+const styles = theme => ({
+    root: {
+        ...theme.mixins.gutters(),
+        paddingTop: theme.spacing.unit * 2,
+        paddingBottom: theme.spacing.unit * 2,
+        margin: theme.spacing.unit * 2,
+    },
+    inline: {
+        display: 'inline',
+    },
+});
 
 class PatientList extends Component {
+
+    constructor(props) {
+        super(props);
+    }
 
 
     renderPatients() {
@@ -12,7 +30,7 @@ class PatientList extends Component {
                     return <IndividualPatient key={user._id} user={user} />
                 }
             }
-        );
+        );x
     }
 
 
@@ -21,7 +39,9 @@ class PatientList extends Component {
                 <div className="pharmacy-profile-page-heading" >
                     <div className="pharmacy-profile-page">
                         <div  className="Pharmacy-Headings">
-                            <h2 id="pharmHeading" className="prescription-header-individual"> Patient List </h2>
+                            <Typography variant="h2" gutterBottom>
+                                Patient List
+                            </Typography>
                             <div id="pendingBox">
                                 <ul>
                             {this.renderPatients()}
@@ -30,12 +50,13 @@ class PatientList extends Component {
                         </div>
                     </div>
                 </div>
+
             );
         }
     }
 
 
-
+const styledComponent = withStyles(styles)(PatientList);
 export default withTracker(() => {
     Meteor.subscribe('userList');
 
@@ -43,4 +64,4 @@ export default withTracker(() => {
         users: Meteor.users.find({}, {
             sort: {lastname: 1}}).fetch()
     };
-})(PatientList);
+})(styledComponent);

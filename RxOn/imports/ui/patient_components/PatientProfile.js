@@ -10,7 +10,7 @@ import React, { Component } from 'react';
 
 
 class PatientProfile extends Component {
-  
+
   render() {
 
   return (
@@ -19,7 +19,7 @@ class PatientProfile extends Component {
       <Typography variant="h2" gutterBottom>
         Profile Page
       </Typography>
-      
+
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -30,7 +30,7 @@ class PatientProfile extends Component {
             fullWidth
             autoComplete="fname"
             //onChange={handleChange('firstname')}
-          /> 
+          />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -43,6 +43,19 @@ class PatientProfile extends Component {
             //onChange={handleChange('lastname')}
           />
         </Grid>
+
+        <Grid item xs={12}>
+          <TextField
+              required
+              id="age"
+              name="age"
+              label="Age"
+              fullWidth
+              autoComplete="billing address-line1"
+          />
+
+        </Grid>
+
         <Grid item xs={12}>
           <TextField
             required
