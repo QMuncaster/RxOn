@@ -21,7 +21,7 @@ const PrescriptionsSchema = new SimpleSchema({
     rxStrength: String,
     status: {
         type: String,
-        allowedValues: ['pending', 'filled', 'complete', 'canceled'],
+        allowedValues: ['pending', 'refilled', 'filled', 'complete', 'canceled'],
         defaultValue: 'pending',
     },
     imgId: {
