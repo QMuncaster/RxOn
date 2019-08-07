@@ -8,6 +8,12 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 const styles = theme => ({
     root: {
@@ -24,20 +30,33 @@ const styles = theme => ({
 class IndividualPatient extends Component {
 
     render() {
+        const { classes } = this.props;
 
         return (
-            <div id="rxForm" className="admin-prescription-form ">
-                    <List>
-                        <ListItem>
-                            <ListItemText>
-                                {this.props.user.lastname} {this.props.user.firstname}
-                            </ListItemText>
-                            <ListItemSecondaryAction>
-                                <ViewMedicationsDialog prescriptions={this.props.prescriptions}/>
-                            </ListItemSecondaryAction>
-                        </ListItem>
-                    </List>
-            </div>
+            <Paper className={classes.root}>
+                <Table className={classes.table}>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell align="center">Patient Name</TableCell>
+                            {/*<TableCell align="right">Name</TableCell>*/}
+                            <TableCell align="center">Age</TableCell>
+                            <TableCell align="center">Gender</TableCell>
+                            <TableCell align="center">History</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        <TableRow >
+                            {/*<TableCell component="th" scope="row">*/}
+                            {/*    {row.name}*/}
+                            {/*</TableCell>*/}
+                            <TableCell align="center">{this.props.user.lastname} {this.props.user.firstname}</TableCell>
+                            <TableCell align="center">{this.props.user.age} </TableCell>
+                            <TableCell align="center">{this.props.user.sex}</TableCell>
+                            <TableCell align="center"><ViewMedicationsDialog prescriptions={this.props.prescriptions}/></TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+            </Paper>
         );
     }
 }
