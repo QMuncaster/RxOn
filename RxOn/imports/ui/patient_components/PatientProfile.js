@@ -1,124 +1,159 @@
-
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import { Meteor } from 'meteor/meteor';
-import { useState } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
-import React, { Component } from 'react';
 
+const styles = theme => ({
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
+  menu: {
+    width: 200,
+  },
+});
 
-class PatientProfile extends Component {
-  
+const sexes = [{ label: 'Male', value: 'Male' }, { label: 'Female', value: 'Female' }, { label: 'Other', value: 'Other' }];
+
+class PatientProfile extends React.Component {
+
+  state = {
+    firstName: '',
+    firstNameError: false,
+    firstNameErrorText: '',
+
+    lastName: '',
+    lastNameError: false,
+    lastNameErrorText: '',
+
+    sex: '',
+    sexError: false,
+    sexErrorText: '',
+
+    address: '',
+    addressError: false,
+    addressErrorText: '',
+
+    isDisabled: true
+  };
+
+  handleChange = (name) => event => {
+    this.setState({ [name]: event.target.value });
+  };
+
+  validateReqFields = (fields) => {
+    let invalid = false;
+    for (let f of fields) {
+      if (!f.value) {
+        this.setState({ [f.error]: true, [f.text]: "Field is required." });
+        invalid = true;
+      }
+      else {
+        this.setState({ [f.error]: false });
+      }
+    }
+    if (invalid) throw new Error();
+  }
+
   render() {
+    const { classes } = this.props;
 
-  return (
-    <React.Fragment>
-      <div style={{ paddingLeft: 150, paddingRight: 150, paddingTop: 75 }}>
-      <Typography variant="h2" gutterBottom>
-        Profile Page
-      </Typography>
-      
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="firstname"
-            name="firstname"
-            label="First Name"
-            fullWidth
-            autoComplete="fname"
-            //onChange={handleChange('firstname')}
-          /> 
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="lastName"
-            name="lastName"
-            label="Last Name"
-            fullWidth
-            autoComplete="lname"
-            //onChange={handleChange('lastname')}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            id="address1"
-            name="address1"
-            label="Address line 1"
-            fullWidth
-            autoComplete="billing address-line1"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            id="address2"
-            name="address2"
-            label="Address line 2"
-            fullWidth
-            autoComplete="billing address-line2"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="city"
-            name="city"
-            label="City"
-            fullWidth
-            autoComplete="billing address-level2"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField id="state" name="state" label="State/Province/Region" fullWidth />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="zip"
-            name="zip"
-            label="Zip / Postal code"
-            fullWidth
-            autoComplete="billing postal-code"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="country"
-            name="country"
-            label="Country"
-            fullWidth
-            autoComplete="billing country"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          {/* <FormControlLabel
-            control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
-            label="Use this address for payment details"
-          /> */}
+    return (
+      <React.Fragment>
+        <div style={{ paddingLeft: 150, paddingRight: 150, paddingTop: 75 }}>
+          <Typography variant="h3" gutterBottom>
+            Profile
+          </Typography>
 
-        <div style={{ paddingTop: 20 }}>
-          <Button color="primary">
-            Update
-          </Button>
-          </div>
+          <form noValidate autoComplete="off">
+            <div >
+              <TextField
+                required
+                id="firstName"
+                label="First Name"
+                value={this.state.firstName}
+                error={this.state.firstNameError}
+                helperText={this.state.firstNameErrorText}
+                onChange={this.handleChange('firstName')}
+                className={classes.textField}
+                margin="normal"
+                disabled={this.state.isDisabled}
+              />
 
-        </Grid>
-      </Grid>
-      </div>
-    </React.Fragment>
-  );
-}
+              <TextField
+                required
+                id="lastName"
+                label="Last Name"
+                value={this.state.lastName}
+                error={this.state.lastNameError}
+                helperText={this.state.lastNameErrorText}
+                onChange={this.handleChange('lastName')}
+                className={classes.textField}
+                margin="normal"
+                disabled={this.state.isDisabled}
+              />
+
+              <TextField
+                required
+                id="standard-select-sex"
+                select
+                label="Sex"
+                className={classes.textField}
+                value={this.state.sex}
+                error={this.state.sexError}
+                helperText={this.state.sexErrorText}
+                onChange={this.handleChange('sex', '')}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu,
+                  },
+                }}
+                margin="normal"
+                disabled={this.state.isDisabled}
+              >
+                {sexes.map(option => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+
+              <TextField
+                required
+                id="address"
+                label="Address"
+                value={this.state.address}
+                error={this.state.addressError}
+                helperText={this.state.addressErrorText}
+                onChange={this.handleChange('address')}
+                className={classes.textField}
+                margin="normal"
+                disabled={this.state.isDisabled}
+              />
+            </div>
+
+            <div>
+              <br />
+              <Button variant="contained" color="default" onClick={this.handleReturn}>
+                Cancel
+            </Button>
+            </div>
+          </form>
+        </div>
+      </React.Fragment>
+    );
+  }
 }
 
-export default withTracker(() => {
-     Meteor.subscribe('userData');
+export default withStyles(styles)(withTracker(() => {
+  Meteor.subscribe('userData');
 
-    return {
-        currentUser: Meteor.user()
-    };
-})(PatientProfile);
+  return {
+    currentUser: Meteor.user()
+  };
+})(PatientProfile));
