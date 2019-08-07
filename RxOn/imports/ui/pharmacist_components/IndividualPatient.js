@@ -4,10 +4,12 @@ import {withTracker} from "meteor/react-meteor-data";
 import {Meteor} from "meteor/meteor";
 import {Prescriptions} from "../../collections/prescriptions";
 import ViewMedicationsDialog from "./ViewMedications";
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 const styles = theme => ({
     root: {
@@ -25,19 +27,17 @@ class IndividualPatient extends Component {
 
     render() {
 
+
         return (
-            <div id="rxForm" className="admin-prescription-form ">
-                    <List>
-                        <ListItem>
-                            <ListItemText>
-                                {this.props.user.lastname} {this.props.user.firstname}
-                            </ListItemText>
-                            <ListItemSecondaryAction>
-                                <ViewMedicationsDialog prescriptions={this.props.prescriptions}/>
-                            </ListItemSecondaryAction>
-                        </ListItem>
-                    </List>
-            </div>
+
+            <TableRow>
+                <TableCell align="left"
+                           style={{width: "25%"}}>{this.props.user.lastname} {this.props.user.firstname}</TableCell>
+                <TableCell align="center">{this.props.user.age} </TableCell>
+                <TableCell align="center">{this.props.user.sex}</TableCell>
+                <TableCell align="center"><ViewMedicationsDialog prescriptions={this.props.prescriptions}/></TableCell>
+            </TableRow>
+
         );
     }
 }
