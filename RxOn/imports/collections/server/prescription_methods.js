@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Prescriptions } from '../prescriptions.js';
 
 Meteor.methods({
-    'prescriptions.insert'(name, strength, dose, firstName, lastName, refill) {
+    'prescriptions.insert'(name, strength, dose, firstName, lastName, refill, imgId) {
         if (!this.userId) {
             throw new Meteor.Error('not-authorized');
         }
@@ -19,7 +19,7 @@ Meteor.methods({
         check(lastName, String);
         check(refill, Number);
 
-        Prescriptions.insert({
+        const objectToInsert = {
             patientId: this.userId,
             rxName: name,
             rxStrength: strength,
@@ -27,7 +27,17 @@ Meteor.methods({
             firstName: firstName,
             lastName: lastName,
             refill: refill,
+            imgId: imgId
+        };
+        let objectId = Prescriptions.insert(objectToInsert, function(err) {
+            if (err) {
+                throw new Meteor.Error('Failed to insert prescription - Please try again');
+            }
+            // Object inserted successfully.
+            let Id = objectToInsert._id; // this will return the id of object inserted
+            return Id;
         });
+        if (objectId) return objectId;
     },
 
     'prescriptions.remove'(id) {

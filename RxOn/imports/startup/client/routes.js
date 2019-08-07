@@ -6,6 +6,7 @@ import { createBrowserHistory } from 'history';
 // route components
 import Header from '../../ui/layouts/Header.js';
 import PatientProfile from '../../ui/patient_components/PatientProfile';
+import ImageUpload from '../../ui/patient_components/image_upload/FileUpload.js';
 import PatientList from "../../ui/pharmacist_components/PatientList";
 import SignupPage from '../../ui/signup_components/Signup';
 import HomeComponent from '../../ui/layouts/HomeComponent';
@@ -58,7 +59,7 @@ const MainContainer = () => (
         See: https://github.com/alanning/meteor-roles/issues/183
         For now just leave route as patient-accessible, and rely on good pub/sub security to not show data*/}
         <PrivateRoute exact path="/patients" component={PatientList} />
-
+        <PrivateRoute exact path="/image-upload" component={ImageUpload} />
     </div>
 );
 

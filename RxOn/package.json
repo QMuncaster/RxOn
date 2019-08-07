@@ -2,7 +2,7 @@
   "name": "RxOn",
   "private": true,
   "scripts": {
-    "start": "MONGO_URL='mongmongodb+srv://rxon:rxon_cs436i@rxon-wcylo.mongodb.net/test?retryWrites=true&w=majority' meteor",
+    "start": "MONGO_URL='mongmongodb+srv://rxon:rxon_cs436i@rxon-wcylo.mongodb.net/test?retryWrites=true&w=majority' meteor --settings settings.json",
     "test": "meteor test --once --driver-package meteortesting:mocha",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
     "visualize": "meteor --production --extra-packages bundle-visualizer"
@@ -12,11 +12,13 @@
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
     "@material-ui/styles": "^4.2.0",
+    "aws-sdk": "^2.503.0",
     "bcrypt": "^3.0.6",
     "classnames": "^2.2.6",
     "faker": "^4.1.0",
     "indexof": "0.0.1",
     "material-table": "^1.40.1",
+    "material-ui-dropzone": "^2.4.0",
     "meteor-node-stubs": "^0.4.1",
     "moment": "^2.24.0",
     "mui-datatables": "^2.6.2",
