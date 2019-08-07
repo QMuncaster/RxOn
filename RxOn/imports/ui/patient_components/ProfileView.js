@@ -96,7 +96,9 @@ class ProfileView extends React.Component {
                     { value: this.state.address, error: 'addressError', text: 'addressErrorText' },
                 ]
             );
-            // server call, update states...
+            Meteor.call(
+                'account.edit', this.state.firstName, this.state.lastName, this.state.sex, this.state.address
+            );
         } catch (error) {
             this.setState({ isSubmitDisabled: false, errorMessage: error.reason });
         }
