@@ -34,10 +34,10 @@ class IndividualPatient extends Component {
 
         return (
             <Paper className={classes.root}>
-                <Table className={classes.table}>
-                    <TableHead>
+                <Table className={classes.table} style={{ tableLayout: "auto" }}>
+                    <TableHead >
                         <TableRow>
-                            <TableCell align="center">Patient Name</TableCell>
+                            <TableCell align="left" style={{ width: "25%"}}>Patient Name</TableCell>
                             {/*<TableCell align="right">Name</TableCell>*/}
                             <TableCell align="center">Age</TableCell>
                             <TableCell align="center">Gender</TableCell>
@@ -49,7 +49,7 @@ class IndividualPatient extends Component {
                             {/*<TableCell component="th" scope="row">*/}
                             {/*    {row.name}*/}
                             {/*</TableCell>*/}
-                            <TableCell align="center">{this.props.user.lastname} {this.props.user.firstname}</TableCell>
+                            <TableCell align="left" style={{ width: "25%"}}>{this.props.user.lastname} {this.props.user.firstname}</TableCell>
                             <TableCell align="center">{this.props.user.age} </TableCell>
                             <TableCell align="center">{this.props.user.sex}</TableCell>
                             <TableCell align="center"><ViewMedicationsDialog prescriptions={this.props.prescriptions}/></TableCell>
