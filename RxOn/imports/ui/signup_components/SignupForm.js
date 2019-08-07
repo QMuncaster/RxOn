@@ -148,7 +148,7 @@ class SignupForm extends React.Component {
                         value={this.state.sex}
                         error={this.state.sexError}
                         helperText={this.state.sexErrorText}
-                        onChange={this.handleChange('sex', '')}
+                        onChange={this.handleChange('sex')}
                         SelectProps={{
                             MenuProps: {
                                 className: classes.menu,
