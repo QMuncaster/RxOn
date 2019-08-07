@@ -19,7 +19,7 @@ const styles = theme => ({
     },
 });
 
-const gender = [
+const sexes = [
     { label: 'Male', value: 'Male' },
     { label: 'Female', value: 'Female' },
     { label: 'Other', value: 'Other' },
@@ -37,9 +37,9 @@ class SignupForm extends React.Component {
             lastNameError: false,
             lastNameErrorText: '',
 
-            gender: '',
-            genderError: false,
-            genderErrorText: '',
+            sex: '',
+            sexError: false,
+            sexErrorText: '',
 
             age: '',
             ageError: false,
@@ -100,9 +100,9 @@ class SignupForm extends React.Component {
                 },
                 { value: this.state.age, error: 'ageError', text: 'ageErrorText' },
                 {
-                    value: this.state.gender,
-                    error: 'genderError',
-                    text: 'genderErrorText',
+                    value: this.state.sex,
+                    error: 'sexError',
+                    text: 'sexErrorText',
                 },
                 {
                     value: this.state.address,
@@ -123,14 +123,14 @@ class SignupForm extends React.Component {
                 profile: {
                     firstname: this.capitalizeFirstLetter(this.state.firstName),
                     lastname: this.capitalizeFirstLetter(this.state.lastName),
-                    gender: this.state.gender,
+                    sex: this.state.sex,
                     age: this.state.age,
                     address: this.state.address,
                 },
             });
             this.props.history.push('/home');
         } catch (error) {
-            console.log("error after submit: ", error)
+            console.log('error after submit: ', error);
             this.setState({ isSubmitDisabled: false, errorMessage: error.reason });
         }
     };
@@ -171,14 +171,14 @@ class SignupForm extends React.Component {
 
                     <TextField
                         required
-                        id="standard-select-gender"
+                        id="standard-select-sex"
                         select
-                        label="gender"
+                        label="sex"
                         className={classes.textField}
-                        value={this.state.gender}
-                        error={this.state.genderError}
-                        helperText={this.state.genderErrorText}
-                        onChange={this.handleChange('gender')}
+                        value={this.state.sex}
+                        error={this.state.sexError}
+                        helperText={this.state.sexErrorText}
+                        onChange={this.handleChange('sex')}
                         SelectProps={{
                             MenuProps: {
                                 className: classes.menu,
@@ -186,7 +186,7 @@ class SignupForm extends React.Component {
                         }}
                         margin="normal"
                     >
-                        {gender.map(option => (
+                        {sexes.map(option => (
                             <MenuItem key={option.value} value={option.value}>
                                 {option.label}
                             </MenuItem>
