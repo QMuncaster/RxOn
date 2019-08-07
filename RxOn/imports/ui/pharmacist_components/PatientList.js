@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {withTracker} from 'meteor/react-meteor-data';
-import "../styling/PharmacyPrescription";
 import IndividualPatient from './IndividualPatient';
 
 class PatientList extends Component {

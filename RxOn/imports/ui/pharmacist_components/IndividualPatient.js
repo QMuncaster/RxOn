@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import "../styling/PharmacyPrescription";
 import {withStyles} from "@material-ui/core";
 import {withTracker} from "meteor/react-meteor-data";
 import {Meteor} from "meteor/meteor";
