@@ -100,6 +100,7 @@ class ProfileView extends React.Component {
             await pify(Meteor.call)(
                 'account.edit', this.state.firstName, this.state.lastName, this.state.sex, this.state.address
             );
+            this.setState({ fieldsDisabled: true });
         } catch (error) {
             this.setState({ isSubmitDisabled: false, errorMessage: error.reason });
         }
