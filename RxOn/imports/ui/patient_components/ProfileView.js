@@ -6,6 +6,7 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
+import pify from 'pify';
 
 const styles = theme => ({
     textField: {
@@ -96,7 +97,7 @@ class ProfileView extends React.Component {
                     { value: this.state.address, error: 'addressError', text: 'addressErrorText' },
                 ]
             );
-            Meteor.call(
+            await pify(Meteor.call)(
                 'account.edit', this.state.firstName, this.state.lastName, this.state.sex, this.state.address
             );
         } catch (error) {
