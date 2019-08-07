@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import MedicationInput from './MedicationInput';
-import ImageUpload from './ImageUpload';
+import DropZone from '../image_upload/DropZone';
 import ConfirmationPage from './ConfirmationPage';
 import Success from './Success';
 
@@ -52,6 +52,7 @@ class MedicationStepper extends Component {
          rxStrength: '',
          rxDose: '',
          imgLink: '',
+         imgId: ''
       };
    }
 
@@ -77,12 +78,16 @@ class MedicationStepper extends Component {
       this.setState({ imgLink: val });
    };
 
+   setImgId = val => {
+      this.setState({ imgId: val });
+   };
+
    getStepContent = (step, values) => {
       switch (step) {
          case 0:
             return <MedicationInput handleChange={this.handleChange} values={values} />;
          case 1:
-            return <ImageUpload setLink={this.setViewLink} values={values} />;
+            return <DropZone setLink={this.setViewLink} setId={this.setImgId} />;
          case 2:
             return <ConfirmationPage values={values} />;
          case 3:
