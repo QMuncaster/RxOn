@@ -59,13 +59,9 @@ function Medication(props) {
     const { classes, ContainerProps } = props;
     const name = ContainerProps.rxName + ' ' + ContainerProps.rxStrength;
     const directions = ContainerProps.rxDose;
-<<<<<<< HEAD
-    const refills = ContainerProps.refill;
-=======
    const refills = ContainerProps.refill;
    const status = ContainerProps.status;
 
->>>>>>> d7542b9701c645cc0b93bbe32e4df5eee0ccbe3e
     // let link = ContainerProps.imgId
     //     ? Images.findOne({ _id: ContainerProps.imgId }).link()
     //     : '';
