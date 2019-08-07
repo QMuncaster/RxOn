@@ -11,12 +11,10 @@ Accounts.onCreateUser((options, user) => {
     Roles.addUsersToRoles(user._id, 'patient');
     user.firstname = options.profile.firstname;
     user.lastname = options.profile.lastname;
+    user.sex = options.profile.sex;
+    user.age = options.profile.age;
     user.address = options.profile.address;
-   // user.email = options.profile.email;
-    user.dateofbirth = options.profile.dateofbirth;
-    user.phonenumber = options.profile.phonenumber;
-    // user.city = options.profile.city;
-    // user.country = options.profile.country;
+
     user.roles = defaultRoles;
     return user;
 });
@@ -26,7 +24,7 @@ Accounts.onCreateUser((options, user) => {
 // but happens before a new user is actually created/inserted
 Accounts.validateNewUser(function (user) {
     // dummy implementation for testing
-    if (!user.firstname || !user.lastname || !user.address) {
+    if (!user.firstname || !user.lastname || !user.age || !user.sex || !user.address) {
         throw new Meteor.Error(403, 'All fields are required');
     }
     return true;
@@ -47,15 +45,21 @@ Meteor.publish('userData', function () {
       return Meteor.users.find({ _id: this.userId }, {
         // 0 = exclude from return document
         // 1 = include in return document
-        fields: {firstname: 1, lastname: 1, address: 1, dateofbirth: 1, phonenumber: 1} 
+        fields: {_id: 1, firstname: 1, lastname: 1, sex: 1, age :1 , address: 1, email: 1, roles: 1}
       });
     } else {
       this.ready();
     }
 });
 
-
 Meteor.publish('userList', function () {
-  return Meteor.users.find({}, {
-    fields: { _id: 1, firstname: 1, lastname: 1, address: 1,  phonenumber: 1, email: 1 } });
+  if (Roles.userIsInRole(this.userId, ['admin'])) {
+    return Meteor.users.find({}, {
+      sort: {lastname: 1},
+      fields: { _id: 1, firstname: 1, lastname: 1, sex: 1, age:1, address: 1, email: 1, roles: 1}});
+  } else {
+    // unauthorized, do not publish data
+    this.stop();
+    return;
+  }
 });

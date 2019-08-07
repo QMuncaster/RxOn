@@ -34,18 +34,23 @@ class PrescriptionTable extends Component {
             retVal['Name'] = px.rxName;
             retVal['Strength'] = px.rxStrength;
             retVal['Request Date'] = px.createdAt.toDateString();
+            retVal['Refills Remaining'] = px.refill;
             return retVal;
         });
         const columns = [
             { name: 'Status' },
+            
             { name: 'Request Date' },
+
             {
                 name: 'Name',
                 options: {
                     filterType: 'textField',
                 },
             },
+
             { name: 'Strength' },
+
             {
                 name: '_id',
                 options: {
@@ -53,28 +58,61 @@ class PrescriptionTable extends Component {
                     filter: false,
                 },
             },
+
+            { name: 'Refills Remaining' },
+
             {
-                name: 'Actions',
+                name: '',
                 options: {
                     sort: false,
                     empty: true,
                     customBodyRender: (value, tableMeta, updateValue) => {
-                        let _id;
+                        let _id, _status, _refill;
                         if (tableMeta.rowData !== undefined) {
                             _id = tableMeta.rowData[4];
+                            _status = tableMeta.rowData[0];
+                            _refill = tableMeta.rowData[5];
                         }
-                        return (
-                            <Button
-                                size="small"
-                                variant="outlined"
-                                color="primary"
-                                onClick={() => {
-                                    Meteor.call('prescriptions.fill', _id);
-                                }}
-                            >
-                                Fill
+
+                        if ((_status == 'filled' || _status == 'refilled') && _refill > 0) {
+
+                            return (
+                                <Button
+                                    size="small"
+                                    variant="outlined"
+                                    color="primary"
+                                    onClick={() => { Meteor.call('prescriptions.refill', _id);}} >
+                                    Refill
+                                </Button>
+                            );
+                        }
+                    },
+                },
+            },
+
+            {
+                name: '',
+                options: {
+                    sort: false,
+                    empty: true,
+                    customBodyRender: (value, tableMeta, updateValue) => {
+                        let _id, _status;
+                        if (tableMeta.rowData !== undefined) {
+                            _id = tableMeta.rowData[4];
+                            _status = tableMeta.rowData[0];
+                        }
+
+                        if (_status == 'pending') {
+                            return (
+                                <Button
+                                    size="small"
+                                    variant="outlined"
+                                    color="primary"
+                                    onClick={() => {Meteor.call('prescriptions.fill', _id);}}>
+                                    Fill
                             </Button>
-                        );
+                            );
+                        }
                     },
                 },
             },

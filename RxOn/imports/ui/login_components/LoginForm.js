@@ -35,9 +35,10 @@ class LoginForm extends Component {
           label="Remember me?"
           className="loginForm__input--inline"
         />
-        <button type="submit" className="loginForm__btn">
+        <button type="submit" className="loginForm__btn" id="submit_btn">
           Log In
         </button>
+        <p className="loginForm__signup">Not a member? Sign up <a href="/signup">here.</a></p>
       </form>
     );
   }

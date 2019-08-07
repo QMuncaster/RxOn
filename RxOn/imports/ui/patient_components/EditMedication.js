@@ -11,12 +11,13 @@ import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 
 export default function EditAction(props) {
-    const { _id, rxName, rxStrength, rxDose } = props.ContainerProps;
+    const { _id, rxName, rxStrength, rxDose, refill } = props.ContainerProps;
     const [open, setOpen] = useState(false);
     const [values, setValues] = useState({
         rxName: rxName,
         rxStrength: rxStrength,
         rxDose: rxDose,
+        refill: refill
     });
 
     const handleChange = valName => event => {
@@ -27,13 +28,33 @@ export default function EditAction(props) {
         setOpen(true);
     }
 
+    function addRefill() {
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value++;
+        document.getElementById('number').value = value;
+      
+      values.refill++;
+    }
+
+    function minusRefill() {
+        if (values.refill > 0) {
+            values.refill--;
+        }
+
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value < 1 ? value = 1 : '';
+        value--;
+        document.getElementById('number').value = value;
+      }
     function handleClose() {
-        setValues({ rxName: rxName, rxStrength: rxStrength, rxDose: rxDose });
+        setValues({ rxName: rxName, rxStrength: rxStrength, rxDose: rxDose, refill: refill });
         setOpen(false);
     }
 
     function handleSave() {
-        Meteor.call('prescriptions.edit', _id, values.rxName, values.rxStrength, values.rxDose);
+        Meteor.call('prescriptions.edit', _id, values.rxName, values.rxStrength, values.rxDose, values.refill);
         setOpen(false);
     }
 
@@ -80,6 +101,17 @@ export default function EditAction(props) {
                         fullWidth={true}
                         onChange={handleChange('rxDose')}
                     />
+                     <br />
+
+            
+                    <Button  onClick={minusRefill} color="primary">
+                    -
+                   </Button>
+                   <input type="number" id="number" value={values.refill} />
+                   <Button  onClick={addRefill} color="primary">
+                    +
+                   </Button>
+
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
@@ -88,6 +120,7 @@ export default function EditAction(props) {
                     <Button onClick={handleSave} color="primary">
                         Save
                     </Button>
+                    
                 </DialogActions>
             </Dialog>
         </React.Fragment>

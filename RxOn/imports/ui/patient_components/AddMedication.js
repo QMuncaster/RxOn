@@ -15,14 +15,38 @@ export default function AddAction() {
     const [values, setValues] = useState({
         rxName: '',
         rxStrength: '',
-        rxDose: '',
+        rxDose: '', 
+        refill: 0
     });
 
     const handleChange = valName => event => {
         setValues({ ...values, [valName]: event.target.value });
     };
 
+    function addRefill() {
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value++;
+        document.getElementById('number').value = value;
+      
+      values.refill++;
+    }
+
+    function minusRefill() {
+        if (values.refill > 0) {
+            values.refill--;
+        }
+
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value < 1 ? value = 1 : '';
+        value--;
+        document.getElementById('number').value = value;
+      }
+
+
     function handleClickOpen() {
+        values.refill = 0;
         setOpen(true);
     }
 
@@ -39,13 +63,7 @@ export default function AddAction() {
             values.rxDose,
             Meteor.user().firstname,
             Meteor.user().lastname,
-            (err, result) => {
-                if (err) {
-                    alert('Medication Add Error');
-                } else {
-                    console.log('result of insert: ', result);
-                }
-            }
+            values.refill,
         );
         setOpen(false);
     }
@@ -53,19 +71,13 @@ export default function AddAction() {
     return (
         <React.Fragment>
             <IconButton edge="end" variant="outlined" onClick={handleClickOpen}>
-                <AddIcon fontSize="large" />
+                <AddIcon fontSize="large"/>
             </IconButton>
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="add-dialog-title"
-                maxWidth="sm"
-            >
+            <Dialog open={open} onClose={handleClose} aria-labelledby="add-dialog-title" maxWidth="sm">
                 <DialogTitle id="edit-dialog-title">Add New Medication</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Please enter information of new medication that you wish to add then click
-                        Add.
+                        Please enter information of new medication that you wish to add then click Add.
                     </DialogContentText>
                     <TextField
                         autoFocus
@@ -103,17 +115,15 @@ export default function AddAction() {
                         variant="outlined"
                     />
                     <br />
-                    <input
-                        accept="image/*"
-                        id="outlined-button-file"
-                        multiple
-                        type="file"
-                    />
-                    <label htmlFor="outlined-button-file">
-                        <Button variant="outlined" color="primary" component="span">
-                            Upload
-                        </Button>
-                    </label>
+                   
+                   <Button  onClick={minusRefill} color="primary">
+                    -
+                   </Button>
+                   <input type="number" id="number" value="0" />
+                   <Button  onClick={addRefill} color="primary">
+                    +
+                   </Button>
+ 
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
