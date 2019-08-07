@@ -28,6 +28,9 @@ const styles = () => ({
         flexDirection: 'column',
         fontFamily: 'Roboto',
     },
+    inline: {
+        display: 'inline',
+    },
 });
 
 class DropzoneAreaExample extends Component {
@@ -110,7 +113,10 @@ class DropzoneAreaExample extends Component {
     handleDelete() {
         let conf = confirm('Are you sure you want to delete the file?') || false;
         if (conf == true) {
-            Meteor.call('images.RemoveFile', this.state.uploadedFile.id, function(err, res) {
+            Meteor.call('images.RemoveFile', this.state.uploadedFile.id, function(
+                err,
+                res
+            ) {
                 if (err) console.log(err);
             });
         }
@@ -121,10 +127,10 @@ class DropzoneAreaExample extends Component {
         const { inProgress } = this.state;
         return (
             <React.Fragment>
-                <Typography variant="body1">
+                <Typography variant="body1" className={classes.inline}>
                     Please upload an image of your prescription
-                    {inProgress && <Progress />}
                 </Typography>
+                <div className={classes.inline}>{inProgress && <Progress />}</div>
                 <br />
                 <DropzoneArea
                     onDelete={this.handleDelete}
