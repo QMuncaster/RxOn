@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import SignupForm from "./SignupForm";
-import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import classNames from 'classnames';
 import Typography from '@material-ui/core/Typography';
 
 class Signup extends Component {
