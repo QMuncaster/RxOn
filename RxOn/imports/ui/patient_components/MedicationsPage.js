@@ -72,6 +72,6 @@ const styledComponent = withStyles(styles)(MedicationsPage);
 export default withTracker(() => {
     Meteor.subscribe('prescriptions');
     return {
-        prescriptions: Prescriptions.find().fetch(),
+        prescriptions: Prescriptions.find({}, { sort: { createdAt: -1 } }).fetch(),
     };
 })(styledComponent);
