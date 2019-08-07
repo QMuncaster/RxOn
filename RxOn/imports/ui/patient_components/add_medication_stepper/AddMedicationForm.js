@@ -22,18 +22,6 @@ export default function AddAction() {
         setOpen(false);
     }
 
-    function handleSave() {
-        Meteor.call(
-            'prescriptions.insert',
-            values.rxName,
-            values.rxStrength,
-            values.rxDose,
-            Meteor.user().firstname,
-            Meteor.user().lastname
-        );
-        setOpen(false);
-    }
-
     return (
         <React.Fragment>
             <IconButton edge="end" variant="outlined" onClick={handleClickOpen}>
