@@ -25,7 +25,11 @@ const PrescriptionsSchema = new SimpleSchema({
     },
     status: {
         type: String,
+<<<<<<< HEAD
         allowedValues: ['pending', 'filled', 'complete', 'canceled', 'refilled'],
+=======
+        allowedValues: ['pending', 'refilled', 'filled', 'complete', 'canceled'],
+>>>>>>> d7542b9701c645cc0b93bbe32e4df5eee0ccbe3e
         defaultValue: 'pending',
     },
     imgId: {

@@ -62,7 +62,7 @@ class PrescriptionTable extends Component {
             { name: 'Refills Remaining' },
 
             {
-                name: '',
+                name: 'Refill Action',
                 options: {
                     sort: false,
                     empty: true,
@@ -91,7 +91,7 @@ class PrescriptionTable extends Component {
             },
 
             {
-                name: '',
+                name: 'Fill Action',
                 options: {
                     sort: false,
                     empty: true,
