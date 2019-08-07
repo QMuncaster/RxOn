@@ -67,6 +67,7 @@ class SignupForm extends React.Component {
             }
         }
         if (invalid) throw new Error();
+        return true;
     }
 
     capitalizeFirstLetter = (word) => {

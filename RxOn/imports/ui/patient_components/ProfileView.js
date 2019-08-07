@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import MenuItem from '@material-ui/core/MenuItem';
+import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
     textField: {
@@ -22,6 +23,7 @@ const sexes = [{ label: 'Male', value: 'Male' }, { label: 'Female', value: 'Fema
 class ProfileView extends React.Component {
     state = {
         fieldsDisabled: true,
+        isSubmitDisabled: false,
 
         firstName: '',
         firstNameError: false,
@@ -67,6 +69,22 @@ class ProfileView extends React.Component {
         return this.props[field] || '';
     }
 
+    // bad code duplication of SignupForm.js
+    validateReqFields = (fields) => {
+        let invalid = false;
+        for (let f of fields) {
+            if (!f.value) {
+                this.setState({ [f.error]: true, [f.text]: "Field is required." });
+                invalid = true;
+            }
+            else {
+                this.setState({ [f.error]: false });
+            }
+        }
+        if (invalid) throw new Error();
+        return true;
+    }
+    
     handleSubmit = async () => {
         this.setState({ isSubmitDisabled: true });
         try {
@@ -85,7 +103,21 @@ class ProfileView extends React.Component {
     };
 
     handleCancel = () => {
-        this.setState({fieldsDisabled: true});
+        this.setState({
+            fieldsDisabled: true,
+
+            firstNameError: false,
+            firstNameErrorText: '',
+    
+            lastNameError: false,
+            lastNameErrorText: '',
+    
+            sexError: false,
+            sexErrorText: '',
+    
+            addressError: false,
+            addressErrorText: '',
+        });
     }
 
     render() {
@@ -113,8 +145,8 @@ class ProfileView extends React.Component {
                         label="Last Name"
                         value={this.getValue('lastName')}
                         onChange={this.handleChange('lastName')}
-                        value={this.state.lastName}
                         error={this.state.lastNameError}
+                        helperText={this.state.lastNameErrorText}
                         className={classes.textField}
                         margin="normal"
                         disabled={this.state.fieldsDisabled}
@@ -159,10 +191,15 @@ class ProfileView extends React.Component {
                     />
                 </div>
 
+                <Typography component="div" color='error'>
+                    <br />
+                    {this.state.errorMessage}
+                </Typography>
+
                 <div>
                     <br />
                     {/* edit or submit button */}
-                    <Button variant="contained" color="primary" onClick={this.handleButtonClick}>
+                    <Button variant="contained" color="primary" onClick={this.handleButtonClick} disabled={this.isSubmitDisabled}>
                         {this.state.fieldsDisabled ? "Edit" : "Submit"}
                     </Button>
 
@@ -173,7 +210,6 @@ class ProfileView extends React.Component {
                             Cancel
                         </Button>
                     }
-
                 </div>
             </form>
         );
