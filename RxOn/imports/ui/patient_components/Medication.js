@@ -47,7 +47,7 @@ function Medication(props) {
     const name = ContainerProps.rxName + ' ' + ContainerProps.rxStrength;
     const directions = ContainerProps.rxDose;
     const refills = ContainerProps.refill;
-    
+
 
     return (
         <List>
@@ -65,7 +65,7 @@ function Medication(props) {
                             <Typography component="span" className={classes.inline} color="textPrimary">
                                 {directions}
                             </Typography>
-
+                            <br/>
                             <Typography component="span" className={classes.inline} color="textSecondary">
                                 Refills:{' '}
                             </Typography>
@@ -74,7 +74,7 @@ function Medication(props) {
                             </Typography>
                         </React.Fragment>
                     }
-                   
+
                 />
                 {renderActions(props)}
             </ListItem>
