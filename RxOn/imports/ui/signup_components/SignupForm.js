@@ -104,6 +104,10 @@ class SignupForm extends React.Component {
         }
     };
 
+    handleReturn = () => {
+        this.props.history.push('/login');
+    }
+
     render() {
         const { classes } = this.props;
 
@@ -207,6 +211,9 @@ class SignupForm extends React.Component {
                     <Button variant="contained" color="primary" className={classes.button}
                         onClick={this.handleSubmit} disabled={this.state.isSubmitDisabled}>
                         Signup
+                    </Button>
+                    <Button variant="contained" color="default" onClick={this.handleReturn}>
+                        Cancel
                     </Button>
                 </div>
             </form>
