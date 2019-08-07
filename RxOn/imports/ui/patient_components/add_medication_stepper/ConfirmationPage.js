@@ -12,12 +12,12 @@ export default class ConfirmationPage extends Component {
 
     render() {
         const {
-            values: { rxName, rxStrength, rxDose, imgLink },
+            values: { rxName, rxStrength, rxDose, imgLink, refill },
         } = this.props;
         return (
             <React.Fragment>
                 <Typography variant="body1">
-                Please review information entered before submitting
+                    Please review information entered before submitting
                 </Typography>
                 <br />
                 <List>
@@ -32,6 +32,9 @@ export default class ConfirmationPage extends Component {
                     </ListItem>
                     <ListItem alignItems="flex-start" divider={true}>
                         <ListItemText primary="Medication Dose: " secondary={rxDose} />
+                    </ListItem>
+                    <ListItem alignItems="flex-start" divider={true}>
+                        <ListItemText primary={'Number of eligible refill: ' + refill} />
                     </ListItem>
                     <ListItem alignItems="flex-start" divider={true}>
                         <Link href={imgLink} target="_blank" color="primary">

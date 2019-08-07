@@ -51,6 +51,7 @@ class MedicationStepper extends Component {
             rxName: '',
             rxStrength: '',
             rxDose: '',
+            refill: 0,
             imgLink: '',
             imgId: '',
         };
@@ -64,27 +65,29 @@ class MedicationStepper extends Component {
     };
 
     handleSubmit = () => {
-      const { activeStep, rxName, rxStrength, rxDose, imgId } = this.state;
-      this.setState({
-          activeStep: activeStep + 1,
-      });
-      Meteor.call(
-         'prescriptions.insert',
-         rxName,
-         rxStrength,
-         rxDose,
-         Meteor.user().firstname,
-         Meteor.user().lastname,
-         imgId,
-         (err, result) => {
-             if (err) {
-                 alert('Medication Add Error');
-             } else {
-                 console.log('result of insert: ', result);
-             }
-         }
-     );
-  };
+        const { activeStep, rxName, rxStrength, rxDose, refill, imgId } = this.state;
+        this.setState({
+            activeStep: activeStep + 1,
+        });
+       console.log("hadnle sumbuit: ", this.state);
+        Meteor.call(
+            'prescriptions.insert',
+            rxName,
+            rxStrength,
+            rxDose,
+            Meteor.user().firstname,
+            Meteor.user().lastname,
+            refill,
+            imgId,
+            (err, result) => {
+                if (err) {
+                    alert('Medication Add Error');
+                } else {
+                    console.log('result of insert: ', result);
+                }
+            }
+        );
+    };
 
     handleBack = () => {
         const { activeStep } = this.state;
@@ -94,7 +97,13 @@ class MedicationStepper extends Component {
     };
 
     handleChange = input => e => {
-        this.setState({ [input]: e.target.value });
+        let val = e.target.value;
+        if (e.target.type === 'number') {
+            console.log("parsed it as a number");
+            val = parseInt(val, 10);
+        }
+        this.setState({ [input]: val });
+        console.log("hadnle chabnge ",this.state);
     };
 
     setViewLink = val => {
@@ -124,8 +133,8 @@ class MedicationStepper extends Component {
 
     render() {
         const { classes } = this.props;
-        const { activeStep, rxName, rxStrength, rxDose, imgLink } = this.state;
-        const values = { rxName, rxStrength, rxDose, imgLink };
+        const { activeStep, rxName, rxStrength, rxDose, refill, imgLink } = this.state;
+        const values = { rxName, rxStrength, rxDose, refill, imgLink };
         const steps = ['Add Medication', 'Upload Prescription', 'Review and Submit'];
         const connector = (
             <StepConnector
