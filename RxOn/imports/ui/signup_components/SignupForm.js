@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
@@ -10,10 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import { withRouter } from "react-router-dom";
 
 const styles = theme => ({
-    container: {
-        // display: 'flex',
-        // flexWrap: 'wrap',
-    },
     textField: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
@@ -113,7 +108,7 @@ class SignupForm extends React.Component {
         const { classes } = this.props;
 
         return (
-            <form className={classes.container} noValidate autoComplete="off">
+            <form noValidate autoComplete="off">
 
                 <div >
                     <TextField

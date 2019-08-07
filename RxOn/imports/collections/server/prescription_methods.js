@@ -78,11 +78,6 @@ Meteor.methods({
     'prescriptions.edit'(id, name, strength, dose, refill) {
         var prescriptions = Prescriptions.find({ _id: id }).fetch();
         var loggedInUser = Meteor.user();
-        // console.log(prescriptions);
-        // console.log(loggedInUser);
-        // console.log(this.userId);
-        // console.log(prescriptions[0].patientId);
-       
         
         if (
             prescriptions.length <= 0 ||
