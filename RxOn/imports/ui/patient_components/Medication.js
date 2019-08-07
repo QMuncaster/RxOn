@@ -26,30 +26,28 @@ const styles = () => ({
     },
 });
 
-
 function renderActions(props) {
     const { ContainerProps } = props;
     const status = ContainerProps.status;
 
-    if ((props.hideActions == undefined || props.hideActions == false) && (status == 'pending')) {
-
+    if (
+        (props.hideActions == undefined || props.hideActions == false) &&
+        status == 'pending'
+    ) {
         return (
             <ListItemSecondaryAction>
                 <EditAction ContainerProps={props.ContainerProps} />
                 <CancelAction ContainerProps={props.ContainerProps} />
             </ListItemSecondaryAction>
-        )
+        );
     }
 }
-
-
 
 function Medication(props) {
     const { classes, ContainerProps } = props;
     const name = ContainerProps.rxName + ' ' + ContainerProps.rxStrength;
     const directions = ContainerProps.rxDose;
-   const refills = ContainerProps.refill;
-
+    const refills = ContainerProps.refill;
     // let link = ContainerProps.imgId
     //     ? Images.findOne({ _id: ContainerProps.imgId }).link()
     //     : '';
@@ -92,16 +90,23 @@ function Medication(props) {
                             >
                                 {directions}
                             </Typography>
-                            <br/>
-                            <Typography component="span" className={classes.inline} color="textSecondary">
+                            <br />
+                            <Typography
+                                component="span"
+                                className={classes.inline}
+                                color="textSecondary"
+                            >
                                 Refills:{' '}
                             </Typography>
-                            <Typography component="span" className={classes.inline} color="textPrimary">
+                            <Typography
+                                component="span"
+                                className={classes.inline}
+                                color="textPrimary"
+                            >
                                 {refills}
                             </Typography>
                         </React.Fragment>
                     }
-
                 />
                 {renderActions(props)}
             </ListItem>
