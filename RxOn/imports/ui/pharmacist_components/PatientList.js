@@ -3,6 +3,12 @@ import {withTracker} from 'meteor/react-meteor-data';
 import IndividualPatient from './IndividualPatient';
 import {withStyles} from "@material-ui/core";
 import Typography from '@material-ui/core/Typography';
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import Paper from "@material-ui/core/Paper";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
 
 const styles = theme => ({
     root: {
@@ -35,25 +41,42 @@ class PatientList extends Component {
 
 
     render() {
-            return (
-                <div className="pharmacy-profile-page-heading" >
-                    <div className="pharmacy-profile-page">
-                        <div  className="Pharmacy-Headings">
-                            <Typography variant="h2" gutterBottom>
-                                Patient List
-                            </Typography>
-                            <div id="pendingBox">
-                                <ul>
-                            {this.renderPatients()}
+        const {classes} = this.props;
+        return (
+
+            <div className="pharmacy-profile-page-heading">
+                <div className="pharmacy-profile-page">
+                    <div className="Pharmacy-Headings">
+                        <Typography variant="h2" gutterBottom>
+                            Patient List
+                        </Typography>
+                        <div id="pendingBox">
+                            <ul>
+                                <Paper className={classes.root}>
+                                    <Table className={classes.table} style={{tableLayout: "auto"}}>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell align="left" style={{width: "25%"}}>Patient
+                                                    Name</TableCell>
+                                                <TableCell align="center">Age</TableCell>
+                                                <TableCell align="center">Gender</TableCell>
+                                                <TableCell align="center">History</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {this.renderPatients()}
+                                        </TableBody>
+                                    </Table>
+                                </Paper>
                             </ul>
-                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-            );
-        }
+        );
     }
+}
 
 
 const styledComponent = withStyles(styles)(PatientList);

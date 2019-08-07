@@ -26,29 +26,18 @@ const styles = theme => ({
 class IndividualPatient extends Component {
 
     render() {
-        const { classes } = this.props;
+
 
         return (
-            <Paper className={classes.root}>
-                <Table className={classes.table} style={{ tableLayout: "auto" }}>
-                    <TableHead >
-                        <TableRow>
-                            <TableCell align="left" style={{ width: "25%"}}>Patient Name</TableCell>
-                            <TableCell align="center">Age</TableCell>
-                            <TableCell align="center">Gender</TableCell>
-                            <TableCell align="center">History</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        <TableRow >
-                            <TableCell align="left" style={{ width: "25%"}}>{this.props.user.lastname} {this.props.user.firstname}</TableCell>
-                            <TableCell align="center">{this.props.user.age} </TableCell>
-                            <TableCell align="center">{this.props.user.sex}</TableCell>
-                            <TableCell align="center"><ViewMedicationsDialog prescriptions={this.props.prescriptions}/></TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-            </Paper>
+
+            <TableRow>
+                <TableCell align="left"
+                           style={{width: "25%"}}>{this.props.user.lastname} {this.props.user.firstname}</TableCell>
+                <TableCell align="center">{this.props.user.age} </TableCell>
+                <TableCell align="center">{this.props.user.sex}</TableCell>
+                <TableCell align="center"><ViewMedicationsDialog prescriptions={this.props.prescriptions}/></TableCell>
+            </TableRow>
+
         );
     }
 }
