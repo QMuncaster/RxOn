@@ -8,7 +8,6 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Medication from './Medication';
 import Grid from '@material-ui/core/Grid';
-import MedicationCard from './MedicationCard';
 import AddAction from './AddMedication.js';
 
 const styles = theme => ({
@@ -56,9 +55,6 @@ class MedicationsPage extends Component {
                             </Typography>
                             {this.renderMedication()}
                         </Paper>
-                    </Grid>
-                    <Grid item xs={3}>
-                        <MedicationCard />
                     </Grid>
                 </Grid>
             </React.Fragment>
