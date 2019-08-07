@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Medication from './Medication';
 import Grid from '@material-ui/core/Grid';
 import MedicationCard from './MedicationCard';
-import AddAction from './AddMedication.js';
+//import AddAction from './AddMedication.js';
 import AddMedicationForm from './add_medication_stepper/AddMedicationForm';
 
 const styles = theme => ({
@@ -65,7 +65,6 @@ class MedicationsPage extends Component {
                                     </Typography>
                                 </Grid>
                                 <Grid item>
-                                    <AddAction />
                                     <AddMedicationForm />
                                 </Grid>
                             </Grid>
