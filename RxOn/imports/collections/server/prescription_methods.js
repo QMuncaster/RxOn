@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Prescriptions } from '../prescriptions.js';
 
 Meteor.methods({
-    'prescriptions.insert'(name, strength, dose, firstName, lastName) {
+    'prescriptions.insert'(name, strength, dose, firstName, lastName, imgId) {
         if (!this.userId) {
             throw new Meteor.Error('not-authorized');
         }
@@ -26,6 +26,7 @@ Meteor.methods({
             rxDose: dose,
             firstName: firstName,
             lastName: lastName,
+            imgId: imgId
         };
         let objectId = Prescriptions.insert(objectToInsert, function(err) {
             if (err) {
