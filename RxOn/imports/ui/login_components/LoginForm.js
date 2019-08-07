@@ -2,15 +2,18 @@ import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import { minLength, maxLength, required } from "./validation";
 import LoginFormInput from "./LoginFormInput";
+import Button from '@material-ui/core/Button';
 import "../styling/LoginForm.css";
 
 class LoginForm extends Component {
-  // handleSubmit prop is passed by redux-form automatically.
-  // For it to work we need to pass our own submit logic to the component
-  // I did so in Login.js where I passed a dummy logic handleLoginSubmit
-  // we can then use handleSubmit for a lot of functionality
+
+  constructor(props) {
+      super(props);
+  }
+
   render() {
     return (
+      // handleSubmit prop is passed by redux-form automatically.
       <form onSubmit={this.props.handleSubmit} className="loginForm">
         <Field
           name="userName"
@@ -28,16 +31,11 @@ class LoginForm extends Component {
           className="loginForm__input"
           validate={[required]}
         />
-        <Field
-          name="remember"
-          type="checkbox"
-          component={LoginFormInput}
-          label="Remember me?"
-          className="loginForm__input--inline"
-        />
-        <button type="submit" className="loginForm__btn" id="submit_btn">
-          Log In
-        </button>
+        <br />
+        <Button variant="contained" color="primary" id="submit_btn" type="submit" 
+            className="loginForm__btn" disabled={this.props.isSubmitDisabled}>
+            Log In
+        </Button>
         <p className="loginForm__signup">Not a member? Sign up <a href="/signup">here.</a></p>
       </form>
     );

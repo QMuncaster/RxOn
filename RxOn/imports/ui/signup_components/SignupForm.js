@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import pify from 'pify';
 import Typography from '@material-ui/core/Typography';
-import { withRouter } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
 
 const styles = theme => ({
     textField: {
@@ -19,79 +19,103 @@ const styles = theme => ({
     },
 });
 
-const sexes = [{ label: 'Male', value: 'Male' }, { label: 'Female', value: 'Female' }, { label: 'Other', value: 'Other' }];
+const sexes = [
+    { label: 'Male', value: 'Male' },
+    { label: 'Female', value: 'Female' },
+    { label: 'Other', value: 'Other' },
+];
 
 class SignupForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            firstName: '',
+            firstNameError: false,
+            firstNameErrorText: '',
 
-    state = {
-        firstName: '',
-        firstNameError: false,
-        firstNameErrorText: '',
+            lastName: '',
+            lastNameError: false,
+            lastNameErrorText: '',
 
-        lastName: '',
-        lastNameError: false,
-        lastNameErrorText: '',
+            sex: '',
+            sexError: false,
+            sexErrorText: '',
 
-        sex: '',
-        sexError: false,
-        sexErrorText: '',
+            age: '',
+            ageError: false,
+            ageErrorText: '',
 
-        age: null,
-        ageError: false,
-        ageErrorText: '',
+            address: '',
+            addressError: false,
+            addressErrorText: '',
 
-        address: '',
-        addressError: false,
-        addressErrorText: '',
+            email: '',
+            emailError: false,
+            emailErrorText: '',
 
-        email: '',
-        emailError: false,
-        emailErrorText: '',
+            password: '', // don't know if this is good practice
+            passwordError: false,
+            passwordErrorText: '',
 
-        password: '', // don't know if this is good practice
-        passwordError: false,
-        passwordErrorText: '',
+            isSubmitDisabled: false,
+        };
+    }
 
-        isSubmitDisabled: false,
-    };
-
-    handleChange = (name) => event => {
+    handleChange = name => event => {
         this.setState({ [name]: event.target.value });
     };
 
-    validateReqFields = (fields) => {
+    validateReqFields = fields => {
         let invalid = false;
         for (let f of fields) {
             if (!f.value) {
-                this.setState({ [f.error]: true, [f.text]: "Field is required." });
+                this.setState({ [f.error]: true, [f.text]: 'Field is required.' });
                 invalid = true;
-            }
-            else {
+            } else {
                 this.setState({ [f.error]: false });
             }
         }
         if (invalid) throw new Error();
-    }
+        return true;
+    };
 
-    capitalizeFirstLetter = (word) => {
-            if (typeof word !== 'string') return "";
-            return word.charAt(0).toUpperCase() + word.slice(1);
-    }
+    capitalizeFirstLetter = word => {
+        if (typeof word !== 'string') return '';
+        return word.charAt(0).toUpperCase() + word.slice(1);
+    };
 
     handleSubmit = async () => {
         this.setState({ isSubmitDisabled: true });
         try {
-            this.validateReqFields(
-                [
-                    { value: this.state.firstName, error: 'firstNameError', text: 'firstNameErrorText' },
-                    { value: this.state.lastName, error: 'lastNameError', text: 'lastNameErrorText' },
-                    { value: this.state.age, error: 'ageError', text: 'ageErrorText' },
-                    { value: this.state.sex, error: 'sexError', text: 'sexErrorText' },
-                    { value: this.state.address, error: 'addressError', text: 'addressErrorText' },
-                    { value: this.state.email, error: 'emailError', text: 'emailErrorText' },
-                    { value: this.state.password, error: 'passwordError', text: 'passwordErrorText' },
-                ]
-            );
+            this.validateReqFields([
+                {
+                    value: this.state.firstName,
+                    error: 'firstNameError',
+                    text: 'firstNameErrorText',
+                },
+                {
+                    value: this.state.lastName,
+                    error: 'lastNameError',
+                    text: 'lastNameErrorText',
+                },
+                { value: this.state.age, error: 'ageError', text: 'ageErrorText' },
+                {
+                    value: this.state.sex,
+                    error: 'sexError',
+                    text: 'sexErrorText',
+                },
+                {
+                    value: this.state.address,
+                    error: 'addressError',
+                    text: 'addressErrorText',
+                },
+                { value: this.state.email, error: 'emailError', text: 'emailErrorText' },
+                {
+                    value: this.state.password,
+                    error: 'passwordError',
+                    text: 'passwordErrorText',
+                },
+            ]);
 
             await pify(Accounts.createUser)({
                 email: this.state.email,
@@ -102,12 +126,17 @@ class SignupForm extends React.Component {
                     sex: this.state.sex,
                     age: this.state.age,
                     address: this.state.address,
-                }
+                },
             });
             this.props.history.push('/home');
         } catch (error) {
+            console.log('error after submit: ', error);
             this.setState({ isSubmitDisabled: false, errorMessage: error.reason });
         }
+    };
+
+    handleReturn = () => {
+        this.props.history.push('/login');
     };
 
     render() {
@@ -115,8 +144,7 @@ class SignupForm extends React.Component {
 
         return (
             <form noValidate autoComplete="off">
-
-                <div >
+                <div>
                     <TextField
                         required
                         id="firstName"
@@ -145,12 +173,12 @@ class SignupForm extends React.Component {
                         required
                         id="standard-select-sex"
                         select
-                        label="Sex"
+                        label="sex"
                         className={classes.textField}
                         value={this.state.sex}
                         error={this.state.sexError}
                         helperText={this.state.sexErrorText}
-                        onChange={this.handleChange('sex', '')}
+                        onChange={this.handleChange('sex')}
                         SelectProps={{
                             MenuProps: {
                                 className: classes.menu,
@@ -165,7 +193,7 @@ class SignupForm extends React.Component {
                         ))}
                     </TextField>
 
-                    <br/>
+                    <br />
 
                     <TextField
                         required
@@ -217,20 +245,31 @@ class SignupForm extends React.Component {
                     />
                 </div>
 
-                <Typography component="div" color='error'>
+                <Typography component="div" color="error">
                     <br />
                     {this.state.errorMessage}
                 </Typography>
 
                 <div>
                     <br />
-                    <Button variant="contained" color="primary" className={classes.button}
-                        onClick={this.handleSubmit} disabled={this.state.isSubmitDisabled}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}
+                        onClick={this.handleSubmit}
+                        disabled={this.state.isSubmitDisabled}
+                    >
                         Signup
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="default"
+                        onClick={this.handleReturn}
+                    >
+                        Cancel
                     </Button>
                 </div>
             </form>
-
         );
     }
 }

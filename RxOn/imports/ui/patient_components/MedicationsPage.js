@@ -8,9 +8,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Medication from './Medication';
 import Grid from '@material-ui/core/Grid';
-import MedicationCard from './MedicationCard';
-//import AddAction from './AddMedication.js';
 import AddMedicationForm from './add_medication_stepper/AddMedicationForm';
+
 
 const styles = theme => ({
     root: {
@@ -75,9 +74,6 @@ class MedicationsPage extends Component {
                             {this.renderMedication()}
                         </Paper>
                     </Grid>
-                    <Grid item xs={3}>
-                        <MedicationCard />
-                    </Grid>
                 </Grid>
             </React.Fragment>
         );
@@ -94,6 +90,6 @@ const styledComponent = withStyles(styles)(MedicationsPage);
 export default withTracker(() => {
     Meteor.subscribe('prescriptions');
     return {
-        prescriptions: Prescriptions.find().fetch(),
+        prescriptions: Prescriptions.find({}, { sort: { createdAt: -1 } }).fetch(),
     };
 })(styledComponent);
