@@ -30,7 +30,9 @@ class MedicationsPage extends Component {
     }
 
     renderMedication() {
-        return this.props.prescriptions.map(px => <Medication key={px._id} ContainerProps={px} />);
+        return this.props.prescriptions.map(px => (
+            <Medication key={px._id} ContainerProps={px} />
+        ));
     }
 
     render() {
@@ -68,8 +70,8 @@ class MedicationsPage extends Component {
                                 </Grid>
                             </Grid>
                             <Typography component="p">
-                                Here is the list of your prescriptions. You can edit or cancel any
-                                Medication before it is filled.
+                                Here is the list of your prescriptions. You can edit or
+                                cancel any Medication before it is filled.
                             </Typography>
                             {this.renderMedication()}
                         </Paper>
