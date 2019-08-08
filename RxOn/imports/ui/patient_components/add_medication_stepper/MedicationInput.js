@@ -24,7 +24,6 @@ export default class MedicationInput extends Component {
                 />
                 <br />
                 <TextField
-                    autoFocus
                     margin="dense"
                     label="Medication Strength"
                     type="text"
@@ -37,7 +36,6 @@ export default class MedicationInput extends Component {
                 />
                 <br />
                 <TextField
-                    autoFocus
                     margin="dense"
                     label="Medication Dose"
                     type="text"
