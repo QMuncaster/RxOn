@@ -11,6 +11,7 @@ import MedicationInput from './MedicationInput';
 import DropZone from '../image_upload/DropZone';
 import ConfirmationPage from './ConfirmationPage';
 import Success from './Success';
+import { withTracker } from 'meteor/react-meteor-data';
 
 const styles = theme => ({
     root: {
@@ -66,22 +67,24 @@ class MedicationStepper extends Component {
 
     handleSubmit = () => {
         const { activeStep, rxName, rxStrength, rxDose, refill, imgId } = this.state;
+        const { firstname, lastname } = this.props.user;
         this.setState({
             activeStep: activeStep + 1,
         });
-       console.log("hadnle sumbuit: ", this.state);
+        console.log('hadnle sumbuit: ', this.state);
         Meteor.call(
             'prescriptions.insert',
             rxName,
             rxStrength,
             rxDose,
-            Meteor.user().firstname,
-            Meteor.user().lastname,
+            firstname,
+            lastname,
             refill,
             imgId,
             (err, result) => {
                 if (err) {
                     alert('Medication Add Error');
+                    console.log(Meteor.user());
                 } else {
                     console.log('result of insert: ', result);
                 }
@@ -193,4 +196,11 @@ class MedicationStepper extends Component {
     }
 }
 
-export default withStyles(styles)(MedicationStepper);
+const styledStepper = withStyles(styles)(MedicationStepper);
+
+export default withTracker(() => {
+    Meteor.subscribe('userData');
+    return {
+        user: Meteor.user()
+    };
+})(styledStepper);
