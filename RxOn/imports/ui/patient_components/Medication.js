@@ -12,8 +12,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import EditAction from './EditMedication';
 import CancelAction from './CancelMedication';
-import deepOrange from '@material-ui/core/colors/deepOrange';
-import deepPurple from '@material-ui/core/colors/deepPurple';
 
 const styles = () => ({
     root: {
@@ -25,67 +23,35 @@ const styles = () => ({
     avatar: {
         margin: 10,
     },
-
-    orangeAvatar: {
-        margin: 10,
-        color: '#fff',
-        backgroundColor: deepOrange[500],
-    },
-
-    purpleAvatar: {
-        margin: 10,
-        color: '#fff',
-        backgroundColor: deepPurple[500],
-    },
 });
+
 
 function renderActions(props) {
     const { ContainerProps } = props;
     const status = ContainerProps.status;
 
-    if (
-        (props.hideActions == undefined || props.hideActions == false) &&
-        status == 'pending'
-    ) {
+    if ((props.hideActions == undefined || props.hideActions == false) && (status == 'pending')) {
+
         return (
             <ListItemSecondaryAction>
                 <EditAction ContainerProps={props.ContainerProps} />
                 <CancelAction ContainerProps={props.ContainerProps} />
             </ListItemSecondaryAction>
-        );
+        )
     }
 }
+
+
 
 function Medication(props) {
     const { classes, ContainerProps } = props;
     const name = ContainerProps.rxName + ' ' + ContainerProps.rxStrength;
     const directions = ContainerProps.rxDose;
-    const refills = ContainerProps.refill;
-    const status = ContainerProps.status;
+   const refills = ContainerProps.refill;
 
     // let link = ContainerProps.imgId
     //     ? Images.findOne({ _id: ContainerProps.imgId }).link()
     //     : '';
-
-    function returnStatus() {
-        if (status == 'pending') {
-            return 'P';
-        }
-
-        if (status == 'filled' || status == 'refilled') {
-            return 'F';
-        }
-    }
-
-    function returnColor() {
-        if (status == 'pending') {
-            return classes.orangeAvatar;
-        }
-
-        if (status == 'filled' || status == 'refilled') {
-            return classes.purpleAvatar;
-        }
-    }
 
     // function handleClick() {
     //     console.log('the img id is ', ContainerProps.imgId);
@@ -98,11 +64,13 @@ function Medication(props) {
 
     return (
         <List>
-            <ListItem alignItems="flex-start" divider={true}>
+            <ListItem
+                alignItems="flex-start"
+                divider={true}
+            >
                 <ListItemAvatar>
-                    <Avatar className={returnColor()}>{returnStatus()}</Avatar>
+                    <Avatar>PH</Avatar>
                 </ListItemAvatar>
-
                 <ListItemText
                     primary={name}
                     secondary={
@@ -121,23 +89,16 @@ function Medication(props) {
                             >
                                 {directions}
                             </Typography>
-                            <br />
-                            <Typography
-                                component="span"
-                                className={classes.inline}
-                                color="textSecondary"
-                            >
+                            <br/>
+                            <Typography component="span" className={classes.inline} color="textSecondary">
                                 Refills:{' '}
                             </Typography>
-                            <Typography
-                                component="span"
-                                className={classes.inline}
-                                color="textPrimary"
-                            >
+                            <Typography component="span" className={classes.inline} color="textPrimary">
                                 {refills}
                             </Typography>
                         </React.Fragment>
                     }
+
                 />
                 {renderActions(props)}
             </ListItem>
