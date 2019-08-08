@@ -18,7 +18,7 @@ Meteor.methods({
         check(firstName, String);
         check(lastName, String);
         check(refill, Number);
-
+        
         const objectToInsert = {
             patientId: this.userId,
             rxName: name,
@@ -27,11 +27,13 @@ Meteor.methods({
             firstName: firstName,
             lastName: lastName,
             refill: refill,
-            imgId: imgId
+            imgId: imgId,
         };
         let objectId = Prescriptions.insert(objectToInsert, function(err) {
             if (err) {
-                throw new Meteor.Error('Failed to insert prescription - Please try again');
+                throw new Meteor.Error(
+                    'Failed to insert prescription - Please try again'
+                );
             }
             // Object inserted successfully.
             let Id = objectToInsert._id; // this will return the id of object inserted
@@ -78,9 +80,15 @@ Meteor.methods({
             throw new Meteor.Error(403, 'Access denied');
         }
 
-       //can only refill if the status is 'filled' and there is > 0 refill tokens available
-        if ((prescriptions[0].status === 'filled' || 'refilled') && prescriptions[0].refill > 0) {
-        Prescriptions.update({ _id: id }, { $set: { refill: prescriptions[0].refill-1, status: 'refilled' } });
+        //can only refill if the status is 'filled' and there is > 0 refill tokens available
+        if (
+            (prescriptions[0].status === 'filled' || 'refilled') &&
+            prescriptions[0].refill > 0
+        ) {
+            Prescriptions.update(
+                { _id: id },
+                { $set: { refill: prescriptions[0].refill - 1, status: 'refilled' } }
+            );
         }
     },
 
@@ -93,7 +101,7 @@ Meteor.methods({
             !loggedInUser ||
             (this.userId !== prescriptions[0].patientId &&
                 !Roles.userIsInRole(loggedInUser, 'admin')) ||
-                prescriptions[0].status !== 'pending'
+            prescriptions[0].status !== 'pending'
         ) {
             throw new Meteor.Error(403, 'Access denied');
         }
