@@ -12,7 +12,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import EditAction from './EditMedication';
 import CancelAction from './CancelMedication';
-import {  deepOrange, deepPurple } from '@material-ui/core/colors';
+import deepOrange from '@material-ui/core/colors/deepOrange';
+import deepPurple from '@material-ui/core/colors/deepPurple';
 
 const styles = () => ({
     root: {
@@ -25,17 +26,17 @@ const styles = () => ({
         margin: 10,
     },
 
-      orangeAvatar: {
+    orangeAvatar: {
         margin: 10,
         color: '#fff',
         backgroundColor: deepOrange[500],
-      },
+    },
 
-      purpleAvatar: {
+    purpleAvatar: {
         margin: 10,
         color: '#fff',
         backgroundColor: deepPurple[500],
-      },
+    },
 });
 
 function renderActions(props) {
@@ -59,59 +60,49 @@ function Medication(props) {
     const { classes, ContainerProps } = props;
     const name = ContainerProps.rxName + ' ' + ContainerProps.rxStrength;
     const directions = ContainerProps.rxDose;
-   const refills = ContainerProps.refill;
-   const status = ContainerProps.status;
+    const refills = ContainerProps.refill;
+    const status = ContainerProps.status;
 
     // let link = ContainerProps.imgId
     //     ? Images.findOne({ _id: ContainerProps.imgId }).link()
     //     : '';
 
-
     function returnStatus() {
         if (status == 'pending') {
-            return 'P'
+            return 'P';
         }
 
         if (status == 'filled' || status == 'refilled') {
-            return 'F'
+            return 'F';
         }
     }
 
     function returnColor() {
         if (status == 'pending') {
-        return classes.orangeAvatar
+            return classes.orangeAvatar;
         }
 
         if (status == 'filled' || status == 'refilled') {
-           return classes.purpleAvatar
+            return classes.purpleAvatar;
         }
     }
 
-    function handleClick() {
-        console.log('the img id is ', ContainerProps.imgId);
-        console.log(
-            'the img link is ',
-            Images.findOne({ _id: ContainerProps.imgId }).link()
-        );
-        //let link = Images.findOne({ _id: ContainerProps.imgId }).link();
-    }
-
+    // function handleClick() {
+    //     console.log('the img id is ', ContainerProps.imgId);
+    //     console.log(
+    //         'the img link is ',
+    //         Images.findOne({ _id: ContainerProps.imgId }).link()
+    //     );
+    //     //let link = Images.findOne({ _id: ContainerProps.imgId }).link();
+    // }
 
     return (
         <List>
-            <ListItem
-                alignItems="flex-start"
-                divider={true}
-                button={true}
-                onClick={handleClick}
-            >
-               
-            <ListItemAvatar>
-            <Avatar className= {returnColor()}>
-                {returnStatus()}
-            </Avatar>
-            </ListItemAvatar>
-                
+            <ListItem alignItems="flex-start" divider={true}>
+                <ListItemAvatar>
+                    <Avatar className={returnColor()}>{returnStatus()}</Avatar>
+                </ListItemAvatar>
+
                 <ListItemText
                     primary={name}
                     secondary={
