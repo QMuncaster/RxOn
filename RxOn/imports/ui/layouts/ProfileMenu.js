@@ -39,12 +39,7 @@ export default class ProfileMenu extends Component {
                     disableAutoFocusItem={true}
                 >
                     <MenuItem onClick={this.handleClose}>
-                        <Link to="/home" style={linkStyle}>
-                            Home
-                        </Link>
-                    </MenuItem>
-                    <MenuItem onClick={this.handleClose}>
-                        <Link to="/patient/profile" style={linkStyle}>
+                        <Link to="/profile" style={linkStyle}>
                             Profile
                         </Link>
                     </MenuItem>
