@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {withStyles} from "@material-ui/core";
+import {withStyles} from '@material-ui/core/styles';
 import {withTracker} from "meteor/react-meteor-data";
 import {Meteor} from "meteor/meteor";
 import {Prescriptions} from "../../collections/prescriptions";
@@ -14,9 +14,9 @@ import Paper from '@material-ui/core/Paper';
 const styles = theme => ({
     root: {
         ...theme.mixins.gutters(),
-        paddingTop: theme.spacing.unit * 2,
-        paddingBottom: theme.spacing.unit * 2,
-        margin: theme.spacing.unit * 2,
+        paddingTop: theme.spacing(2),
+        paddingBottom: theme.spacing(2),
+        margin: theme.spacing(2),
     },
     inline: {
         display: 'inline',

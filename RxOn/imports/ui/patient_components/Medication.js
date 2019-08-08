@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import { withTracker } from 'meteor/react-meteor-data';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {withTracker} from 'meteor/react-meteor-data';
 import IndividualPatient from './IndividualPatient';
-import {withStyles} from "@material-ui/core";
+import {withStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
@@ -13,9 +13,9 @@ import TableBody from "@material-ui/core/TableBody";
 const styles = theme => ({
     root: {
         ...theme.mixins.gutters(),
-        paddingTop: theme.spacing.unit * 2,
-        paddingBottom: theme.spacing.unit * 2,
-        margin: theme.spacing.unit * 2,
+        paddingTop: theme.spacing(2),
+        paddingBottom: theme.spacing(2),
+        margin: theme.spacing(2),
     },
     inline: {
         display: 'inline',
