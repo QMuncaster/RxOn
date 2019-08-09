@@ -8,7 +8,7 @@ import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import MedicationInput from './MedicationInput';
-import DropZone from '../image_upload/DropZone';
+import ImageUpload from './ImageUpload';
 import ConfirmationPage from './ConfirmationPage';
 import { withTracker } from 'meteor/react-meteor-data';
 
@@ -130,7 +130,7 @@ class MedicationStepper extends Component {
                     <MedicationInput handleChange={this.handleChange} values={values} />
                 );
             case 1:
-                return <DropZone setLink={this.setViewLink} setId={this.setImgId} />;
+                return <ImageUpload setLink={this.setViewLink} setId={this.setImgId} />;
             case 2:
                 return <ConfirmationPage values={values} />;
             default:

@@ -1,12 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
+import { Images } from '../../../collections/images';
 import { DropzoneArea } from 'material-ui-dropzone';
 import { withStyles } from '@material-ui/core/styles';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Images } from '../../../collections/images';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
-import './dz.css';
+import '../../styling/ImageUpload.css';
 
 function Progress() {
     return (
@@ -32,7 +32,7 @@ const styles = () => ({
     },
 });
 
-class DropzoneAreaExample extends Component {
+class ImageUpload extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -55,7 +55,8 @@ class DropzoneAreaExample extends Component {
                 },
                 streams: 'dynamic',
                 chunkSize: 'dynamic',
-                allowWebWorkers: true, // If you see issues with uploads, change this to false
+                // change this to false if there are any issues with upload
+                allowWebWorkers: true,
             },
             false
         );
@@ -82,26 +83,15 @@ class DropzoneAreaExample extends Component {
                         isNull: false,
                     },
                 });
-            } else {
-                console.log('On end error: ', error);
             }
-        });
-
-        uploadInstance.on('error', function(error, fileRef) {
-            console.log('Error during upload: ' + error);
         });
 
         uploadInstance.start();
     }
 
     handleDelete() {
-        let conf = confirm('Are you sure you want to delete the file?') || false;
-        if (conf == true) {
-            let id = this.state.uploadedFile.id;
-            Meteor.call('images.RemoveFile', id, function(err, res) {
-                if (err) console.log(err);
-            });
-        }
+        let id = this.state.uploadedFile.id;
+        Meteor.call('images.RemoveFile', id);
     }
 
     render() {
@@ -129,11 +119,11 @@ class DropzoneAreaExample extends Component {
     }
 }
 
-const styledDropZone = withStyles(styles)(DropzoneAreaExample);
+const styledImageUpload = withStyles(styles)(ImageUpload);
 export default withTracker(() => {
     const filesHandle = Meteor.subscribe('images');
     const docsReadyYet = filesHandle.ready();
     return {
         docsReadyYet,
     };
-})(styledDropZone);
+})(styledImageUpload);

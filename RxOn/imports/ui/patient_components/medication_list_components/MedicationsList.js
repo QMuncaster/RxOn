@@ -12,9 +12,9 @@ import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
 import deepOrange from '@material-ui/core/colors/deepOrange';
 import deepPurple from '@material-ui/core/colors/deepPurple';
-import { Prescriptions } from '../../collections/prescriptions.js';
+import { Prescriptions } from '../../../collections/prescriptions.js';
 import Medication from './Medication';
-import AddMedicationForm from './add_medication_stepper/AddMedicationForm';
+import AddMedicationForm from '../add_medication_stepper/AddMedicationForm';
 
 const useStyles = makeStyles(theme => ({
     orangeIcon: {
