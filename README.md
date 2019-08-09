@@ -1,23 +1,23 @@
 # RxOn
 
-### Progress 5 Description (for industry professionals on demo day)
+## Progress 5 Description (for industry professionals on demo day)
 
 RxOn is an online pharmacy platform that aims to simplify through digitalization the process of requesting and filling prescriptions. The basic functionality of a patient account includes uploading, requesting refills and viewing past prescriptions, while a pharmacy account has the ability to fill prescriptions, view all patients and view all existing prescriptions.
 
-### Project Description
+## Project Description
 
 Replace with screenshot of project and description of all implemented features!
 
 
-### Project Addendum
+## Project Addendum
 
-Code Style:
+### Code Style:
 
 We followed the recommended Meteor project structure:
 https://guide.meteor.com/structure.html.
 We use several ‘/server’ subdirectories to prevent our “secret” authentication methods from being exposed to the client (although our repo is public and our authentication is quite standard).
 
-Basic Technology Requirements: 
+### Basic Technology Requirements: 
  
 - HTML/JS/CSS (JSS)
 These technologies are the backbone of our app. The main front-end entrypoints are main.html and main.js, where the latter targets the former to render our (routed) components. We use CSS files to style the login page, and the rest of our styling through MUI is written with JSS, which compiles down to CSS.
@@ -34,7 +34,7 @@ We use Mongodb, a non-relational database, to store our prescription, user and o
 - Release Engineering
 By deploying on Heroku, our application can be accessed by the world through a web site, and the configuration of the server can be upgraded to meet more view volume. The Mongodb database we use is a cloud database provided by atlas. For assets storage such as pictures, we use AWS s3 for separate storage.
 
-Basic Contribution Requirements: 
+### Basic Contribution Requirements: 
  
 Leadership:
 - Omar took the initiative to make sure that every team member was able to contribute, by setting us up with Github Projects to coordinate work, and by explaining new technologies to other team members through videos. He also introduced and implemented several new technologies,  such as MUI to overhaul our UI and image uploading through AWS.
@@ -46,12 +46,12 @@ Leadership:
 - Quintin took the initiative on security for our core functionality. He setup authenticated routing to ensure only logged in users could access certain pages, and setup user accounts with roles to distinguish pharmacist and patient users. He also helped us transition to removing autopublish and insecure methods by setting up meteor methods and publications which include role-based security checks.
 
 
-Basic Functionality Requirements: 
+### Basic Functionality Requirements: 
 
 You’re at home, coughing up a storm with a hot water bottle on your chest and cold cloth on your forehead; the last thing you want to do is wait for hours to speak to a doctor at the walk-in clinic, pick up a prescription, travel to a pharmacy and have to wait another half hour to fill the prescription. RxOn is an online pharmacy platform that aims to simplify this process by eliminating the need to drop off your paper prescription and wait for it to be filled. A user can either assume the role of a patient or a pharmacist: after a patient uploads their prescription (inputting rx name, strength, dose, number of refills and picture of prescription), the pharmacist will fill it and change the status of the prescription online, signifying to the patient that their medication is ready for pick-up. Additionally, pharmacists can administer refills easily by the click of a button to those patients eligible for medication refills. RxOn not only benefits the patient users, but also offers a simple and efficient experience for pharmacist users through very accessible “Fill” and “Refill” buttons placed beside prescriptions, a clear patient list page that offers a preview of each patients medical history, and the ability to batch fill prescriptions to save time.
 
 
-Challenges, learning, and future directions:
+### Challenges, learning, and future directions:
 
 - We have records of several challenges we faced and overcame on Github. Examples include but are not limited to:
 https://github.com/QMuncaster/RxOn/issues/31
@@ -65,7 +65,7 @@ As every member in our group is part of the second-degree BCS program, we come f
 To progress further in our project, our next step would be to add a billing system to RxOn. Another stretch goal which would be impactful to add is an image recognition functionality, where the patient uploads a picture of their prescription and the information is pulled directly off the prescription, so the patient doesn’t have to enter all the information manually.
 
 
-Initiative and additional contributions: 
+### Initiative and additional contributions: 
 
 To create the ‘Add Medication Stepper’, we excelled in our understanding of React as seven components were needed to create this sophisticated feature of RxOn. Although challenging, one group member was able to utilize what he has learned from React through the individual assignment and research further to logically nest components to build the stepper.
 An additional technology we incorporated to unify our UI design was Material UI – although this was a new technology that required additionally learning from each of our team members, it allowed us to all work on different parts of the project whilst still maintaining a cohesive visual experience.
