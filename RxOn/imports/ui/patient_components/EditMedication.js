@@ -11,7 +11,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 
 export default function EditAction(props) {
-    const { _id, rxName, rxStrength, rxDose, refill } = props.ContainerProps;
+    const { _id, rxName, rxStrength, rxDose, refill, status } = props.ContainerProps;
     const [open, setOpen] = useState(false);
     const [values, setValues] = useState({
         rxName: rxName,
@@ -43,20 +43,18 @@ export default function EditAction(props) {
     }
 
     function handleSave() {
-        Meteor.call(
-            'prescriptions.edit',
-            _id,
-            values.rxName,
-            values.rxStrength,
-            values.rxDose,
-            values.refill
-        );
+        Meteor.call('prescriptions.edit', _id, rxName, rxStrength, rxDose, refill);
         setOpen(false);
     }
 
     return (
         <React.Fragment>
-            <IconButton variant="outlined" color="primary" onClick={handleClickOpen}>
+            <IconButton
+                variant="outlined"
+                color="primary"
+                onClick={handleClickOpen}
+                disabled={status === 'pending' ? false : true}
+            >
                 <EditIcon />
             </IconButton>
             <Dialog

@@ -10,7 +10,7 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import IconButton from '@material-ui/core/IconButton';
 
 export default function CancelAction(props) {
-    const { _id, rxName } = props.ContainerProps;
+    const { _id, rxName, status } = props.ContainerProps;
     const [open, setOpen] = useState(false);
 
     function handleClickOpen() {
@@ -28,13 +28,27 @@ export default function CancelAction(props) {
 
     return (
         <React.Fragment>
-            <IconButton variant="outlined" color="secondary" onClick={handleClickOpen}>
+            <IconButton
+                variant="outlined"
+                color="secondary"
+                onClick={handleClickOpen}
+                disabled={status === 'pending' ? false : true}
+            >
                 <CancelIcon />
             </IconButton>
-            <Dialog open={open} onClose={handleClose} aria-labelledby="cancel-dialog-title" maxWidth="xs">
-                <DialogTitle id="cancel-dialog-title">Cancel Medication Dispensing Request</DialogTitle>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="cancel-dialog-title"
+                maxWidth="xs"
+            >
+                <DialogTitle id="cancel-dialog-title">
+                    Cancel Medication Dispensing Request
+                </DialogTitle>
                 <DialogContent>
-                    <DialogContentText>Are you sure that you want to cancel your {rxName} medication?</DialogContentText>
+                    <DialogContentText>
+                        Are you sure that you want to cancel your {rxName} medication?
+                    </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
