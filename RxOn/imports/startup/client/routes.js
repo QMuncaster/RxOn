@@ -7,7 +7,7 @@ import { createBrowserHistory } from 'history';
 import Header from '../../ui/layouts/Header.js';
 import PatientProfile from '../../ui/patient_components/PatientProfile';
 import ImageUpload from '../../ui/patient_components/image_upload/FileUpload.js';
-import PatientList from "../../ui/pharmacist_components/PatientList";
+import PatientList from '../../ui/pharmacist_components/PatientList';
 import SignupPage from '../../ui/signup_components/Signup';
 import HomeComponent from '../../ui/layouts/HomeComponent';
 import Login from '../../ui/login_components/Login';
@@ -40,13 +40,17 @@ const theme = createMuiTheme({
 
 const LoginContainer = () => (
     <div className="login-container">
-        <Route exact path="/login" render={() => (Meteor.userId() ? <Redirect to="/home" /> : <Login />)} />
+        <Route
+            exact
+            path="/login"
+            render={() => (Meteor.userId() ? <Redirect to="/home" /> : <Login />)}
+        />
     </div>
 );
 
 const MainContainer = () => (
     <div className="main-container">
-        <Header/>
+        <Header />
         {/* shared route, different component based on user */}
         <PrivateRoute exact path="/" component={HomeComponent} />
         <PrivateRoute exact path="/home" component={HomeComponent} />
@@ -70,7 +74,10 @@ export const renderRoutes = ({ store }) => (
                 <CssBaseline />
                 <Switch>
                     <Route exact path="/login" component={LoginContainer} />
-                    <Route exact path="/logout" render={() => {
+                    <Route
+                        exact
+                        path="/logout"
+                        render={() => {
                             Meteor.logout(error => {
                                 if (error) {
                                     alert(error);
@@ -82,7 +89,7 @@ export const renderRoutes = ({ store }) => (
                     />
                     <Route exact path="/signup" component={SignupPage} />
                     {/* Has to be at the very bottom*/}
-                    <Route component={MainContainer}/>
+                    <Route component={MainContainer} />
                 </Switch>
             </Router>
         </Provider>
