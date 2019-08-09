@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {withTracker} from 'meteor/react-meteor-data';
+import React, { Component } from 'react';
+import { withTracker } from 'meteor/react-meteor-data';
 import IndividualPatient from './IndividualPatient';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
@@ -28,50 +28,43 @@ class PatientList extends Component {
         super(props);
     }
 
-
     renderPatients() {
         return this.props.users.map((user) => {
             //only show users who are patients, not pharamcies
+            // (THIS IS ALSO ENSURED ON SERVER SIDE)
             if (user.roles != 'admin') {
-                    return <IndividualPatient key={user._id} user={user} />
-                }
+                return <IndividualPatient key={user._id} user={user} />
             }
-        );x
+        }
+        );
     }
 
-
     render() {
-        const {classes} = this.props;
+        const { classes } = this.props;
         return (
 
-            <div className="pharmacy-profile-page-heading">
-                <div className="pharmacy-profile-page">
-                    <div className="Pharmacy-Headings">
-                        <Typography variant="h2" gutterBottom>
-                            Patient List
-                        </Typography>
-                        <div id="pendingBox">
-                            <ul>
-                                <Paper className={classes.root}>
-                                    <Table className={classes.table} style={{tableLayout: "auto"}}>
-                                        <TableHead>
-                                            <TableRow>
-                                                <TableCell align="left" style={{width: "25%"}}>Patient
+            <div style={{ paddingLeft: 150, paddingRight: 150, paddingTop: 75 }}>
+                <ul>
+                    <Typography variant="h5">
+                        Patient List
+                </Typography>
+                    <Paper className={classes.root}>
+                        <Table className={classes.table} style={{ tableLayout: "auto" }}>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell align="left" style={{ width: "25%" }}>Patient
                                                     Name</TableCell>
-                                                <TableCell align="center">Age</TableCell>
-                                                <TableCell align="center">Gender</TableCell>
-                                                <TableCell align="center">History</TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            {this.renderPatients()}
-                                        </TableBody>
-                                    </Table>
-                                </Paper>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                                    <TableCell align="center">Age</TableCell>
+                                    <TableCell align="center">Gender</TableCell>
+                                    <TableCell align="center">History</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {this.renderPatients()}
+                            </TableBody>
+                        </Table>
+                    </Paper>
+                </ul>
             </div>
 
         );
@@ -85,6 +78,7 @@ export default withTracker(() => {
 
     return {
         users: Meteor.users.find({}, {
-            sort: {lastname: 1}}).fetch()
+            sort: { lastname: 1 }
+        }).fetch()
     };
 })(styledComponent);
