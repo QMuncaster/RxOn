@@ -220,15 +220,13 @@ class ProfileView extends React.Component {
     }
 }
 
-
 export default withStyles(styles)(withTracker(() => {
-    let currentUser = Meteor.user();
-
+    Meteor.subscribe('userData');
+    let currentUser = Meteor.users.findOne();
     return {
-        // can't do below in the render fn, as then gives uncontrolled action in controlled component warning...
-        firstName: currentUser ? Meteor.user().firstname : '',
-        lastName: currentUser ? Meteor.user().lastname : '',
-        sex: currentUser ? Meteor.user().sex : '',
-        address: currentUser ? Meteor.user().address : '',
+        firstName:  currentUser ? currentUser.firstname : '',
+        lastName:   currentUser ? currentUser.lastname : '',
+        sex:        currentUser ? currentUser.sex : '',
+        address:    currentUser ? currentUser.address : '',
     };
 })(ProfileView));
