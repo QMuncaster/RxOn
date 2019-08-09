@@ -1,4 +1,5 @@
 import React from 'react';
+import pify from 'pify';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -6,7 +7,6 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
-import pify from 'pify';
 
 const styles = theme => ({
     textField: {
@@ -19,7 +19,11 @@ const styles = theme => ({
     },
 });
 
-const sexes = [{ label: 'Male', value: 'Male' }, { label: 'Female', value: 'Female' }, { label: 'Other', value: 'Other' }];
+const sexes = [
+    { label: 'Male', value: 'Male' },
+    { label: 'Female', value: 'Female' },
+    { label: 'Other', value: 'Other' },
+];
 
 class ProfileView extends React.Component {
     state = {
@@ -41,64 +45,72 @@ class ProfileView extends React.Component {
         address: '',
         addressError: false,
         addressErrorText: '',
-    }
+    };
 
     handleButtonClick = () => {
         if (this.state.fieldsDisabled) {
-            this.setState({ firstName: this.props.firstName })
-            this.setState({ lastName: this.props.lastName })
-            this.setState({ sex: this.props.sex })
-            this.setState({ address: this.props.address })
+            this.setState({ firstName: this.props.firstName });
+            this.setState({ lastName: this.props.lastName });
+            this.setState({ sex: this.props.sex });
+            this.setState({ address: this.props.address });
             this.setState({ fieldsDisabled: false });
         } else {
             this.handleSubmit();
         }
     };
 
-    handleChange = (name) => event => {
+    handleChange = name => event => {
         this.setState({ [name]: event.target.value });
     };
 
-    // function returns either the Meteor user info if not editing
-    // or the text from the state when editing
-    getValue = (field) => {
+    getValue = field => {
         if (!this.state.fieldsDisabled) {
             return this.state[field];
         }
-        // '' is a hack to avoid warning:
-        // A component is changing a controlled input of type text to be uncontrolled.
         return this.props[field] || '';
-    }
+    };
 
-    // bad code duplication of SignupForm.js
-    validateReqFields = (fields) => {
+    validateReqFields = fields => {
         let invalid = false;
         for (let f of fields) {
             if (!f.value) {
-                this.setState({ [f.error]: true, [f.text]: "Field is required." });
+                this.setState({ [f.error]: true, [f.text]: 'Field is required.' });
                 invalid = true;
-            }
-            else {
+            } else {
                 this.setState({ [f.error]: false });
             }
         }
         if (invalid) throw new Error();
         return true;
-    }
-    
+    };
+
     handleSubmit = async () => {
         this.setState({ isSubmitDisabled: true });
         try {
-            this.validateReqFields(
-                [
-                    { value: this.state.firstName, error: 'firstNameError', text: 'firstNameErrorText' },
-                    { value: this.state.lastName, error: 'lastNameError', text: 'lastNameErrorText' },
-                    { value: this.state.sex, error: 'sexError', text: 'sexErrorText' },
-                    { value: this.state.address, error: 'addressError', text: 'addressErrorText' },
-                ]
-            );
+            this.validateReqFields([
+                {
+                    value: this.state.firstName,
+                    error: 'firstNameError',
+                    text: 'firstNameErrorText',
+                },
+                {
+                    value: this.state.lastName,
+                    error: 'lastNameError',
+                    text: 'lastNameErrorText',
+                },
+                { value: this.state.sex, error: 'sexError', text: 'sexErrorText' },
+                {
+                    value: this.state.address,
+                    error: 'addressError',
+                    text: 'addressErrorText',
+                },
+            ]);
             await pify(Meteor.call)(
-                'account.edit', this.state.firstName, this.state.lastName, this.state.sex, this.state.address
+                'account.edit',
+                this.state.firstName,
+                this.state.lastName,
+                this.state.sex,
+                this.state.address
             );
             this.setState({ fieldsDisabled: true });
         } catch (error) {
@@ -112,24 +124,24 @@ class ProfileView extends React.Component {
 
             firstNameError: false,
             firstNameErrorText: '',
-    
+
             lastNameError: false,
             lastNameErrorText: '',
-    
+
             sexError: false,
             sexErrorText: '',
-    
+
             addressError: false,
             addressErrorText: '',
         });
-    }
+    };
 
     render() {
         const { classes } = this.props;
 
         return (
             <form noValidate autoComplete="off">
-                <div >
+                <div>
                     <TextField
                         required
                         id="firstName"
@@ -195,38 +207,47 @@ class ProfileView extends React.Component {
                     />
                 </div>
 
-                <Typography component="div" color='error'>
+                <Typography component="div" color="error">
                     <br />
                     {this.state.errorMessage}
                 </Typography>
 
                 <div>
                     <br />
-                    {/* edit or submit button */}
-                    <Button variant="contained" color="primary" onClick={this.handleButtonClick} disabled={this.isSubmitDisabled}>
-                        {this.state.fieldsDisabled ? "Edit" : "Submit"}
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={this.handleButtonClick}
+                        disabled={this.isSubmitDisabled}
+                    >
+                        {this.state.fieldsDisabled ? 'Edit' : 'Submit'}
                     </Button>
-
-                    {/* cancel button, only visible when above button is "Submit" */}
-                    {this.state.fieldsDisabled ?
-                        '' :
-                        <Button variant="contained" color="default" onClick={this.handleCancel}>
+                    {this.state.fieldsDisabled ? (
+                        ''
+                    ) : (
+                        <Button
+                            variant="contained"
+                            color="default"
+                            onClick={this.handleCancel}
+                        >
                             Cancel
                         </Button>
-                    }
+                    )}
                 </div>
             </form>
         );
     }
 }
 
-export default withStyles(styles)(withTracker(() => {
-    Meteor.subscribe('userData');
-    let currentUser = Meteor.users.findOne();
-    return {
-        firstName:  currentUser ? currentUser.firstname : '',
-        lastName:   currentUser ? currentUser.lastname : '',
-        sex:        currentUser ? currentUser.sex : '',
-        address:    currentUser ? currentUser.address : '',
-    };
-})(ProfileView));
+export default withStyles(styles)(
+    withTracker(() => {
+        Meteor.subscribe('userData');
+        let currentUser = Meteor.users.findOne();
+        return {
+            firstName: currentUser ? currentUser.firstname : '',
+            lastName: currentUser ? currentUser.lastname : '',
+            sex: currentUser ? currentUser.sex : '',
+            address: currentUser ? currentUser.address : '',
+        };
+    })(ProfileView)
+);
