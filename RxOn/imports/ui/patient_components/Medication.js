@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { withTracker } from 'meteor/react-meteor-data';
+
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -12,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import EditAction from './EditMedication';
 import CancelAction from './CancelMedication';
 import ViewImageAction from './ViewPrescriptionImage';
+import deepOrange from '@material-ui/core/colors/deepOrange';
+import deepPurple from '@material-ui/core/colors/deepPurple';
 
 const styles = () => ({
     root: {
@@ -22,6 +25,16 @@ const styles = () => ({
     },
     avatar: {
         margin: 10,
+    },
+    orangeAvatar: {
+        margin: 10,
+        color: '#fff',
+        backgroundColor: deepOrange[600],
+    },
+    purpleAvatar: {
+        margin: 10,
+        color: '#fff',
+        backgroundColor: deepPurple[500],
     },
 });
 
@@ -44,12 +57,33 @@ function Medication(props) {
     const name = ContainerProps.rxName + ' ' + ContainerProps.rxStrength;
     const directions = ContainerProps.rxDose;
     const refills = ContainerProps.refill;
+    const status = ContainerProps.status;
+
+    function returnStatus() {
+        if (status == 'pending') {
+            return 'P';
+        }
+
+        if (status == 'filled' || status == 'refilled') {
+            return 'F';
+        }
+    }
+
+    function returnColor() {
+        if (status == 'pending') {
+            return classes.orangeAvatar;
+        }
+
+        if (status == 'filled' || status == 'refilled') {
+            return classes.purpleAvatar;
+        }
+    }
 
     return (
         <List>
             <ListItem alignItems="flex-start" divider={true}>
                 <ListItemAvatar>
-                    <Avatar>PH</Avatar>
+                    <Avatar className={returnColor()}>{returnStatus()}</Avatar>
                 </ListItemAvatar>
                 <ListItemText
                     primary={name}
