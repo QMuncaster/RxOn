@@ -43,7 +43,14 @@ export default function EditAction(props) {
     }
 
     function handleSave() {
-        Meteor.call('prescriptions.edit', _id, rxName, rxStrength, rxDose, refill);
+        Meteor.call(
+            'prescriptions.edit',
+            _id,
+            values.rxName,
+            values.rxStrength,
+            values.rxDose,
+            values.refill
+        );
         setOpen(false);
     }
 

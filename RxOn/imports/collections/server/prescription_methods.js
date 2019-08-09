@@ -120,7 +120,8 @@ Meteor.methods({
         check(name, String);
         check(strength, String);
         check(dose, String);
-        //check(refill, Object);
+        check(refill, Number);
+        
         Prescriptions.update(
             { _id: id },
             { $set: { rxName: name, rxStrength: strength, rxDose: dose, refill: refill } }
