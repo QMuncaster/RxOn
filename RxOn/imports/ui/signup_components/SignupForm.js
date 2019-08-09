@@ -130,7 +130,6 @@ class SignupForm extends React.Component {
             });
             this.props.history.push('/home');
         } catch (error) {
-            console.log('error after submit: ', error);
             this.setState({ isSubmitDisabled: false, errorMessage: error.reason });
         }
     };

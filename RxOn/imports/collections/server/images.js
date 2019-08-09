@@ -14,7 +14,6 @@ const bound = Meteor.bindEnvironment(callback => {
 
 /* Check settings existence in `Meteor.settings` */
 if (s3Config && s3Config.key && s3Config.secret && s3Config.bucket && s3Config.region) {
-    console.log('in image config file');
     // Create a new S3 object
     const s3 = new S3({
         secretAccessKey: s3Config.secret,
