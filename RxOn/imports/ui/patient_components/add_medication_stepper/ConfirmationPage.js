@@ -5,6 +5,19 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 
+function PrescriptionLink(props) {
+    let link = props.imageLink;
+    if (link === '') {
+        return <ListItemText primary="No Prescription image uploaded" />;
+    } else {
+        return (
+            <Link href={link} target="_blank" color="primary">
+                Uploaded Prescription
+            </Link>
+        );
+    }
+}
+
 export default class ConfirmationPage extends Component {
     constructor(props) {
         super(props);
@@ -37,9 +50,7 @@ export default class ConfirmationPage extends Component {
                         <ListItemText primary={'Number of eligible refill: ' + refill} />
                     </ListItem>
                     <ListItem alignItems="flex-start" divider={true}>
-                        <Link href={imgLink} target="_blank" color="primary">
-                            Uploaded Prescription
-                        </Link>
+                        <PrescriptionLink imageLink={imgLink} />
                     </ListItem>
                 </List>
             </React.Fragment>
