@@ -32,6 +32,10 @@ const PrescriptionsSchema = new SimpleSchema({
         type: String,
         optional: true, // Just for now
     },
+    imgLink: {
+        type: String,
+        optional: true, // Just for now
+    },
     createdAt: {
         type: Date,
         // Force value to be current date (on server) upon insert
