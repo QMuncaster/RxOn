@@ -10,14 +10,18 @@ class HomeComponent extends Component {
     }
 
     render() {
-        if (Roles.userIsInRole(this.props.user, 'admin')) return <PrescriptionTable />;
-        else if (Roles.userIsInRole(this.props.user, 'patient')) return <MedicationsPage />;
-        else return null; // necessary so don't show patient page while waiting for user and role of an admin
+        if (Roles.userIsInRole(this.props.user, 'admin')) {
+            return <PrescriptionTable />;
+        } else if (Roles.userIsInRole(this.props.user, 'patient')) {
+            return <MedicationsPage />;
+        }
+        // React conditionaly rendering must return null if not any of the cases above
+        else return null;
     }
 }
 
 export default withTracker(() => {
     return {
-        user: Meteor.user()
+        user: Meteor.user(),
     };
 })(HomeComponent);
