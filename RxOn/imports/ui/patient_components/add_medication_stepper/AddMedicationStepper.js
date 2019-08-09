@@ -10,7 +10,6 @@ import Typography from '@material-ui/core/Typography';
 import MedicationInput from './MedicationInput';
 import DropZone from '../image_upload/DropZone';
 import ConfirmationPage from './ConfirmationPage';
-import Success from './Success';
 import { withTracker } from 'meteor/react-meteor-data';
 
 const styles = theme => ({
@@ -18,7 +17,9 @@ const styles = theme => ({
         width: '90%',
     },
     button: {
+        marginTop: theme.spacing(1),
         marginRight: theme.spacing(1),
+        marginBottom: theme.spacing(1),
     },
     instructions: {
         marginTop: theme.spacing(1),
@@ -58,20 +59,20 @@ class MedicationStepper extends Component {
         };
     }
 
-    handleNext = () => {
-        const { activeStep } = this.state;
-        this.setState({
-            activeStep: activeStep + 1,
-        });
-    };
-
     handleSubmit = () => {
-        const { activeStep, rxName, rxStrength, rxDose, refill, imgId, imgLink} = this.state;
+        const {
+            activeStep,
+            rxName,
+            rxStrength,
+            rxDose,
+            refill,
+            imgId,
+            imgLink,
+        } = this.state;
         const { firstname, lastname } = this.props.user;
         this.setState({
             activeStep: activeStep + 1,
         });
-        console.log('hadnle sumbuit: ', this.state);
         Meteor.call(
             'prescriptions.insert',
             rxName,
@@ -85,12 +86,18 @@ class MedicationStepper extends Component {
             (err, result) => {
                 if (err) {
                     alert('Medication Add Error');
-                    console.log(Meteor.user());
-                } else {
-                    console.log('result of insert: ', result);
                 }
             }
         );
+    };
+
+    handleClose = () => {};
+
+    handleNext = () => {
+        const { activeStep } = this.state;
+        this.setState({
+            activeStep: activeStep + 1,
+        });
     };
 
     handleBack = () => {
@@ -126,15 +133,13 @@ class MedicationStepper extends Component {
                 return <DropZone setLink={this.setViewLink} setId={this.setImgId} />;
             case 2:
                 return <ConfirmationPage values={values} />;
-            case 3:
-                return <Success />;
             default:
-                return 'Unknown step';
+                return null;
         }
     };
 
     render() {
-        const { classes } = this.props;
+        const { classes, handleClose } = this.props;
         const { activeStep, rxName, rxStrength, rxDose, refill, imgLink } = this.state;
         const values = { rxName, rxStrength, rxDose, refill, imgLink };
         const steps = ['Add Medication', 'Upload Prescription', 'Review and Submit'];
@@ -163,7 +168,9 @@ class MedicationStepper extends Component {
                             <Typography className={classes.instructions}>
                                 All steps completed - you're prescription has been sent!
                             </Typography>
-                            <Button className={classes.button}>Close</Button>
+                            <Button className={classes.button} onClick={handleClose}>
+                                Close
+                            </Button>
                         </div>
                     ) : (
                         <React.Fragment>
@@ -171,8 +178,7 @@ class MedicationStepper extends Component {
                             {this.getStepContent(activeStep, values)}
                             <br />
                             <Button
-                                disabled={activeStep === 0}
-                                onClick={this.handleBack}
+                                onClick={activeStep === 0 ? handleClose : this.handleBack}
                                 className={classes.button}
                             >
                                 {activeStep === 0 ? 'Cancel' : 'Back'}
@@ -202,6 +208,6 @@ const styledStepper = withStyles(styles)(MedicationStepper);
 export default withTracker(() => {
     Meteor.subscribe('userData');
     return {
-        user: Meteor.user()
+        user: Meteor.user(),
     };
 })(styledStepper);
