@@ -29,8 +29,6 @@ class PatientList extends Component {
 
     renderPatients() {
         return this.props.users.map(user => {
-            //only show users who are patients, not pharamcies
-            // (THIS IS ALSO ENSURED ON SERVER SIDE)
             if (user.roles != 'admin') {
                 return <IndividualPatient key={user._id} user={user} />;
             }
@@ -69,9 +67,6 @@ export default withTracker(() => {
     Meteor.subscribe('userList');
 
     return {
-        users: Meteor.users.find({},
-            {
-                sort: { lastname: 1 },
-            }).fetch(),
+        users: Meteor.users.find({}, { sort: { lastname: 1 } }).fetch(),
     };
 })(styledComponent);

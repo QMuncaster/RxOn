@@ -53,7 +53,7 @@ class SignupForm extends React.Component {
             emailError: false,
             emailErrorText: '',
 
-            password: '', // don't know if this is good practice
+            password: '',
             passwordError: false,
             passwordErrorText: '',
 
@@ -278,4 +278,5 @@ SignupForm.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(withRouter(SignupForm));
+const styledSignup = withStyles(styles)(SignupForm);
+export default withRouter(styledSignup);

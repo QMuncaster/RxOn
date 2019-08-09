@@ -7,7 +7,6 @@ import ViewMedicationsDialog from './ViewMedications';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
-
 const styles = theme => ({
     root: {
         ...theme.mixins.gutters(),
@@ -38,7 +37,6 @@ class IndividualPatient extends Component {
 }
 
 const styledComponent = withStyles(styles)(IndividualPatient);
-// pass in props, props is passed from parent automatically so that we can filter prescriptions by user._id
 export default withTracker(props => {
     Meteor.subscribe('prescriptions.all');
     return {
