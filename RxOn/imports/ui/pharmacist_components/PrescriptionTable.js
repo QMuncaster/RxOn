@@ -74,6 +74,7 @@ class PrescriptionTable extends Component {
                     sort: false,
                     empty: true,
                     searchable: false,
+                    filter: false,
                     customBodyRender: (value, tableMeta, updateValue) => {
                         let id,
                             status,
