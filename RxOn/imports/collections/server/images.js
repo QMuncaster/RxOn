@@ -1,4 +1,3 @@
-// THIS FILE MUST BE IN A "server" DIRECTORY INSIDE the "imports" DIRECTORY.
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
 import { Random } from 'meteor/random';
@@ -7,23 +6,20 @@ import stream from 'stream';
 import S3 from 'aws-sdk/clients/s3';
 import fs from 'fs';
 
-// access S3 config and keys from settings.json
+/* access S3 config and keys from settings.json */
 const s3Config = Meteor.settings.s3 || {};
-// https://guide.meteor.com/using-npm-packages.html#bind-environment
 const bound = Meteor.bindEnvironment(callback => {
     return callback();
 });
 
 /* Check settings existence in `Meteor.settings` */
-/* This is the best practice for app security */
 if (s3Config && s3Config.key && s3Config.secret && s3Config.bucket && s3Config.region) {
-    console.log("in image config file");
+    console.log('in image config file');
     // Create a new S3 object
     const s3 = new S3({
         secretAccessKey: s3Config.secret,
         accessKeyId: s3Config.key,
         region: s3Config.region,
-        // sslEnabled: true, // optional
         httpOptions: {
             timeout: 6000,
             agent: false,
@@ -32,29 +28,23 @@ if (s3Config && s3Config.key && s3Config.secret && s3Config.bucket && s3Config.r
 
     // Declare the Meteor file collection on the Server
     export const Images = new FilesCollection({
-        debug: false, // Change to `true` for debugging
+        debug: false,
         storagePath: 'assets/app/uploads/uploadedFiles',
         collectionName: 'Images',
         // Disallow Client to execute remove, use the Meteor.method
         allowClientCode: false,
 
-        // Start moving files to AWS:S3
+        // Start moving files to AWS
         // after fully received by the Meteor server
         onAfterUpload(fileRef) {
             // Run through each of the uploaded file
             _.each(fileRef.versions, (vRef, version) => {
-                // We use Random.id() instead of real file's _id
+                // Random.id() is used instead of real _id
                 // to secure files from reverse engineering on the AWS client
-                const filePath = 'files/' + Random.id() + '-' + version + '.' + fileRef.extension;
-
-                // Create the AWS:S3 object.
-                // Feel free to change the storage class from, see the documentation,
-                // `STANDARD_IA` is the best deal for low access files.
-                // Key is the file name we are creating on AWS:S3, so it will be like files/XXXXXXXXXXXXXXXXX-original.XXXX
-                // Body is the file stream we are sending to AWS
+                const filePath =
+                    'files/' + Random.id() + '-' + version + '.' + fileRef.extension;
                 s3.putObject(
                     {
-                        // ServerSideEncryption: 'AES256', // Optional
                         StorageClass: 'STANDARD',
                         Bucket: s3Config.bucket,
                         Key: filePath,
@@ -68,7 +58,9 @@ if (s3Config && s3Config.key && s3Config.secret && s3Config.bucket && s3Config.r
                             } else {
                                 // Update FilesCollection with link to the file at AWS
                                 const upd = { $set: {} };
-                                upd['$set']['versions.' + version + '.meta.pipePath'] = filePath;
+                                upd['$set'][
+                                    'versions.' + version + '.meta.pipePath'
+                                ] = filePath;
 
                                 this.collection.update(
                                     {
@@ -79,7 +71,7 @@ if (s3Config && s3Config.key && s3Config.secret && s3Config.bucket && s3Config.r
                                         if (updError) {
                                             console.error(updError);
                                         } else {
-                                            // Unlink original files from FS after successful upload to AWS:S3
+                                            /* Unlink original files from FS after successful upload to AWS */
                                             this.unlink(
                                                 this.collection.findOne(fileRef._id),
                                                 version
@@ -94,8 +86,7 @@ if (s3Config && s3Config.key && s3Config.secret && s3Config.bucket && s3Config.r
             });
         },
 
-        // Intercept access to the file
-        // And redirect request to AWS:S3
+        /* Intercept access to the file redirect request to AWS */
         interceptDownload(http, fileRef, version) {
             let path;
 
@@ -109,15 +100,9 @@ if (s3Config && s3Config.key && s3Config.secret && s3Config.bucket && s3Config.r
                 path = fileRef.versions[version].meta.pipePath;
             }
 
+            /* If file is successfully moved to AWS:S3 pipe request to AWS
+            this way the original link will stay always secure */
             if (path) {
-                // If file is successfully moved to AWS:S3
-                // We will pipe request to AWS:S3
-                // So, original link will stay always secure
-
-                // To force ?play and ?download parameters
-                // and to keep original file name, content-type,
-                // content-disposition, chunked "streaming" and cache-control
-                // we're using low-level .serve() method
                 const opts = {
                     Bucket: s3Config.bucket,
                     Key: path,
@@ -130,7 +115,6 @@ if (s3Config && s3Config.key && s3Config.secret && s3Config.bucket && s3Config.r
                     const start = parseInt(array[1]);
                     let end = parseInt(array[2]);
                     if (isNaN(end)) {
-                        // Request data from AWS:S3 by small chunks
                         end = start + this.chunkSize - 1;
                         if (end >= vRef.size) {
                             end = vRef.size - 1;
@@ -152,8 +136,10 @@ if (s3Config && s3Config.key && s3Config.secret && s3Config.bucket && s3Config.r
                             http.request.headers.range &&
                             this.httpResponse.headers['content-range']
                         ) {
-                            // Set proper range header in according to what is returned from AWS:S3
-                            http.request.headers.range = this.httpResponse.headers['content-range']
+                            /* Set proper range header in according to what is returned from AWS:S3 */
+                            http.request.headers.range = this.httpResponse.headers[
+                                'content-range'
+                            ]
                                 .split('/')[0]
                                 .replace('bytes ', 'bytes=');
                         }
@@ -172,20 +158,20 @@ if (s3Config && s3Config.key && s3Config.secret && s3Config.bucket && s3Config.r
 
                 return true;
             }
-            // While file is not yet uploaded to AWS:S3
-            // It will be served file from FS
+            /* Serve file from FS While file is not yet uploaded to AWS */
             return false;
         },
     });
 
-    // Intercept FilesCollection's remove method to remove file from AWS:S3
+    /* Intercept remove method to remove file from AWS:S3 */
     const _origRemove = Images.remove;
     Images.remove = function(search) {
         const cursor = this.collection.find(search);
         cursor.forEach(fileRef => {
             _.each(fileRef.versions, vRef => {
                 if (vRef && vRef.meta && vRef.meta.pipePath) {
-                    // Remove the object from AWS:S3 first, then we will call the original FilesCollection remove
+                    /* Remove the object from AWS first, 
+                    then call the original FilesCollection remove */
                     s3.deleteObject(
                         {
                             Bucket: s3Config.bucket,
@@ -203,7 +189,7 @@ if (s3Config && s3Config.key && s3Config.secret && s3Config.bucket && s3Config.r
             });
         });
 
-        //remove original file from database
+        /* Remove original file record from database */
         _origRemove.call(this, search);
     };
 } else {
