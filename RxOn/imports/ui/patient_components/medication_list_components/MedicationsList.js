@@ -14,7 +14,7 @@ import deepOrange from '@material-ui/core/colors/deepOrange';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 import { Prescriptions } from '../../../collections/prescriptions.js';
 import Medication from './Medication';
-import AddMedicationForm from '../add_medication_stepper/AddMedicationForm';
+import AddMedicationDialog from '../add_medication_stepper/AddMedicationDialog';
 
 const useStyles = makeStyles(theme => ({
     orangeIcon: {
@@ -116,7 +116,7 @@ class MedicationsPage extends Component {
                                     </Typography>
                                 </Grid>
                                 <Grid item>
-                                    <AddMedicationForm />
+                                    <AddMedicationDialog />
                                 </Grid>
                             </Grid>
                             <Typography variant="body1">

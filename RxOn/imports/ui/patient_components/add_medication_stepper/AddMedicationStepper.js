@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import { Meteor } from 'meteor/meteor';
+import { withTracker } from 'meteor/react-meteor-data';
+import { withStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -10,7 +11,6 @@ import Typography from '@material-ui/core/Typography';
 import MedicationInput from './MedicationInput';
 import ImageUpload from './ImageUpload';
 import ConfirmationPage from './ConfirmationPage';
-import { withTracker } from 'meteor/react-meteor-data';
 
 const styles = theme => ({
     root: {

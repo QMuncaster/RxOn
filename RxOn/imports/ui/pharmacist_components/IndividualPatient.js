@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Prescriptions } from '../../collections/prescriptions';
-import ViewMedicationsDialog from './ViewMedications';
+import ViewMedicationsDialog from './ViewMedicationsDialog';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 

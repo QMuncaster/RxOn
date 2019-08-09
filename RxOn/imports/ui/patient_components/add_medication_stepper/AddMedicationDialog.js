@@ -30,7 +30,7 @@ export default function AddAction() {
             >
                 <DialogTitle id="edit-dialog-title">Add New Medication</DialogTitle>
                 <DialogContent>
-                    <AddMedicationStepper handleClose={handleClose}/>
+                    <AddMedicationStepper handleClose={handleClose} />
                 </DialogContent>
             </Dialog>
         </React.Fragment>
