@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
-import Button from '@material-ui/core/Button';
 import { Prescriptions } from '../../collections/prescriptions';
 import MUIDataTable from 'mui-datatables';
 import { Grid } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
+import PrescriptionTableActions from './PrescriptionTableActions';
 
 function Progress() {
-    return <CircularProgress size={24} style={{ marginLeft: 15, position: 'relative', top: 4 }} />;
+    return (
+        <CircularProgress
+            size={24}
+            style={{ marginLeft: 15, position: 'relative', top: 4 }}
+        />
+    );
 }
 
 class PrescriptionTable extends Component {
@@ -35,22 +40,10 @@ class PrescriptionTable extends Component {
             retVal['Strength'] = px.rxStrength;
             retVal['Request Date'] = px.createdAt.toDateString();
             retVal['Refills Remaining'] = px.refill;
+            retVal['Link'] = px.imgLink;
             return retVal;
         });
         const columns = [
-            { name: 'Status' },
-            
-            { name: 'Request Date' },
-
-            {
-                name: 'Name',
-                options: {
-                    filterType: 'textField',
-                },
-            },
-
-            { name: 'Strength' },
-
             {
                 name: '_id',
                 options: {
@@ -58,61 +51,45 @@ class PrescriptionTable extends Component {
                     filter: false,
                 },
             },
-
-            { name: 'Refills Remaining' },
-
+            { name: 'Status' },
             {
-                name: 'Refill Action',
+                name: 'Name',
                 options: {
-                    sort: false,
-                    empty: true,
-                    customBodyRender: (value, tableMeta, updateValue) => {
-                        let _id, _status, _refill;
-                        if (tableMeta.rowData !== undefined) {
-                            _id = tableMeta.rowData[4];
-                            _status = tableMeta.rowData[0];
-                            _refill = tableMeta.rowData[5];
-                        }
-
-                        if ((_status == 'filled' || _status == 'refilled') && _refill > 0) {
-
-                            return (
-                                <Button
-                                    size="small"
-                                    variant="outlined"
-                                    color="primary"
-                                    onClick={() => { Meteor.call('prescriptions.refill', _id);}} >
-                                    Refill
-                                </Button>
-                            );
-                        }
-                    },
+                    filterType: 'textField',
                 },
             },
-
+            { name: 'Strength' },
+            { name: 'Request Date' },
+            { name: 'Refills Remaining' },
             {
-                name: 'Fill Action',
+                name: 'Link',
+                options: {
+                    display: 'excluded',
+                    filter: false,
+                },
+            },
+            {
+                name: 'Actions',
                 options: {
                     sort: false,
                     empty: true,
+                    searchable: false,
+                    filter: false,
                     customBodyRender: (value, tableMeta, updateValue) => {
-                        let _id, _status;
+                        let id,
+                            status,
+                            imgLink,
+                            rxName = '';
+                        let refill = 0;
                         if (tableMeta.rowData !== undefined) {
-                            _id = tableMeta.rowData[4];
-                            _status = tableMeta.rowData[0];
+                            id = tableMeta.rowData[0];
+                            status = tableMeta.rowData[1];
+                            rxName = tableMeta.rowData[2];
+                            refill = tableMeta.rowData[5];
+                            imgLink = tableMeta.rowData[6];
                         }
-
-                        if (_status == 'pending') {
-                            return (
-                                <Button
-                                    size="small"
-                                    variant="outlined"
-                                    color="primary"
-                                    onClick={() => {Meteor.call('prescriptions.fill', _id);}}>
-                                    Fill
-                            </Button>
-                            );
-                        }
+                        let values = { id, status, rxName, refill, imgLink };
+                        return <PrescriptionTableActions ContainerProps={values} />;
                     },
                 },
             },
@@ -127,7 +104,7 @@ class PrescriptionTable extends Component {
         return (
             <div style={{ padding: 20 }}>
                 <br />
-                <Grid container spacing={32} alignItems="stretch">
+                <Grid container spacing={0} alignItems="stretch">
                     <Grid item xs={12}>
                         <MUIDataTable
                             title={
