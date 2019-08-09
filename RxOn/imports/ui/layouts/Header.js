@@ -21,7 +21,6 @@ import ProfileIcon from '@material-ui/icons/accountBox';
 import PatientsIcon from '@material-ui/icons/supervisorAccount';
 import ProfileMenu from './ProfileMenu';
 
-
 const drawerWidth = 200;
 const linkStyle = {
     color: 'black',
@@ -78,7 +77,7 @@ const useStyles = makeStyles(theme => ({
 function Header(props) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-    const { user } = props;
+    const { user, firstName } = props;
     let tabs = ['Home', 'Profile'];
     let links = ['/home', '/profile', '/patients'];
 
@@ -126,7 +125,7 @@ function Header(props) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h5" noWrap className={classes.grow}>
-                        Welcome
+                        {firstName ? 'Welcome ' + firstName : 'Welcome'}
                     </Typography>
                     <ProfileMenu />
                 </Toolbar>
@@ -162,7 +161,10 @@ function Header(props) {
 }
 
 export default withTracker(() => {
+    Meteor.subscribe('userData');
+    let user = Meteor.users.findOne();
     return {
-        user: Meteor.user(),
+        user,
+        firstName: user ? user.firstname : ' ',
     };
 })(Header);
