@@ -17,8 +17,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
-import ProfileIcon from '@material-ui/icons/accountBox';
-import PatientsIcon from '@material-ui/icons/supervisorAccount';
+import ProfileIcon from '@material-ui/icons/AccountBox';
+import PatientsIcon from '@material-ui/icons/SupervisorAccount';
 import ProfileMenu from './ProfileMenu';
 
 const drawerWidth = 200;
