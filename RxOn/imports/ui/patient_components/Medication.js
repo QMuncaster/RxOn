@@ -11,6 +11,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import EditAction from './EditMedication';
 import CancelAction from './CancelMedication';
+import ViewImageAction from './ViewPrescriptionImage';
 
 const styles = () => ({
     root: {
@@ -24,49 +25,29 @@ const styles = () => ({
     },
 });
 
-
 function renderActions(props) {
     const { ContainerProps } = props;
-    const status = ContainerProps.status;
 
-    if ((props.hideActions == undefined || props.hideActions == false) && (status == 'pending')) {
-
+    if (props.hideActions == undefined || props.hideActions == false) {
         return (
             <ListItemSecondaryAction>
-                <EditAction ContainerProps={props.ContainerProps} />
-                <CancelAction ContainerProps={props.ContainerProps} />
+                <EditAction ContainerProps={ContainerProps} />
+                <CancelAction ContainerProps={ContainerProps} />
+                <ViewImageAction ContainerProps={ContainerProps} />
             </ListItemSecondaryAction>
-        )
+        );
     }
 }
-
-
 
 function Medication(props) {
     const { classes, ContainerProps } = props;
     const name = ContainerProps.rxName + ' ' + ContainerProps.rxStrength;
     const directions = ContainerProps.rxDose;
-   const refills = ContainerProps.refill;
-
-    // let link = ContainerProps.imgId
-    //     ? Images.findOne({ _id: ContainerProps.imgId }).link()
-    //     : '';
-
-    // function handleClick() {
-    //     console.log('the img id is ', ContainerProps.imgId);
-    //     console.log(
-    //         'the img link is ',
-    //         Images.findOne({ _id: ContainerProps.imgId }).link()
-    //     );
-    //     //let link = Images.findOne({ _id: ContainerProps.imgId }).link();
-    // }
+    const refills = ContainerProps.refill;
 
     return (
         <List>
-            <ListItem
-                alignItems="flex-start"
-                divider={true}
-            >
+            <ListItem alignItems="flex-start" divider={true}>
                 <ListItemAvatar>
                     <Avatar>PH</Avatar>
                 </ListItemAvatar>
@@ -88,16 +69,23 @@ function Medication(props) {
                             >
                                 {directions}
                             </Typography>
-                            <br/>
-                            <Typography component="span" className={classes.inline} color="textSecondary">
+                            <br />
+                            <Typography
+                                component="span"
+                                className={classes.inline}
+                                color="textSecondary"
+                            >
                                 Refills:{' '}
                             </Typography>
-                            <Typography component="span" className={classes.inline} color="textPrimary">
+                            <Typography
+                                component="span"
+                                className={classes.inline}
+                                color="textPrimary"
+                            >
                                 {refills}
                             </Typography>
                         </React.Fragment>
                     }
-
                 />
                 {renderActions(props)}
             </ListItem>
