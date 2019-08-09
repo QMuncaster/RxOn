@@ -53,8 +53,8 @@ class MedicationStepper extends Component {
             rxStrength: '',
             rxDose: '',
             refill: 0,
-            imgLink: '',
             imgId: '',
+            imgLink: '',
         };
     }
 
@@ -66,7 +66,7 @@ class MedicationStepper extends Component {
     };
 
     handleSubmit = () => {
-        const { activeStep, rxName, rxStrength, rxDose, refill, imgId } = this.state;
+        const { activeStep, rxName, rxStrength, rxDose, refill, imgId, imgLink} = this.state;
         const { firstname, lastname } = this.props.user;
         this.setState({
             activeStep: activeStep + 1,
@@ -81,6 +81,7 @@ class MedicationStepper extends Component {
             lastname,
             refill,
             imgId,
+            imgLink,
             (err, result) => {
                 if (err) {
                     alert('Medication Add Error');
