@@ -6,7 +6,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Medication from '../patient_components/Medication';
+import Medication from '../patient_components/medication_list_components/Medication';
 import IconButton from '@material-ui/core/IconButton';
 
 export default function ViewMedicationsDialog(props) {

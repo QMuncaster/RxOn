@@ -4,7 +4,7 @@ import { Router, Route, Redirect, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 // route components
 import Header from '../../ui/layouts/Header.js';
-import PatientProfile from '../../ui/patient_components/PatientProfile';
+import PatientProfile from '../../ui/patient_components/profile_components/PatientProfile';
 import PatientList from '../../ui/pharmacist_components/PatientList';
 import SignupPage from '../../ui/signup_components/Signup';
 import HomeComponent from '../../ui/layouts/HomeComponent';

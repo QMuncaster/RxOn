@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
-import ViewPrescriptionImage from '../patient_components/ViewPrescriptionImage';
+import ViewMedicationImage from '../patient_components/medication_list_components/ViewMedicationImage';
 
 const options = ['Fill', 'Refill'];
 
@@ -87,7 +87,7 @@ export default function SplitButton(props) {
                         <ArrowDropDownIcon />
                     </Button>
                 </ButtonGroup>
-                <ViewPrescriptionImage ContainerProps={{ rxName, imgLink }} />
+                <ViewMedicationImage ContainerProps={{ rxName, imgLink }} />
                 <Popper open={open} anchorEl={anchorRef.current} transition>
                     {({ TransitionProps, placement }) => (
                         <Grow
