@@ -8,11 +8,6 @@ const PrescriptionsSchema = new SimpleSchema({
     _id: String,
     patientId: {
         type: String,
-        defaultValue: 'fake1234',
-    },
-    pharmacyId: {
-        type: String,
-        defaultValue: 'fake1234',
     },
     firstName: String,
     lastName: String,
