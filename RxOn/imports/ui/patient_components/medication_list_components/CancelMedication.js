@@ -10,7 +10,7 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import IconButton from '@material-ui/core/IconButton';
 
 export default function CancelAction(props) {
-    const { _id, rxName, status } = props.ContainerProps;
+    const { _id, rxName, status, imgId } = props.ContainerProps;
     const [open, setOpen] = useState(false);
 
     function handleClickOpen() {
@@ -23,6 +23,9 @@ export default function CancelAction(props) {
 
     function handleCancel() {
         Meteor.call('prescriptions.remove', _id);
+        if (imgId !== undefined && imgId !== '') {
+            Meteor.call('images.RemoveFile', imgId);
+        }
         setOpen(false);
     }
 
