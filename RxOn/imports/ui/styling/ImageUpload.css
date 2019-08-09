@@ -1,0 +1,15 @@
+div[aria-describedby='client-snackbar'][class*=' SnackbarContentWrapper-success'] {
+    background-color: #3cd4a0;
+}
+
+div[aria-describedby='client-snackbar'][class*=' SnackbarContentWrapper-info'] {
+    background-color: #9013fe;
+}
+
+div[aria-describedby='client-snackbar'][class*=' SnackbarContentWrapper-warning'] {
+    background-color: #ffc260;
+}
+
+p[class*='DropzoneArea-dropzoneParagraph'] {
+    font-size: 1rem;
+}
