@@ -32,7 +32,7 @@ export default function ViewPrescriptionImage(props) {
         <React.Fragment>
             <IconButton
                 className={clsx('fas fa-file-prescription')}
-                color="default"
+                color="primary"
                 onClick={handleClickOpen}
                 disabled={imgLink === undefined || imgLink === '' ? true : false}
             />

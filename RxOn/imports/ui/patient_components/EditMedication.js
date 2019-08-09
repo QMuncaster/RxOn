@@ -51,7 +51,7 @@ export default function EditAction(props) {
         <React.Fragment>
             <IconButton
                 variant="outlined"
-                color="primary"
+                color="default"
                 onClick={handleClickOpen}
                 disabled={status === 'pending' ? false : true}
             >
