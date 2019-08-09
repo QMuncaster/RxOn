@@ -1,53 +1,56 @@
-import React, { Component } from "react";
-import "../styling/Login.css"
-import LoginForm from "./LoginForm";
-import { SubmissionError } from "redux-form";
+import React, { Component } from 'react';
 import pify from 'pify';
-import { withRouter } from "react-router-dom";
+import { SubmissionError } from 'redux-form';
+import { withRouter } from 'react-router-dom';
+import LoginForm from './LoginForm';
+import '../styling/Login.css';
 
 class Login extends Component {
-
-  constructor(){
-    super();
-    this.state = {
-      isSubmitDisabled: false
-    };
-  }
-
-  handleLoginSubmit = async (values) => {
-    this.setState({ isSubmitDisabled: true });
-
-    try {
-      // I had to convert login function to a promise instead of using its callback
-      // Otherwise the callback would lose the SubmissionError functionality for showing error on form
-      // I tried using Meteor's callAsync to make it sync but then it couldn't handle errors...
-      await pify(Meteor.loginWithPassword)({ email: values.userName }, values.password);
-      this.props.history.push('/home');
-    } catch (error) {
-      this.setState({ isSubmitDisabled: false });
-      throw new SubmissionError({
-        password: "Invalid login."
-      });
+    constructor() {
+        super();
+        this.state = {
+            isSubmitDisabled: false,
+        };
     }
-  }
 
-  handleCreateAccount = () => {
-    this.props.history.push('/signup')
-  }
+    handleLoginSubmit = async values => {
+        this.setState({ isSubmitDisabled: true });
 
-  render() {
-    return (
-      <div>
-        <div className="Login Login-header">
-          <h1 className="Login__header">RxOn Login</h1>
-          <div className="Login_form">
-          <LoginForm onSubmit={this.handleLoginSubmit} isSubmitDisabled={this.state.isSubmitDisabled} />
-          </div>
-        </div>
+        try {
+            // login function using a promise instead of using its callback
+            // Otherwise the callback would lose the SubmissionError functionality for showing error on form
+            await pify(Meteor.loginWithPassword)(
+                { email: values.userName },
+                values.password
+            );
+            this.props.history.push('/home');
+        } catch (error) {
+            this.setState({ isSubmitDisabled: false });
+            throw new SubmissionError({
+                password: 'Invalid login.',
+            });
+        }
+    };
 
-      </div>
-    );
-  }
+    handleCreateAccount = () => {
+        this.props.history.push('/signup');
+    };
+
+    render() {
+        return (
+            <div>
+                <div className="Login Login-header">
+                    <h1 className="Login__header">RxOn Login</h1>
+                    <div className="Login_form">
+                        <LoginForm
+                            onSubmit={this.handleLoginSubmit}
+                            isSubmitDisabled={this.state.isSubmitDisabled}
+                        />
+                    </div>
+                </div>
+            </div>
+        );
+    }
 }
 
 export default withRouter(Login);

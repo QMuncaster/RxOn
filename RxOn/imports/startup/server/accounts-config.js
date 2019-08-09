@@ -21,10 +21,6 @@ Accounts.validateNewUser(function (user) {
     return true;
 });
 
-
-// Deny all client-side updates to user documents
-// MAY NEED TO UNDO THIS WHEN WE IMPLEMENT UPDATING USER INFO
-// https://guide.meteor.com/accounts.html#dont-use-profile
 Meteor.users.deny({
     update() { return true; }
 });
