@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
-import { minLength, maxLength, required } from "./validation";
+import { minLength, maxLength, required } from "./validationFunctions";
 import LoginFormInput from "./LoginFormInput";
 import Button from '@material-ui/core/Button';
 import "../styling/LoginForm.css";
