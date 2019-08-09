@@ -6,14 +6,11 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Link from '@material-ui/core/Link';
 import IconButton from '@material-ui/core/IconButton';
 import ModalImage from 'react-modal-image';
 
 export default function ViewPrescriptionImage(props) {
     const { rxName, imgLink } = props.ContainerProps;
-    console.log('view image comtaiomer proes: ', props.ContainerProps);
-
     const [open, setOpen] = useState(false);
 
     React.useEffect(() => {
@@ -46,7 +43,7 @@ export default function ViewPrescriptionImage(props) {
                 maxWidth="xs"
             >
                 <DialogTitle id="cancel-dialog-title">
-                    Uploaded Prescription Image
+                    Uploaded Prescription Image for {rxName}
                 </DialogTitle>
                 <DialogContent>
                     <ModalImage
