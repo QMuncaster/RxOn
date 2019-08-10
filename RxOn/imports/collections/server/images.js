@@ -1,3 +1,9 @@
+/*Citation: 
+This code was copied from the documentation of Meteor files with very little modification. 
+The documentation indicated that users of the library who want to integrate 
+with AWS:S3 should use this code.
+link for reference: https://github.com/VeliovGroup/Meteor-Files/wiki/AWS-S3-Integration
+*/
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
 import { Random } from 'meteor/random';
