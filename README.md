@@ -67,6 +67,8 @@ To progress further in our project, our next step would be to add a billing syst
 
 ### Initiative and additional contributions: 
 
-- To create the ‘Add Medication Stepper’, we excelled in our understanding of React as five components were needed to create this sophisticated feature of RxOn. Although challenging, one group member was able to utilize what he has learned from React through the individual assignment and research further to logically nest components to build the stepper.
-- An additional technology we incorporated to unify our UI design was Material UI – although this was a new technology that required additionally learning from each of our team members, it allowed us to all work on different parts of the project whilst still maintaining a cohesive visual experience.
-- An RxOn feature that shows initiative from our team is the [insert information about image upload and AWS cloud]
+- To create the ‘Add Medication Stepper’, we excelled in our understanding of React as five components were needed to create this sophisticated UI piece of RxOn. The goal was to provide a good user experience and to make the process of adding medication fault tolerant. Although challenging, we were able to utilize what was learned from React through the individual assignments and research further to logically nest components to build the stepper.
+
+- An additional technology we incorporated to unify our UI design was Material UI – although this was a new technology that required additionally learning from each of our team members, it allowed us to all work on different parts of the project whilst still maintaining a cohesive visual experience and lessened the burden of maintaining several style sheets.
+
+- A RxOn feature that shows initiative from our team is the image upload feature to AWS S3. We wanted to store images uploaded by user and wanted to store them in high quality so that pharmacist user can clearly see the details of prescription image. Therefore going with a cloud storage service was the best option. Using meteor file library we were able to have a high performance image upload functionality. 
