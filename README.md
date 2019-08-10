@@ -54,9 +54,9 @@ You’re at home, coughing up a storm with a hot water bottle on your chest and 
 ### Challenges, learning, and future directions:
 
 - We have records of several challenges we faced and overcame on Github. Examples include but are not limited to:
-⋅⋅* https://github.com/QMuncaster/RxOn/issues/31
-⋅⋅* https://github.com/QMuncaster/RxOn/pull/63
-⋅⋅* https://github.com/QMuncaster/RxOn/pull/53
+ - https://github.com/QMuncaster/RxOn/issues/31
+ - https://github.com/QMuncaster/RxOn/pull/63
+ - https://github.com/QMuncaster/RxOn/pull/53
 
 - We also overcame several non-technical challenges:
 As every member in our group is part of the second-degree BCS program, we come from a vast variety of backgrounds and skill-levels. Some of us had already worked on significant CS group projects before, while others had barely used GitHub. Navigating through the different skills levels and ensuring we were all confidently able to complete work and solve problems was a challenge in the beginning of the project, however we will able to land on solid ground where each member felt secure and could make significant contributions to the project. To achieve this, we recorded videos explaining solutions whenever a group member had a question and posted it in our group chat – this allowed us to easily re-watch videos whenever we had a similar problem or needed to remind ourselves how we solved it the first time. Visual Studio Code LiveShare was also used to allow us to directly help each other by viewing each other’s code. Additionally, what really helped our group was using GitHub Projects, where we added small to-do tasks every couple of weeks and group members were able to assign themselves tasks they felt confident completing. Once a task was completed, a pull-request would be sent to the entire group, and this ensured everyone was up to do and in-tune with how the project was progressing. 
