@@ -92,6 +92,14 @@ class ImageUpload extends Component {
     handleDelete() {
         let id = this.state.uploadedFile.id;
         Meteor.call('images.RemoveFile', id);
+        this.props.setLink('');
+        this.props.setId('');
+        this.setState({
+            uploadedFile: {
+                id: '',
+                isNull: true,
+            },
+        });
     }
 
     render() {
