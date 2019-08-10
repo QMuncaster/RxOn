@@ -55,7 +55,9 @@ You’re at home, coughing up a storm with a hot water bottle on your chest and 
 
 - We have records of several challenges we faced and overcame on Github. Examples include but are not limited to:
 https://github.com/QMuncaster/RxOn/issues/31
+
 https://github.com/QMuncaster/RxOn/pull/63
+
 https://github.com/QMuncaster/RxOn/pull/53
 
 - We also overcame several non-technical challenges:
