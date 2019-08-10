@@ -14,19 +14,19 @@ We use several ‘/server’ subdirectories to prevent our “secret” authenti
 
 ### Basic Technology Requirements: 
  
-- HTML/JS/CSS (JSS)
+- HTML/JS/CSS (JSS):
 These technologies are the backbone of our app. The main front-end entrypoints are main.html and main.js, where the latter targets the former to render our (routed) components. We use CSS files to style the login page, and the rest of our styling through MUI is written with JSS, which compiles down to CSS.
 
-- React: Front-end
+- React Front-end:
 Our entire front-end is made up of React components, which provides modularization for cleaner project structure, easier routing, and abstraction of rendering logic. We use react state, for example when maintaining text field inputs on the signup form. We use JSX in our render functions where coupling between javascript logic and HTML is natural, for example in determing whether to show a patient or pharmacist child component at the ‘/home’ route.
 
-- NodeJS/Meteor: Back-end
-Meteor is another framework we use to process requests from the foreground react and interface with the database layer to handle additions and deletions to individual data models. It also has a series of built-in methods for user registration and login, which we call directly to achieve the registration and login of users of the website. 
+- NodeJS/Meteor Back-end:
+Meteor is another framework we use to process requests from the react front-end and interface with the database layer to handle additions and deletions to individual data models. It also has a series of built-in methods for user registration and login, which we call directly to achieve the registration and login of users of the website. 
 
-- MongoDB
-We use Mongodb, a non-relational database, to store our prescription, user and other data. Because it is a non-relational database, there is no longer a fixed schema, we can quickly change the schema of a data model as needed. With the support of meteor collection methods, our app easily links with Mongodb to modify the contents of the database. 
+- MongoDB:
+We use Mongodb, a non-relational database, to store our prescription, user and other data. Because it is a non-relational database, there is no fixed database-side schema, so we can quickly change the schema of a data model as needed. With the support of meteor collection methods, our app easily links with Mongodb to modify the contents of the database. 
 
-- Release Engineering
+- Release Engineering:
 By deploying on Heroku, our application can be accessed by the world through a web site, and the configuration of the server can be upgraded to meet more view volume. The Mongodb database we use is a cloud database provided by atlas. For assets storage such as pictures, we use AWS s3 for separate storage.
 
 ### Basic Contribution Requirements: 
